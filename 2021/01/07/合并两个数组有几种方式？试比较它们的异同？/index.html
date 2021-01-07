@@ -20,28 +20,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="邹国锋的个人网站">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="方式：  array_merge() ‘+’  array_merge_recursive()  补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 array_combine() ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="合并两个数组有几种方式？试比较它们的异同？">
+<meta property="og:url" content="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/index.html">
 <meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="方式：  array_merge() ‘+’  array_merge_recursive()  补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 array_combine() ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-07T13:53:48.000Z">
+<meta property="article:modified_time" content="2021-01-07T17:29:49.823Z">
 <meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="腾讯">
+<meta property="article:tag" content="笔试">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>邹国锋的个人网站</title>
+  <title>合并两个数组有几种方式？试比较它们的异同？ | 邹国锋的个人网站</title>
   
 
 
@@ -150,9 +158,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -168,10 +177,9 @@
       <meta itemprop="name" content="邹国锋的个人网站">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-title-link" itemprop="url">合并两个数组有几种方式？试比较它们的异同？</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          合并两个数组有几种方式？试比较它们的异同？
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -231,145 +239,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>方式：</p>
+        <p>方式：</p>
 <ol>
 <li><strong>array_merge()</strong></li>
 <li><strong>‘+’</strong> </li>
 <li><strong>array_merge_recursive()</strong></li>
 </ol>
 <p>补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 <strong>array_combine()</strong> ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<a id="more"></a>
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>接下来我们分析下其每个的具体作用。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例1</span></span><br><span class="line"><span class="variable">$a1</span> = [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$a2</span> = [<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$a1</span> + <span class="variable">$a2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_combine(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:&quot;b&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例2</span></span><br><span class="line"><span class="variable">$b1</span> = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$b2</span> = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$b1</span>+<span class="variable">$b2</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_combine(<span class="variable">$b1</span>, <span class="variable">$b2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">// result Warning: array_combine(): Both parameters should have an equal number of elements</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例3</span></span><br><span class="line"><span class="variable">$c1</span> = [<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>];</span><br><span class="line"><span class="variable">$c2</span> = [<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span> =&gt; <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$c1</span> + <span class="variable">$c2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:3,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:[2,3],&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>示例1中不难看出array_merge和array_merge_recursive是能正常合并的，不过’+’不行。array_combine前者的元素变成了对应后者元素的键值。</p>
+<p>接着示例2，可以看出array_merge和array_merge_recursive依然是能正常合并的。’+’则是合并了后者的第三个元素。array_combine在示例2中则运行报错了。</p>
+<p>示例3，array_merge是合并了。array_merge_recursive也合并，若果有相同的键值时，则会递归合并。’+’依然是只合并了后者的第三个元素。</p>
+<p>分析得出：</p>
+<p><strong>array_merge()</strong> ，正常合并两个数组。</p>
+<p><strong>array_merge_recursive()</strong> ，正常合并两个数组。若果<u>有相同的键值时则递归合并</u>。</p>
+<p><strong>‘+’</strong> ,根据示例1和示例2对比，我们可以得出<u>键值相同的元素不会附加在前面的数组中</u>，不同则附加，作为结果返回。</p>
+<p><strong>array_combine()</strong>[<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-combine.php">进入手册</a>]，根据php手册中我们可以找到解释。array_combine()，“创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值.如果作为keys的数组和作为values的数组的元素个数不一样，将会抛出一个警告错误”。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><strong>array_merge()</strong> 简单的合并数组</p>
+<p><strong>array_merge_recursive()</strong> 合并两个数组，有相同的键值时则递归合并</p>
+<p><strong>‘+’</strong> 合并两个数组，键值相同的元素不会附加在前面的数组中</p>
+<p><strong>array_combine()</strong> 合并两个数组，前者元素值成了对应后者元素值的键值</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>细心的小伙伴应该能发现示例2和示例3中array_merge返回值有点不对劲🤔️。</p>
+<p>示例2中返回了bb，而示例3只返回了b=&gt;3。</p>
+<p>细想了下，若果是键值唯一，那么示例3成立，示例2应是bcd，取后者覆盖后的值。</p>
+<p>若果键值不唯一，示例2成立，则示例3应是b=&gt;2,b=&gt;3。</p>
+<p>最终查看php手册发现原因，<strong>array_merge()</strong>[<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-merge.php">进入手册</a>],“如果输入的数组中有<u>相同的字符串键名</u>，则该键名后面的值<u>将覆盖前一个值</u>。然而，如果数组包含<u>数字键名</u>，后面的值<u>将 <font color=red>不会</font> 覆盖原来的值</u>，而是附加到后面。”</p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 面试题</a>
+              <a href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag"># 腾讯</a>
+              <a href="/tags/%E7%AC%94%E8%AF%95/" rel="tag"># 笔试</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="邹国锋">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="邹国锋的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" class="post-title-link" itemprop="url">程序员练级攻略-技术资源集散地</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-05 16:32:25" itemprop="dateCreated datePublished" datetime="2021-01-05T16:32:25+08:00">2021-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-08 01:31:03" itemprop="dateModified" datetime="2021-01-08T01:31:03+08:00">2021-01-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98/" itemprop="url" rel="index"><span itemprop="name">程序员</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" class="post-meta-item leancloud_visitors" data-flag-title="程序员练级攻略-技术资源集散地" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>极客时间陈皓老师的专栏《左耳听风》,为了自己方便学习，同时也分享一起学习，当然如果有兴趣，可以去订阅。</p>
-<h2 id="个人技术博客"><a href="#个人技术博客" class="headerlink" title="个人技术博客"></a>个人技术博客</h2><p>首先，我先推荐一些不错的个人技术博客。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" rel="prev" title="程序员练级攻略-技术资源集散地">
+      <i class="fa fa-chevron-left"></i> 程序员练级攻略-技术资源集散地
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -416,6 +351,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.</span> <span class="nav-text">实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

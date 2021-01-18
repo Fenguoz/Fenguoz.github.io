@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在PHP中，数据类型分为字符串、整数、浮点、布尔值、数组、对象和资源7大类。在这篇文章中，举例了各数据类型的重点或者易错点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础数据类型总结">
+<meta property="og:url" content="http://example.com/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="在PHP中，数据类型分为字符串、整数、浮点、布尔值、数组、对象和资源7大类。在这篇文章中，举例了各数据类型的重点或者易错点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-18T13:40:09.000Z">
+<meta property="article:modified_time" content="2021-01-18T15:57:56.710Z">
+<meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="数据类型">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP基础数据类型总结 | 邹国锋的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">邹国锋的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邹国锋的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP基础数据类型总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-18 21:40:09 / 修改时间：23:57:56" itemprop="dateCreated datePublished" datetime="2021-01-18T21:40:09+08:00">2021-01-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="PHP基础数据类型总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">在PHP中，数据类型分为字符串、整数、浮点、布尔值、数组、对象和资源7大类。在这篇文章中，举例了各数据类型的重点或者易错点。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h2><h4 id="单引号-amp-双引号"><a href="#单引号-amp-双引号" class="headerlink" title="单引号&amp;双引号"></a>单引号&amp;双引号</h4><p>单引号 和 双引号 的区别，单引号字符串中变量和特殊字符的转义序列将不会被替换，而双引号是会被替换。</p>
+<h4 id="Heredoc-amp-Nowdoc"><a href="#Heredoc-amp-Nowdoc" class="headerlink" title="Heredoc&amp;Nowdoc"></a>Heredoc&amp;Nowdoc</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Heredoc 结构</span></span><br><span class="line"><span class="keyword">echo</span> &lt;&lt;&lt;EOT</span><br><span class="line">My name is <span class="string">&quot;<span class="subst">$name</span>&quot;</span>. I am printing some <span class="variable">$foo</span>-&gt;foo.</span><br><span class="line">Now, I am printing some &#123;<span class="variable">$foo</span>-&gt;bar[<span class="number">1</span>]&#125;.</span><br><span class="line">EOT;</span><br><span class="line"><span class="comment">// 输出以下：</span></span><br><span class="line"><span class="comment">// My name is &quot;MyName&quot;. I am printing some Foo.</span></span><br><span class="line"><span class="comment">// Now, I am printing some Bar2.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Nowdoc 结构</span></span><br><span class="line"><span class="keyword">echo</span> &lt;&lt;&lt;<span class="string">&#x27;EOT&#x27;</span></span><br><span class="line">My name is <span class="string">&quot;<span class="subst">$name</span>&quot;</span>. I am printing some <span class="variable">$foo</span>-&gt;foo.</span><br><span class="line">Now, I am printing some &#123;<span class="variable">$foo</span>-&gt;bar[<span class="number">1</span>]&#125;.</span><br><span class="line">EOT;</span><br><span class="line"><span class="comment">// 输出以下：</span></span><br><span class="line"><span class="comment">// My name is &quot;$name&quot;. I am printing some $foo-&gt;foo.</span></span><br><span class="line"><span class="comment">// Now, I am printing some &#123;$foo-&gt;bar[1]&#125;.</span></span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ol>
+<li>heredoc 结构类似于双引号字符串，Nowdoc 结构是类似于单引号字符串的。</li>
+<li>结束标识符不能缩进，分号的前后也不能有任何空白或制表符。</li>
+</ol>
+<hr>
+<h2 id="Integer-整型"><a href="#Integer-整型" class="headerlink" title="Integer 整型"></a>Integer 整型</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="string">&quot;0123&quot;</span>     <span class="comment">// 十进制数 123 (区别八进制)</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">0123</span>;      <span class="comment">// 八进制数 (等于十进制 83)</span></span><br><span class="line"></span><br><span class="line">var_dump((<span class="keyword">int</span>) <span class="number">010</span>);  <span class="comment">//Output 8</span></span><br><span class="line">var_dump((<span class="keyword">int</span>) <span class="string">&quot;010&quot;</span>); <span class="comment">//output 10</span></span><br><span class="line"></span><br><span class="line">var_dump(intval(<span class="string">&quot;010&quot;</span>)); <span class="comment">//output 10</span></span><br><span class="line">var_dump(intval(<span class="string">&quot;010&quot;</span>, <span class="number">8</span>)); <span class="comment">//output 8</span></span><br></pre></td></tr></table></figure>
+<p>(int) 和 intval() 两者都是强制转换为整数，默认基数10。不同的是，(int)遇到零开头基数为8，”0x”开头基数为16，”0b”开头基数为2，而intval()允许将不同的基数指定为第二个参数，而直接转换操作则不允许。</p>
+<p>总结:</p>
+<ol>
+<li>在数字文字前加零表示“这是八进制”。 但不要混淆：字符串中的前面的零是不认的</li>
+<li><u>(int)是根据前几个字符来确定基数，intval()是根据第二个参数来确认基数</u></li>
+</ol>
+<h4 id="整数溢出"><a href="#整数溢出" class="headerlink" title="整数溢出"></a>整数溢出</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//64 位系统</span></span><br><span class="line"><span class="variable">$large_number</span> = <span class="number">9223372036854775807</span>;</span><br><span class="line">var_dump(<span class="variable">$large_number</span>);                     <span class="comment">// int(9223372036854775807)</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$large_number</span> = <span class="number">9223372036854775808</span>;</span><br><span class="line">var_dump(<span class="variable">$large_number</span>);                     <span class="comment">// float(9.2233720368548E+18)</span></span><br></pre></td></tr></table></figure>
+<p>总结：<u>一个数超出了 integer 的范围，将会被解释为 float。</u>(32位系统范围: ±2147483647, 64位系统范围: ±9223372036854775807)</p>
+<hr>
+<h2 id="Float-浮点型"><a href="#Float-浮点型" class="headerlink" title="Float 浮点型"></a>Float 浮点型</h2><h4 id="精度"><a href="#精度" class="headerlink" title="精度"></a>精度</h4><p>看看下面有意思的情况：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$f</span> = <span class="number">0.58</span>;</span><br><span class="line">    var_dump(intval(<span class="variable">$f</span> * <span class="number">100</span>)); <span class="comment">//为啥输出57</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>浮点数, 以64位的长度(双精度)为例, 会采用1位符号位(E), 11指数位(Q), 52位尾数(M)表示(一共64位).<br>符号位：最高位表示数据的正负，0表示正数，1表示负数。<br>指数位：表示数据以2为底的幂，指数采用偏移码表示。<br>尾数：表示数据小数点后的有效数字。</p>
+</blockquote>
+<p>这里的关键点就在于, 小数在二进制的表示。详细看 <a target="_blank" rel="noopener" href="https://www.laruence.com/2013/03/26/2884.html">laruence</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.58</span>二进制 -&gt; <span class="number">0010100011110101110000101000111101011100001010001111</span> -&gt; <span class="number">0.57999999999999996</span></span><br></pre></td></tr></table></figure>
+<p>总结：<u>绝不要将未知的分数强制转换为 integer，可以选择使用高精度的 bc 函数</u></p>
+<hr>
+<h2 id="Boolean-布尔类型"><a href="#Boolean-布尔类型" class="headerlink" title="Boolean 布尔类型"></a>Boolean 布尔类型</h2><p>当转换为 boolean 时，以下值被认为是 false：</p>
+<ol>
+<li>布尔值 <strong>false</strong> 本身</li>
+<li>整型值 <strong>0</strong> 及 <strong>-0</strong></li>
+<li>浮点型值 <strong>0.0</strong> <strong>-0.0</strong><a id="more"></a></li>
+<li>空字符串，以及字符串 <strong>“0”</strong></li>
+<li>不包括任何元素的数组</li>
+<li>特殊类型 <strong>NULL</strong>（包括尚未赋值的变量）</li>
+<li>从空标记生成的 SimpleXML 对象</li>
+</ol>
+<p>总结：<u>只要遇到 0 和 null 是都是 false，其他都是 true，包括 -1 和其它非零值（不论正负）一样，被认为是 true！</u></p>
+<hr>
+<h2 id="Array-数组"><a href="#Array-数组" class="headerlink" title="Array 数组"></a>Array 数组</h2><p>// doing</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag"># 基础</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag"># 数据类型</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/18/PSR-1/" rel="prev" title="PSR-1">
+      <i class="fa fa-chevron-left"></i> PSR-1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">String 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7-amp-%E5%8F%8C%E5%BC%95%E5%8F%B7"><span class="nav-number">1.0.1.</span> <span class="nav-text">单引号&amp;双引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Heredoc-amp-Nowdoc"><span class="nav-number">1.0.2.</span> <span class="nav-text">Heredoc&amp;Nowdoc</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Integer-%E6%95%B4%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">Integer 整型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.0.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA"><span class="nav-number">2.0.2.</span> <span class="nav-text">整数溢出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Float-%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">Float 浮点型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%BE%E5%BA%A6"><span class="nav-number">3.0.1.</span> <span class="nav-text">精度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean-%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">Boolean 布尔类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-%E6%95%B0%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">Array 数组</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="邹国锋"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

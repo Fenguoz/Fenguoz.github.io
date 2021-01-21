@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单元测试规范">
+<meta property="og:url" content="http://example.com/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-21T07:57:35.000Z">
+<meta property="article:modified_time" content="2021-01-21T10:09:56.182Z">
+<meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="标准规范">
+<meta property="article:tag" content="单元测试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>单元测试规范 | 邹国锋的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">邹国锋的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邹国锋的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单元测试规范
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-21 15:57:35 / 修改时间：18:09:56" itemprop="dateCreated datePublished" datetime="2021-01-21T15:57:35+08:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="单元测试规范" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
+<a id="more"></a>
+<p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
+<h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><ol>
+<li><p><font color=bc0008>【强制】</font>好的单元测试必须遵守 AIR 原则。</p>
+<p> <font color=977919>说明:</font>单元测试在线上运行时，感觉像空气(AIR)一样并不存在，但在测试质量的保障上，却是非常关键的。好的单元测试宏观上来说，具有自动化、独立性、可重复执行的特点。</p>
+<pre><code> - A:Automatic(自动化) 
+ - I:Independent(独立性)
+ - R:Repeatable(可重复)</code></pre>
+</li>
+<li><p><font color=bc0008>【强制】</font>单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化才有意义。输出结果需要人工检查的测试不是一个好的单元测试。单元测试中不准使用 System.out 来进行人肉验证，必须使用 assert 来验证。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>保持单元测试的独立性。为了保证单元测试稳定可靠且便于维护，单元测试用例之 间决不能互相调用，也不能依赖执行的先后次序。</p>
+<p> <font color=fa4113>反例:</font>method2 需要依赖 method1 的执行，将执行结果作为 method2 的输入。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>单元测试是可以重复执行的，不能受到外界环境的影响。 </p>
+<p> <font color=977919>说明:</font>单元测试通常会被放到持续集成中，每次有代码 check in 时单元测试都会被执行。如果单测对外部 环境(网络、服务、中间件等)有依赖，容易导致持续集成机制的不可用。<br> <font color=29965b>正例:</font>为了不受外界环境影响，要求设计代码时就把 SUT 的依赖改成注入，在测试时用 spring 这样的 DI框架注入一个本地(内存)实现或者 Mock 实现。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>对于单元测试，要保证测试粒度足够小，有助于精确定位问题。单测粒度至多是类 级别，一般是方法级别。 </p>
+<p> <font color=977919>说明:</font>只有测试粒度小才能在出错时尽快定位到出错位置。单测不负责检查跨类或者跨系统的交互逻辑， 那是集成测试的领域。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>核心业务、核心应用、核心模块的增量代码确保单元测试通过。 </p>
+<p> <font color=977919>说明:</font>新增代码及时补充单元测试，如果新增代码影响了原有单元测试，请及时修正。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>单元测试代码必须写在如下工程目录:src/test，不允许写在业务代码目录下。</p>
+<p> <font color=977919>说明:</font>源码编译时会跳过此目录，而单元测试框架默认是扫描此目录。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>单元测试的基本目标:语句覆盖率达到70%;核心模块的语句覆盖率和分支覆盖率都要达到 100%</p>
+<p> <font color=977919>说明:</font>在工程规约的应用分层中提到的 Model 层，Manager 层，可重用度高的 Service，都应该进行单测试。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>编写单元测试代码遵守BCDE原则，以保证被测试模块的交付质量。</p>
+<ul>
+<li>B:Border，边界值测试，包括循环边界、特殊取值、特殊时间点、数据顺序等。</li>
+<li>C:Correct，正确的输入，并得到预期的结果。</li>
+<li>D:Design，与设计文档相结合，来编写单元测试。</li>
+<li>E:Error，强制错误信息输入(如:非法数据、异常流程、业务允许外等)，并得到预期的结果。</li>
+</ul>
+</li>
+<li><p><font color=febd2c>【推荐】</font>对于数据库相关的查询，更新，删除等操作，不能假设数据库里的数据是存在的，或者直接操作数据库把数据插入进去，请使用程序插入或者导入数据的方式来准备数据。</p>
+<p> <font color=fa4113>反例:</font>删除某一行数据的单元测试，在数据库中，先直接手动增加一行作为删除目标，但是这一行新增数据并不符合业务插入规则，导致测试结果异常。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>和数据库相关的单元测试，可以设定自动回滚机制，不给数据库造成脏数据。或者对单元测试产生的数据有明确的前后缀标识。</p>
+<p> <font color=29965b>正例:</font>在企业智能事业部的内部单元测试中，使用 ENTERPRISE_INTELLIGENCE _UNIT_TEST_的前缀来标识单元测试相关代码。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>对于不可测的代码在适当的时机做必要的重构，使代码变得可测，避免为了达到测 试要求而书写不规范测试代码。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>在设计评审阶段，开发人员需要和测试人员一起确定单元测试范围，单元测试最好 覆盖所有测试用例。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>单元测试作为一种质量保障手段，在项目提测前完成单元测试，不建议项目发布后补充单元测试用例。</p>
+</li>
+<li><p><font color=799042>【参考】</font>为了更方便地进行单元测试，业务代码应避免以下情况:</p>
+<p> <font color=977919>说明:</font>多层条件语句建议使用卫语句、策略模式、状态模式等方式重构。</p>
+<pre><code> - 构造方法中做的事情过多。
+ - 存在过多的全局变量和静态方法。 
+ - 存在过多的外部依赖。
+ - 存在过多的条件语句。</code></pre>
+</li>
+<li><p><font color=799042>【参考】</font>不要对单元测试存在如下误解:</p>
+<ul>
+<li>那是测试同学干的事情。本文是开发手册，凡是本文内容都是与开发同学强相关的。 </li>
+<li>单元测试代码是多余的。系统的整体功能与各单元部件的测试正常与否是强相关的。</li>
+<li>单元测试代码不需要维护。一年半载后，那么单元测试几乎处于废弃状态。</li>
+<li>单元测试与线上故障没有辩证关系。好的单元测试能够最大限度地规避线上故障。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
+              <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag"># 单元测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" rel="prev" title="PHP编码规范">
+      <i class="fa fa-chevron-left"></i> PHP编码规范
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" rel="next" title="异常日志规范">
+      异常日志规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">单元测试</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="邹国锋"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

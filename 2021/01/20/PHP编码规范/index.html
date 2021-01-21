@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP编码规范">
+<meta property="og:url" content="http://example.com/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-20T02:31:33.000Z">
+<meta property="article:modified_time" content="2021-01-21T09:56:53.871Z">
+<meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="标准规范">
+<meta property="article:tag" content="编码">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP编码规范 | 邹国锋的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">邹国锋的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邹国锋的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP编码规范
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-20 10:31:33" itemprop="dateCreated datePublished" datetime="2021-01-20T10:31:33+08:00">2021-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-21 17:56:53" itemprop="dateModified" datetime="2021-01-21T17:56:53+08:00">2021-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="PHP编码规范" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
+<a id="more"></a>
+<p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
+<h1 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h1><ol>
+<li><p><font color=bc0008>【强制】</font>代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。 </p>
+<p> <font color=977919>说明:</font>正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，纯拼音命名方式更要避免采用。 </p>
+<p> <font color=29965b>正例:</font>renminbi / taobao / youku / chongqing 等国际通用的名称，可视同英文。 </p>
+<p> <font color=fa4113>反例:</font>DaZhePromotion [打折] / getPingfenByName() [评分] / (int)某变量 = 3</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>类名使用大驼峰(UpperCamelCase)风格。</p>
+<p> <font color=29965b>正例:</font>XmlService / TcpUdpDeal </p>
+<p> <font color=fa4113>反例:</font>XMLService / TCPUDPDeal</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>方法名、参数名、成员变量、局部变量都统一使用小驼峰(lowerCamelCase)风格。</p>
+<p> <font color=29965b>正例:</font> localValue / getHttpMessage() / inputUserId</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。</p>
+<p> <font color=29965b>正例:</font>MAX_STOCK_COUNT / CACHE_EXPIRED_TIME </p>
+<p> <font color=fa4113>反例:</font>MAX_COUNT / EXPIRED_TIME</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>抽象类命名使用Abstract或Base开头;异常类命名使用Exception结尾;测试类命名以它要测试的类的名称开始，以 Test 结尾。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>避免在子父类的成员变量之间、或者不同代码块的局部变量之间采用完全相同的命名，使可读性降低。</p>
+<p> <font color=977919>说明:</font>子类、父类成员变量名相同，即使是 public 类型的变量也是能够通过编译，而局部变量在同一方法内的不同代码块中同名也是合法的，但是要避免使用。对于非 setter/getter 的参数名称也要避免与成员变量名称相同。</p>
+<p> <font color=fa4113>反例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">    <span class="comment">// 非 setter/getter 的参数名称，不允许与本类成员变量同名</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"><span class="keyword">String</span> <span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$arg</span>) &#123;</span><br><span class="line">            <span class="variable">$money</span> = <span class="number">531</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 在同一方法体中，不允许与其它代码块中的 money 命名相同 </span></span><br><span class="line">            <span class="variable">$money</span> = <span class="number">615</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 不允许与父类的成员变量名称相同 </span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><font color=bc0008>【强制】</font>杜绝完全不规范的缩写，避免望文不知义。</p>
+<p> <font color=fa4113>反例:</font>AbstractClass“缩写”命名成 AbsClass;condition“缩写”命名成 condi，此类随意缩写严重降低了代码的可阅读性。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>为了达到代码自解释的目标，任何自定义编程元素在命名时，使用尽量完整的单词组合来表达其意。</p>
+<p> <font color=29965b>正例:</font>表达原子更新的类名为:AtomicReferenceFieldUpdater。</p>
+<p> <font color=fa4113>反例:</font>int a 的随意命名方式。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>在常量与变量的命名时，表示类型的名词放在词尾，以提升辨识度。</p>
+<p> <font color=29965b>正例:</font>startTime / workQueue / nameList / TERMINATED_THREAD_COUNT</p>
+<p> <font color=fa4113>反例:</font>startedAt / QueueOfWork / listName / COUNT_TERMINATED_THREAD</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>如果模块、接口、类、方法使用了设计模式，在命名时需体现出具体模式。 </p>
+<p> <font color=977919>说明:</font>将设计模式体现在名字中，有利于阅读者快速理解架构设计理念。     </p>
+<p> <font color=29965b>正例:</font> </p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderFactory</span></span>&#123;&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginProxy</span></span>&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResourceObserver</span></span>&#123;&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=799042>【参考】</font>枚举类名带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 </p>
+<p> <font color=977919>说明:</font>枚举其实就是特殊的类，域成员均为常量，且构造方法被默认强制是私有。 </p>
+<p> <font color=29965b>正例:</font>枚举名字为 ProcessStatusEnum 的成员名称:SUCCESS / UNKNOWN_REASON。</p>
+</li>
+<li><p><font color=799042>【参考】</font>Service 层方法命名规约:</p>
+<pre><code> 1) 获取单个对象的方法用 get 做前缀。
+ 2) 获取多个对象的方法用 list 做前缀，复数形式结尾如:listObjects。 
+ 3) 获取统计值的方法用 count 做前缀。
+ 4) 插入的方法用 save/insert 做前缀。
+ 5) 删除的方法用 delete 做前缀。
+ 6) 修改的方法用 update 做前缀。</code></pre>
+</li>
+</ol>
+<h1 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h1><ol>
+<li><p><font color=febd2c>【推荐】</font>不要使用一个常量类维护所有常量，要按常量功能进行归类，分开维护。 </p>
+<p> <font color=977919>说明:</font>大而全的常量类，杂乱无章，使用查找功能才能定位到修改的常量，不利于理解和维护。 </p>
+<p> <font color=29965b>正例:</font>缓存相关常量放在类 CacheConsts 下;系统配置相关常量放在类 ConfigConsts 下。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>如果变量值仅在一个固定范围内变化用enum类型来定义。</p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountEnum</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> PHONE_NUMBER = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> EMAIL = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">const</span> USERNAME = <span class="number">3</span>;</span><br><span class="line">	<span class="built_in">static</span> <span class="keyword">public</span> <span class="variable">$__names</span> = <span class="keyword">array</span>(</span><br><span class="line">		<span class="number">1</span> =&gt; <span class="string">&#x27;phone_number&#x27;</span>,</span><br><span class="line">		<span class="number">2</span> =&gt; <span class="string">&#x27;email&#x27;</span>,</span><br><span class="line">		<span class="number">3</span> =&gt; <span class="string">&#x27;username&#x27;</span>,</span><br><span class="line">	);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h1></li>
+<li><p><font color=bc0008>【强制】</font>如果是大括号内为空，则简洁地写成{}即可，大括号中间无需换行和空格;如果是非空代码块则:</p>
+<pre><code> 1) 左大括号前不换行。
+ 2) 左大括号后换行。
+ 3) 右大括号前换行。
+ 4) 右大括号后还有 else 等代码则不换行;表示终止的右大括号后必须换行。</code></pre>
+</li>
+<li><p><font color=bc0008>【强制】</font>左小括号和字符之间不出现空格;同样，右小括号和字符之间也不出现空格;而左 大括号前需要空格。详见第 5 条下方正例提示。</p>
+<p> <font color=fa4113>反例:</font>if (空格 a == b 空格)</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>if/for/while/switch/do等保留字与括号之间都必须加空格。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>任何二目、三目运算符的左右两边都需要加一个空格。</p>
+<p> <font color=977919>说明:</font>运算符包括赋值运算符=、逻辑运算符&amp;&amp;、加减乘除符号等。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>采用4个空格缩进，禁止使用tab字符。</p>
+<p> <font color=977919>说明:</font>如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。</p>
+<p> <font color=29965b>正例:</font> (涉及 1-5 点)</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"><span class="keyword">String</span> <span class="variable">$args</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 缩进 4 个空格</span></span><br><span class="line">	<span class="variable">$say</span> = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="comment">// 运算符的左右必须有一个空格</span></span><br><span class="line">	<span class="variable">$flag</span> = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">0</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="variable">$say</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 左大括号前加空格且不换行;左大括号后换行</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">1</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 右大括号前换行，右大括号后有 else，不用换行</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 在右大括号后直接结束，则必须换行</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=bc0008>【强制】</font>注释的双斜线与注释内容之间有且仅有一个空格。 </p>
+<p> <font color=29965b>正例:</font>// 这是示例注释，请注意在双斜线之后有一个空格</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>在进行类型强制转换时，右括号与强制转换值之间不需要任何空格隔开。</p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$second</span> = (<span class="keyword">int</span>)<span class="variable">$first</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=bc0008>【强制】</font>单行字符数限制不超过120个，超出需要换行，换行时遵循如下原则:</p>
+<pre><code> 1)第二行相对第一行缩进 4 个空格，从第三行开始，不再继续缩进，参考示例。 
+ 2)运算符与下文一起换行。
+ 3)方法调用的点符号与下文一起换行。 
+ 4)方法调用中的多个参数需要换行时，在逗号后进行。
+ 5)在括号前不要换行，见反例。 </code></pre>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行</span></span><br><span class="line"><span class="variable">$sb</span>-&gt;append(<span class="string">&quot;Jack&quot;</span>)-&gt;append(<span class="string">&quot;Ma&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p> <font color=fa4113>反例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，不要在括号前换行 </span></span><br><span class="line"><span class="variable">$sb</span>-&gt;append(<span class="string">&quot;Jack&quot;</span>)-&gt;append(<span class="string">&quot;Ma&quot;</span>)...append</span><br><span class="line">(<span class="string">&quot;alibaba&quot;</span>);</span><br><span class="line"><span class="comment">// 参数很多的方法调用可能超过 120 个字符，不要在逗号前换行 </span></span><br><span class="line">method(args1, args2, args3, ...</span><br><span class="line">, argsX);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><font color=bc0008>【强制】</font>方法参数在定义和传入时，多个参数逗号后边必须加空格。</p>
+<p> <font color=29965b>正例:</font>下例中实参的 args1，后边必须要有一个空格。 </p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">method(args1, args2, args3);</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=febd2c>【推荐】</font>单个方法的总行数不超过 80 行。</p>
+<p> <font color=977919>说明:</font>除注释之外的方法签名、左右大括号、方法内代码、空行、回车及任何不可见字符的总行数不超过80 行。</p>
+<p> <font color=29965b>正例:</font>代码逻辑分清红花和绿叶，个性和共性，绿叶逻辑单独出来成为额外方法，使主干代码更加清晰;共性逻辑抽取成为共性方法，便于复用和维护。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>没有必要增加若干空格来使变量的赋值等号与上一行对应位置的等号对齐。 </p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$first</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$one</span> = <span class="number">2</span>;</span><br><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br></pre></td></tr></table></figure>
+<p> <font color=977919>说明:</font>增加 sb 这个变量，如果需要对齐，则给 one、first 都要增加几个空格，在变量比较多的情况下，是非常累赘的事情。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来以提升可读性。</p>
+<p> <font color=977919>说明:</font>任何情形，没有必要插入多个空行进行隔开。</p>
+</li>
+</ol>
+<h1 id="OOP规约"><a href="#OOP规约" class="headerlink" title="OOP规约"></a>OOP规约</h1><ol>
+<li><p><font color=bc0008>【强制】</font>避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>相同参数类型，相同业务含义，才可以使用可变参数，避免使用Object。 </p>
+<p> <font color=977919>说明:</font>可变参数必须放置在参数列表的最后。(提倡尽量不用可变参数编程)</p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">listUsers</span>(<span class="params"><span class="keyword">String</span> type, <span class="keyword">int</span>... ids</span>) </span>&#123;...&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=bc0008>【强制】</font>不能使用过时的类或方法。</p>
+<p> <font color=977919>说明:</font>PHP 7.4.x中在一个对象中使用 array_key_exists() 已被废弃。请使用 isset() 或 property_exists() 来替代。接口提供方既然明确是过时接口，那么有义务同时提供新的接口;作为调用方来说，有义务去考证过时方法的新实现是什么。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起， 便于阅读，此条规则优先于下一条。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font> 类内方法定义的顺序依次是:公有方法或保护方法 &gt; 私有方法 &gt; getter / setter 方法。</p>
+<p> <font color=977919>说明:</font>公有方法是类的调用者和维护者最关心的方法，首屏展示最好;保护方法虽然只是子类关心，也可能是“模板设计模式”下的核心方法;而私有方法外部一般不需要特别关心，是一个黑盒实现;因为承载的信息价值较低，所有 Service 和 Model 的 getter/setter 方法放在类体最后。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>final 可以声明类、成员变量、方法、以及本地变量，下列情况使用 final 关键字: </p>
+<pre><code> 1) 不允许被继承的类，如:String 类。
+ 2) 不允许修改引用的域对象。
+ 3) 不允许被覆写的方法。
+ 4) 不允许运行过程中重新赋值的局部变量。
+ 5) 避免上下文重复使用一个变量，使用 final 可以强制重新定义一个变量，方便更好地进行重构。</code></pre>
+</li>
+<li><p><font color=febd2c>【推荐】</font>类成员与方法访问控制从严:</p>
+<pre><code> 1) 如果不允许外部直接通过 new 来创建对象，那么构造方法必须是 private。 
+ 2) 工具类不允许有 public 构造方法。
+ 3) 类非 static 成员变量并且与子类共享，必须是 protected。
+ 4) 类非 static 成员变量并且仅在本类使用，必须是 private。
+ 5) 类 static 成员变量如果仅在本类使用，必须是 private。
+ 6) 若是 static 成员变量，考虑是否为 final。
+ 7) 类成员方法只供类内部调用，必须是 private。
+ 8) 类成员方法只对继承类公开，那么限制为 protected。</code></pre>
+<p> <font color=977919>说明:</font>任何类、方法、参数、变量，严控访问范围。过于宽泛的访问范围，不利于模块解耦。</p>
+</li>
+</ol>
+<h1 id="并发处理"><a href="#并发处理" class="headerlink" title="并发处理"></a>并发处理</h1><ol>
+<li><p><font color=bc0008>【强制】</font>获取单例对象需要保证线程安全，其中的方法也要保证线程安全。 </p>
+<p> <font color=977919>说明:</font>资源驱动类、工具类、单例工厂类都需要注意。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁; 能锁区块，就不要锁整个方法体;能用对象锁，就不要用类锁。 说明:尽可能使加锁的代码块工作量尽可能的小，避免在锁代码块中调用 RPC 方法。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁。</p>
+<p> <font color=977919>说明:</font>线程一需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序也必须是 A、B、C，否则可能出现死锁。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>在使用阻塞等待获取锁的方式中，必须在try代码块之外，并且在加锁方法与try代码块之间没有任何可能抛出异常的方法调用，避免加锁成功后，在 finally 中无法解锁。 </p>
+<p> <font color=977919>说明一:</font>如果在 lock 方法与 try 代码块之间的方法调用抛出异常，那么无法解锁，造成其它线程无法成功获取锁。</p>
+<p> <font color=977919>说明二:</font>如果 lock 方法在 try 代码块之内，可能由于其它方法抛出异常，导致在 finally 代码块中，unlock 对未加锁的对象解锁，它会调用 AQS 的 tryRelease 方法(取决于具体实现类)，抛出 IllegalMonitorStateException 异常。</p>
+<p> <font color=977919>说明三:</font>在 Lock 对象的 lock 方法实现中可能抛出 unchecked 异常，产生的后果与说明二相同。 </p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$lock</span>-&gt;lock(); </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	doSomething();</span><br><span class="line">	doOthers(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <font color=fa4113>反例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">// 如果此处抛出异常，则直接执行 finally 代码块</span></span><br><span class="line">	doSomething();</span><br><span class="line">	<span class="comment">// 无论加锁是否成功，finally 代码块都会执行</span></span><br><span class="line">	<span class="variable">$lock</span>-&gt;lock();</span><br><span class="line">	doOthers(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=bc0008>【强制】</font>在使用尝试机制来获取锁的方式中，进入业务代码块之前，必须先判断当前线程是否持有锁。锁的释放规则与锁的阻塞等待方式相同。</p>
+<p> <font color=29965b>正例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$isLocked</span> = <span class="variable">$lock</span>-&gt;tryLock(); </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$isLocked</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123; </span><br><span class="line">		doSomething();</span><br><span class="line">		doOthers(); </span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=bc0008>【强制】</font>并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加锁，要么在数据库层使用乐观锁，使用 version 作为更新依据。 </p>
+<p> <font color=977919>说明:</font>如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>资金相关的金融敏感信息，使用悲观锁策略。</p>
+<p> <font color=977919>说明:</font>乐观锁在获得锁的同时已经完成了更新操作，校验逻辑容易出现漏洞，另外，乐观锁对冲突的解决策略有较复杂的要求，处理不当容易造成系统压力或数据异常，所以资金相关的金融敏感信息不建议使用乐观锁更新。</p>
+</li>
+</ol>
+<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><ol>
+<li><p><font color=bc0008>【强制】</font>在一个switch块内，每个case要么通过continue/break/return等来终止，要么注释说明程序将继续执行到哪一个 case 为止;在一个 switch 块内，都必须包含一个 default 语句并且放在最后，即使它什么代码也没有。</p>
+<p> <font color=977919>说明:</font>注意 break 是退出 switch 语句块，而 return 是退出方法体。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>当switch括号内的变量类型为String并且此变量为外部参数时，必须先进行null 判断。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>在if/else/for/while/do语句中必须使用大括号。</p>
+<p> <font color=977919>说明:</font>即使只有一行代码，避免采用单行的编码方式:if ($condition) statements; </p>
+</li>
+<li><p><font color=bc0008>【强制】</font>在高并发场景中，避免使用”等于”判断作为中断或退出的条件。</p>
+<p> <font color=977919>说明:</font>如果并发控制没有处理好，容易产生等值判断被“击穿”的情况，使用大于或小于的区间判断条件来代替。</p>
+<p> <font color=fa4113>反例:</font>判断剩余奖品数量等于 0 时，终止发放奖品，但因为并发处理错误导致奖品数量瞬间变成了负数，这样的话，活动无法终止。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>表达异常的分支时，少用if-else方式，这种方式可以改写成:</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$condition</span>) &#123; </span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$obj</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接着写 else 的业务逻辑代码;</span></span><br></pre></td></tr></table></figure>
+<p> <font color=977919>说明:</font>如果非使用 if()…else if()…else…方式表达逻辑，避免后续代码维护困难，<font color=bc0008>【强制】</font>请勿超过 3 层。 </p>
+<p> <font color=29965b>正例:</font>超过 3 层的 if-else 的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现，其中卫语句即代码逻辑先考虑失败、异常、中断、退出等直接返回的情况，以方法多个出口的方式，解决代码中判断分支嵌套的问题，这是逆向思维的体现。示例如下:</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">findBoyfriend</span>(<span class="params"><span class="variable">$man</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isUgly()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;本姑娘是外貌协会的资深会员&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isPoor()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;贫贱夫妻百事哀&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isBadTemper()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;银河有多远，你就给我滚多远&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	var_dump(<span class="string">&quot;可以先交往一段时间看看&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=febd2c>【推荐】</font>除常用方法(如getXxx/isXxx)等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</p>
+<p> <font color=977919>说明:</font>很多 if 语句内的逻辑表达式相当复杂，与、或、取反混合运算，甚至各种方法纵深调用，理解成本非常高。如果赋值一个非常好理解的布尔变量名字，则是件令人爽心悦目的事情。</p>
+<p> <font color=29965b>正例:</font>// 伪代码如下</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$existed</span> = (fopen(fileName, <span class="string">&quot;w&quot;</span>) != <span class="literal">null</span>) &amp;&amp; (...) || (...);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$existed</span>) &#123; </span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <font color=fa4113>反例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">function</span> <span class="title">acquire</span>(<span class="params"><span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">if</span> (!tryAcquire(<span class="variable">$arg</span>) &amp;&amp;</span><br><span class="line">		acquireQueued(addWaiter(Node.EXCLUSIVE), <span class="variable">$arg</span>)) &#123; </span><br><span class="line">			selfInterrupt();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=febd2c>【推荐】</font>不要在其它表达式(尤其是条件表达式)中，插入赋值语句。</p>
+<p> <font color=977919>说明:</font>赋值点类似于人体的穴位，对于代码的理解至关重要，所以赋值语句需要清晰地单独成为一行。</p>
+<p> <font color=fa4113>反例:</font></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getLock</span>(<span class="params"><span class="keyword">boolean</span> <span class="variable">$fair</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 算术表达式中出现赋值操作，容易忽略 $count 值已经被改变</span></span><br><span class="line">	<span class="variable">$threshold</span> = (<span class="variable">$count</span> = MAX_VALUE) - <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 条件表达式中出现赋值操作，容易误认为是 $sync==$fair</span></span><br><span class="line">	<span class="keyword">return</span> (<span class="variable">$sync</span> = <span class="variable">$fair</span>) ? <span class="keyword">new</span> FairSync() : <span class="keyword">new</span> NonfairSync(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=febd2c>【推荐】</font>循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变 量、获取数据库连接，进行不必要的 try-catch 操作(这个 try-catch 是否可以移至循环体外)。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>避免采用取反逻辑运算符。</p>
+<p> <font color=977919>说明:</font>取反逻辑不利于快速理解，并且取反逻辑写法必然存在对应的正向逻辑写法。</p>
+<p> <font color=29965b>正例:</font>使用 if (x &lt; 628) 来表达 x 小于 628。</p>
+<p> <font color=fa4113>反例:</font>使用 if (!(x &gt;= 628)) 来表达 x 小于 628。</p>
+</li>
+<li><p><font color=799042>【参考】</font>下列情形，需要进行参数校验:</p>
+<pre><code> 1) 调用频次低的方法。
+ 2) 执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失。
+ 3) 需要极高稳定性和可用性的方法。
+ 4) 对外提供的开放接口，不管是 RPC/API/HTTP 接口。 
+ 5) 敏感权限入口。</code></pre>
+</li>
+<li><p><font color=799042>【参考】</font>下列情形，不需要进行参数校验:</p>
+<pre><code> 1) 极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。
+ 2) 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般 Model 层与 Service 层都在同一个应用中，部署在同一台服务器中，所以 Model 的参数校验，可以省略。
+ 3) 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</code></pre>
+</li>
+</ol>
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><ol>
+<li><p><font color=bc0008>【强制】</font>在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。 </p>
+<p> <font color=977919>说明:</font>不要在方法体内定义:preg_match(“规则”, $str);</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>日期格式化时，传入pattern中表示年份统一使用小写的y。 说明:日期格式化时，yyyy 表示当天所在的年，而大写的 YYYY 代表是 week in which year，意思是当天所在的周属于的年份，一周从周日开始，周六结束， 只要本周跨年，返回的 YYYY 就是下一年。另外需要注意:</p>
+<ul>
+<li><p>表示月份是大写的 M</p>
+</li>
+<li><p>表示分钟则是小写的 m </p>
+</li>
+<li><p>4 小时制的是大写的 H</p>
+</li>
+<li><p>12 小时制的则是小写的 h</p>
+<p><font color=29965b>正例:</font>表示日期和时间的格式如下所示:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><font color=febd2c>【推荐】</font>不要在视图模板中加入任何复杂的逻辑。</p>
+<p> <font color=977919>说明:</font>根据 MVC 理论，视图的职责是展示，不要抢模型和控制器的活。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>及时清理不再使用的代码段或配置信息。 </p>
+<p> <font color=977919>说明:</font>对于垃圾代码或过时配置，坚决清理干净，避免程序过度臃肿，代码冗余。 </p>
+<p> <font color=29965b>正例:</font>对于暂时被注释掉，后续可能恢复使用的代码片断，在注释代码上方，统一规定使用三个斜杠(///) 来说明注释掉代码的理由。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
+              <a href="/tags/%E7%BC%96%E7%A0%81/" rel="tag"># 编码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" rel="prev" title="Mysql数据库设计规范">
+      <i class="fa fa-chevron-left"></i> Mysql数据库设计规范
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/" rel="next" title="单元测试规范">
+      单元测试规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC"><span class="nav-number">2.</span> <span class="nav-text">命名风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">常量定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">代码格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OOP%E8%A7%84%E7%BA%A6"><span class="nav-number">5.</span> <span class="nav-text">OOP规约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">并发处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">8.</span> <span class="nav-text">其它</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="邹国锋"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

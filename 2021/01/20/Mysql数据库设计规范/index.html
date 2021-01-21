@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql数据库设计规范">
+<meta property="og:url" content="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-20T02:31:25.000Z">
+<meta property="article:modified_time" content="2021-01-21T10:09:44.729Z">
+<meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="标准规范">
+<meta property="article:tag" content="Mysql">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mysql数据库设计规范 | 邹国锋的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">邹国锋的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邹国锋的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql数据库设计规范
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-20 10:31:25" itemprop="dateCreated datePublished" datetime="2021-01-20T10:31:25+08:00">2021-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-21 18:09:44" itemprop="dateModified" datetime="2021-01-21T18:09:44+08:00">2021-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql数据库设计规范" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
+<a id="more"></a>
+<p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
+<h1 id="建表规约"><a href="#建表规约" class="headerlink" title="建表规约"></a>建表规约</h1><ol>
+<li><p><font color=bc0008>【强制】</font>表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint(1 表示是，0 表示否)。</p>
+<p> <font color=977919>说明:</font>任何字段如果为非负数，必须是 unsigned。</p>
+<p> <font color=29965b>正例:</font>表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>表名、字段名必须使用小写字母或数字，禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。</p>
+<p> <font color=977919>说明:</font>MySQL 在 Windows下不区分大小写，但在 Linux 下默认是区分大小写。因此，数据库名、表名、字段名，都不允许出现任何大写字母，避免节外生枝</p>
+<p> <font color=29965b>正例:</font>aliyun_admin，rdc_config，level3_name</p>
+<p> <font color=fa4113>反例:</font>AliyunAdmin，rdcConfig，level_3_name</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>表名不使用复数名词。</p>
+<p> <font color=977919>说明:</font>表名应该仅仅表示表里面的实体内容，不应该表示实体数量，对应于 Model 类名也是单数形式，符合表达习惯。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>禁用保留字，如desc、range、match、delayed等，请参考MySQL官方保留字。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>主键索引名为pk_字段名;唯一索引名为uk_字段名;普通索引名则为idx_字段名。</p>
+<p> <font color=977919>说明:</font>pk_ 即 primary key;uk_ 即 unique key;idx_ 即 index 的简称。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>小数类型为decimal，禁止使用float和double。</p>
+<p> <font color=977919>说明:</font>在存储的时候，float 和 double 都存在精度损失的问题，很可能在比较值的时候，得到不正确的结果。如果存储的数据范围超过 decimal 的范围，建议将数据拆成整数和小数并分开存储。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>如果存储的字符串长度几乎相等，使用char定长字符串类型。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>varchar是可变长字符串，不预先分配存储空间，长度不要超过5000，如果存储长度大于此值，定义字段类型为 text，独立出来一张表，用主键来对应，避免影响其它字段索 引效率。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>表必备三字段:id,created_at,updated_at。</p>
+<p> <font color=977919>说明:</font>其中id必为主键，类型为bigint unsigned、单表时自增、步长为 1。created_at,updated_at的类型均为 datetime 类型。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>表的命名最好是遵循“业务名称_表的作用”。</p>
+<p> <font color=29965b>正例:</font>alipay_task / force_project / trade_config</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>库名与应用名称尽量一致。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>如果修改字段含义或对字段表示的状态追加时，需要及时更新字段注释。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>字段允许适当冗余，以提高查询性能，但必须考虑数据一致。冗余字段应遵循: </p>
+<pre><code> 1) 不是频繁修改的字段。
+ 2) 不是 varchar 超长字段，更不能是 text 字段。
+ 3) 不是唯一索引的字段。 正例:商品类目名称使用频率高，字段长度短，名称基本一不变，可在相关联的表中冗余存储类目名称，避免关联查询。</code></pre>
+</li>
+<li><p><font color=febd2c>【推荐】</font>单表行数超过 500 万行或者单表容量超过 2GB，才推荐进行分库分表。 说明:如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表。</p>
+</li>
+<li><p><font color=799042>【参考】</font>合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。</p>
+<p> <font color=29965b>正例:</font>如下表，其中无符号值可以避免误存负数，且扩大了表示范围。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">对象</th>
+<th align="left">年龄区间</th>
+<th align="left">类型</th>
+<th align="center">字节</th>
+<th align="left">表示范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">人</td>
+<td align="left">150 岁之内</td>
+<td align="left">tinyint unsigned</td>
+<td align="center">1</td>
+<td align="left">无符号值:0 到 255</td>
+</tr>
+<tr>
+<td align="left">龟</td>
+<td align="left">数百岁</td>
+<td align="left">smallint unsigned</td>
+<td align="center">2</td>
+<td align="left">无符号值:0 到 65535</td>
+</tr>
+<tr>
+<td align="left">恐龙化石</td>
+<td align="left">数千万年</td>
+<td align="left">int unsigned</td>
+<td align="center">4</td>
+<td align="left">无符号值:0 到约 42.9 亿</td>
+</tr>
+<tr>
+<td align="left">太阳</td>
+<td align="left">约 50 亿年</td>
+<td align="left">bigint unsigned</td>
+<td align="center">8</td>
+<td align="left">无符号值:0 到约 10 的 19 次方</td>
+</tr>
+</tbody></table>
+<h1 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h1><ol>
+<li><p><font color=bc0008>【强制】</font>业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。 </p>
+<p> <font color=977919>说明:</font>不要以为唯一索引影响了 insert 速度，这个速度损耗可以忽略，但提高查找速度是明显的;另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，根据墨菲定律，必然有脏数据产生。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>超过三个表禁止join。需要join的字段，数据类型必须绝对一致;多表关联查询时，保证被关联的字段需要有索引。</p>
+<p> <font color=977919>说明:</font>即使双表 join 也要注意表索引、SQL 性能。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>在varchar字段上建立索引时，必须指定索引长度，没必要对全字段建立索引，根据实际文本区分度决定索引长度即可。</p>
+<p> <font color=977919>说明:</font>索引的长度与区分度是一对矛盾体，一般对字符串类型数据，长度为 20 的索引，区分度会高达90%以上，可以使用 count(distinct left(列名, 索引长度))/count(*)的区分度来确定。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决。</p>
+<p> <font color=977919>说明:</font>索引文件具有 B-Tree 的最左前缀匹配特性，如果左边的值未确定，那么无法使用此索引。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>如果有 order by 的场景，请注意利用索引的有序性。order by 最后的字段是组合索引的一部分，并且放在索引组合顺序的最后，避免出现 file_sort 的情况，影响查询性能。 </p>
+<p> <font color=29965b>正例:</font>where a=? and b=? order by c; 索引:a_b_c </p>
+<p> <font color=fa4113>反例:</font>索引如果存在范围查询，那么索引有序性无法利用，如:WHERE a&gt;10 ORDER BY b; 索引 a_b 无法排序。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>利用覆盖索引来进行查询操作，避免回表。</p>
+<p> <font color=977919>说明:</font>如果一本书需要知道第 11 章是什么标题，会翻开第 11 章对应的那一页吗?目录浏览一下就好，这个目录就是起到覆盖索引的作用。<br> 正例:能够建立索引的种类分为主键索引、唯一索引、普通索引三种，而覆盖索引只是一种查询的一种效 果，用 explain 的结果，extra 列会出现:using index。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>利用延迟关联或者子查询优化超多分页场景。</p>
+<p> <font color=977919>说明:</font>MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回 N 行，那当 offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写。</p>
+<p> <font color=29965b>正例:</font>先快速定位需要获取的 id 段，然后再关联:</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.* <span class="keyword">FROM</span> 表 <span class="number">1</span> a, (select id <span class="keyword">from</span> 表 <span class="number">1</span> where 条件 LIMIT <span class="number">100000</span>,<span class="number">20</span> ) b where a.id=b.id</span><br></pre></td></tr></table></figure></li>
+<li><p><font color=febd2c>【推荐】</font>SQL 性能优化的目标:至少要达到 range 级别，要求是 ref 级别，如果可以是 consts 最好。</p>
+<p> <font color=977919>说明:</font></p>
+<pre><code> 1) consts 单表中最多只有一个匹配行(主键或者唯一索引)，在优化阶段即可读取到数据。 
+ 2) ref 指的是使用普通的索引(normal index)。
+ 3) range 对索引进行范围检索。</code></pre>
+<p> <font color=fa4113>反例:</font>explain 表的结果，type=index，索引物理文件全扫描，速度非常慢，这个 index 级别比较 range 还低，与全表扫描是小巫见大巫。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>建组合索引的时候，区分度最高的在最左边。</p>
+<p> <font color=29965b>正例:</font>如果 where a=? and b=? ，如果 a 列的几乎接近于唯一值，那么只需要单建 idx_a 索引即可。 说明:存在非等号和等号混合时，在建索引时，请把等号条件的列前置。如:where c&gt;? and d=? 那么 即使 c 的区分度更高，也必须把 d 放在索引的最前列，即索引 idx_d_c。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>防止因字段类型不同造成的隐式转换，导致索引失效。</p>
+</li>
+<li><p><font color=799042>【参考】</font>创建索引时避免有如下极端误解:</p>
+<pre><code> 1) 宁滥勿缺。认为一个查询就需要建一个索引。
+ 2) 宁缺勿滥。认为索引会消耗空间、严重拖慢记录的更新以及行的新增速度。
+ 3) 抵制惟一索引。认为业务的惟一性一律需要在应用层通过“先查后插”方式解决。</code></pre>
+</li>
+</ol>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><ol>
+<li><p><font color=bc0008>【强制】</font>不要使用count(列名)或count(常量)来替代count(<em>)，count(</em>)是SQL92定义的 标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。</p>
+<p> <font color=977919>说明:</font>count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>count(distinct col) 计算该列除 NULL 之外的不重复行数，注意 count(distinct col1, col2) 如果其中一列全为 NULL，那么即使另一列有不同的值，也返回为 0。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>当某一列的值全是NULL时，count(col)的返回结果为0，但sum(col)的返回结果 为 NULL，因此使用 sum()时需注意 NPE 问题。</p>
+<p> <font color=29965b>正例:</font>使用如下方式来避免 sum 的 NPE 问题:SELECT IFNULL(SUM(column), 0) FROM table;</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>使用ISNULL()来判断是否为NULL值。</p>
+<p> <font color=977919>说明:</font>NULL 与任何值的直接比较都为 NULL。</p>
+<pre><code> 1) NULL&lt;&gt;NULL 的返回结果是 NULL，而不是 false。 
+ 2) NULL=NULL 的返回结果是 NULL，而不是 true。 
+ 3) NULL&lt;&gt;1 的返回结果是 NULL，而不是 true。</code></pre>
+</li>
+<li><p><font color=bc0008>【强制】</font>代码中写分页查询逻辑时，若count为0应直接返回，避免执行后面的分页语句。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>不得使用外键与级联，一切外键概念必须在应用层解决。 </p>
+<p> <font color=977919>说明:</font>以学生和成绩的关系为例，学生表中的 student_id 是主键，那么成绩表中的 student_id 则为外 键。如果更新学生表中的 student_id，同时触发成绩表中的 student_id 更新，即为级联更新。外键与级联更新适用于单机低并发，不适合分布式、高并发集群;级联更新是强阻塞，存在数据库更新风暴的风险;外键影响数据库的插入速度。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>禁止使用存储过程，存储过程难以调试和扩展，更没有移植性。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>数据订正(特别是删除、修改记录操作)时，要先select，避免出现误删除，确认无误才能执行更新语句。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>in操作能避免则避免，若实在避免不了，需要仔细评估in后边的集合元素数量，控制在 1000 个之内。</p>
+</li>
+<li><p><font color=799042>【参考】</font>如果有国际化需要，所有的字符存储与表示，均以 utf-8 编码，注意字符统计函数的区别。</p>
+<p> <font color=977919>说明:</font></p>
+<pre><code> SELECT LENGTH(&quot;轻松工作&quot;); 返回为 12
+ SELECT CHARACTER_LENGTH(&quot;轻松工作&quot;); 返回为 4 如果需要存储表情，那么选择 utf8mb4 来进行存储，注意它与 utf-8 编码的区别。</code></pre>
+</li>
+<li><p><font color=799042>【参考】</font>TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少，但 TRUNCATE 无事务且不触发 trigger，有可能造成事故，故不建议在开发代码中使用此语句。 </p>
+<p> <font color=977919>说明:</font>TRUNCATE TABLE 在功能上与不带 WHERE 子句的 DELETE 语句相同。</p>
+</li>
+</ol>
+<h1 id="ORM映射"><a href="#ORM映射" class="headerlink" title="ORM映射"></a>ORM映射</h1><ol>
+<li><p><font color=bc0008>【强制】</font>在表查询中，一律不要使用 * 作为查询的字段列表，需要哪些字段必须明确写明。 </p>
+<p> <font color=977919>说明:</font></p>
+<pre><code> 1)增加查询分析器解析成本。
+ 2)增减字段容易与 resultMap 配置不一致。
+ 3)无用字段增加网络消耗，尤其是 text 类型的字段。</code></pre>
+</li>
+<li><p><font color=bc0008>【强制】</font>更新数据表记录时，必须同时更新记录对应的 updated_at 字段值为当前时间。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>不要写一个大而全的数据更新接口。不管是不是自己的目标更新字段，都进行 update table set c1=value1,c2=value2,c3=value3; 这是不对的。执行 SQL 时，不要更新无改动的字段，一是易出错;二是效率低;三是增加 binlog 存储。</p>
+</li>
+<li><p><font color=799042>【参考】</font>@Transactional事务不要滥用。事务会影响数据库的QPS，另外使用事务的地方需要考虑各方面的回滚方案，包括缓存回滚、搜索引擎回滚、消息补偿、统计修正等。</p>
+</li>
+<li><p><font color=799042>【参考】</font><isEqual>中的 compareValue 是与属性值对比的常量，一般是数字，表示相等时 带上此条件;<isNotEmpty>表示不为空且不为 null 时执行;<isNotNull>表示不为 null 值 时执行。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
+              <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" rel="prev" title="PHP基础数据类型总结">
+      <i class="fa fa-chevron-left"></i> PHP基础数据类型总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" rel="next" title="PHP编码规范">
+      PHP编码规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">建表规约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">索引规约</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">SQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORM%E6%98%A0%E5%B0%84"><span class="nav-number">4.</span> <span class="nav-text">ORM映射</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="邹国锋"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常日志规范">
+<meta property="og:url" content="http://example.com/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-21T08:05:05.000Z">
+<meta property="article:modified_time" content="2021-01-21T10:10:03.590Z">
+<meta property="article:author" content="邹国锋">
+<meta property="article:tag" content="标准规范">
+<meta property="article:tag" content="异常日志">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>异常日志规范 | 邹国锋的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">邹国锋的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="邹国锋的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          异常日志规范
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-21 16:05:05 / 修改时间：18:10:03" itemprop="dateCreated datePublished" datetime="2021-01-21T16:05:05+08:00">2021-01-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="异常日志规范" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
+<a id="more"></a>
+<p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><ol>
+<li><p><font color=bc0008>【强制】</font>异常不要用来做流程控制，条件控制。</p>
+<p> <font color=977919>说明:</font>异常设计的初衷是解决程序运行中的各种意外情况，且异常的处理效率比条件判断方式要低很多。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>catch时请分清稳定代码和非稳定代码，稳定代码指的是无论如何不会出错的代码。 对于非稳定代码的 catch 尽可能进行区分异常类型，再做对应的异常处理。 </p>
+<p> <font color=977919>说明:</font>对大段代码进行 try-catch，使程序无法根据不同的异常做出正确的应激反应，也不利于定位问 题，这是一种不负责任的表现。 </p>
+<p> <font color=29965b>正例:</font>用户注册的场景中，如果用户输入非法字符，或用户名称已存在，或用户输入密码过于简单，在程序上作出分门别类的判断，并提示给用户。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>捕获异常是为了处理它，不要捕获了却什么都不处理而抛弃之，如果不想处理它， 请将该异常抛给它的调用者。最外层的业务使用者，必须处理异常，将其转化为用户可以理 解的内容。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>有try块放到了事务代码中，catch异常后，如果需要回滚事务，一定要注意手动回 滚事务。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>finally块必须对资源对象、流对象进行关闭，有异常也要做try-catch。 </p>
+</li>
+<li><p><font color=bc0008>【强制】</font>不要在finally块中使用return。</p>
+<p> <font color=977919>说明:</font>try 块中的 return 语句执行成功后，并不马上返回，而是继续执行 finally 块中的语句，如果此处存在 return 语句，则在此直接返回，无情丢弃掉 try 块中的返回点。</p>
+<p> <font color=fa4113>反例:</font></p>
+<pre><code>     private $x = 0;
+     public function checkReturn() &#123;
+         try &#123;
+             // x 等于 1，此处不返回
+             return ++$x; 
+         &#125; finally &#123;
+             // 返回的结果是 2
+             return ++$x; 
+         &#125;
+     &#125;</code></pre>
+</li>
+<li><p><font color=bc0008>【强制】</font>捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。</p>
+<p> <font color=977919>说明:</font>如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。 </p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分 说明什么情况下会返回 null 值。</p>
+<p> <font color=977919>说明:</font>本手册明确防止 NPE (Null Pointer Exception)是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也 并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回 null 的情况。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>防止 NPE，是程序员的基本修养，注意 NPE 产生的场景:</p>
+<pre><code> 1) 数据库的查询结果可能为 null。
+ 2) 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null。
+ 3) 远程调用返回对象时，一律要求进行空指针判断，防止 NPE。
+ 4) 对于 Session 中获取的数据，建议进行 NPE 检查，避免空指针。 
+ 5) 级联调用 obj-&gt;getA()-&gt;getB()-&gt;getC();一连串调用，易产生 NPE。</code></pre>
+</li>
+<li><p><font color=febd2c>【推荐】</font>定义时区分 unchecked / checked 异常，避免直接抛出 new RuntimeException()， 更不允许抛出 Exception 或者 Throwable，应使用有业务含义的自定义异常。推荐业界已定 义过的自定义异常，如:DAOException / ServiceException 等。</p>
+</li>
+<li><p><font color=799042>【参考】</font>对于公司外的 http/api 开放接口必须使用“错误码”;而应用内部推荐异常抛出; 跨应用间 RPC 调用优先考虑使用 Result 方式，封装 isSuccess()方法、“错误码”、“错误 简短信息”。</p>
+<p> <font color=977919>说明:</font>跨应用间 RPC 调用使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误</p>
+</li>
+<li><p><font color=799042>【参考】</font>避免出现重复的代码(Don’t Repeat Yourself)，即 DRY 原则。 </p>
+<p> <font color=977919>说明:</font>随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。</p>
+<p> <font color=29965b>正例:</font>一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取:</p>
+<pre><code>     private boolean checkParam($param) &#123;...&#125;</code></pre>
+</li>
+</ol>
+<h1 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h1><ol>
+<li><p><font color=bc0008>【强制】</font>应用中不可直接使用日志系统中的API，使用门面模式的日志框架，有利于维护和各个类的日志处理方式统一。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>所有日志文件至少保存15天，因为有些异常具备以“周”为频次发生的特点。网络 运行状态、安全相关信息、系统监测、管理后台操作、用户敏感操作需要留存相关的网络日 志不少于 6 个月。</p>
+</li>
+<li><p><font color=bc0008>【强制】</font>应用中的扩展日志(如打点、临时监控、访问日志等)命名方式: appName_logType_logName.log。logType:日志类型，如 stats/monitor/access 等;logName:日志 描述。这种命名的好处:通过文件名就可知道日志文件属于什么应用，什么类型，什么目的，也有利于归 类查找。 </p>
+<p> <font color=977919>说明:</font>推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，也便于通过日志对 系统进行及时监控。</p>
+<p> <font color=29965b>正例:</font>force-web 应用中单独监控时区转换异常，如:force_web_timeZoneConvert.log</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>谨慎地记录日志。生产环境禁止输出debug日志;有选择地输出info日志;如果使 用 warn 来记录刚上线时的业务行为信息，一定要注意日志输出量的问题，避免把服务器磁盘 撑爆，并记得及时删除这些观察日志。 </p>
+<p> <font color=977919>说明:</font>大量地输出无效日志，不利于系统性能提升，也不利于快速定位错误点。记录日志时请思考:这些 日志真的有人看吗?看到这条日志你能做什么?能不能给问题排查带来好处?</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>可以使用 warn 日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。如非必要，请不要在此场景打出 error 级别，避免频繁报警。</p>
+<p> <font color=977919>说明:</font>注意日志输出的级别，error 级别只记录系统逻辑出错、异常或者重要的错误信息。</p>
+</li>
+<li><p><font color=febd2c>【推荐】</font>尽量用英文来描述日志错误信息，如果日志中的错误信息用英文描述不清楚的话使用中文描述即可，否则容易产生歧义。<font color=bc0008>【强制】</font>国际化团队或海外部署的服务器由于字符集问题，使用全英文来注释和描述日志错误信息。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
+              <a href="/tags/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97/" rel="tag"># 异常日志</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/21/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83/" rel="prev" title="单元测试规范">
+      <i class="fa fa-chevron-left"></i> 单元测试规范
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/21/%E5%AE%89%E5%85%A8%E8%A7%84%E8%8C%83/" rel="next" title="安全规范">
+      安全规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E8%A7%84%E7%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">日志规约</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="邹国锋"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

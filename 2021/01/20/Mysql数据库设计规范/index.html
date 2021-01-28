@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+  <meta name="description" content="Mysql数据库设计规范指南目录 前言 建表规约 索引规约 SQL语句">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql数据库设计规范">
 <meta property="og:url" content="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/index.html">
 <meta property="og:site_name" content="邹国锋的个人网站">
-<meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
+<meta property="og:description" content="Mysql数据库设计规范指南目录 前言 建表规约 索引规约 SQL语句">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-20T02:31:25.000Z">
-<meta property="article:modified_time" content="2021-01-21T10:26:14.367Z">
+<meta property="article:modified_time" content="2021-01-22T07:42:28.305Z">
 <meta property="article:author" content="邹国锋">
 <meta property="article:tag" content="PHP">
-<meta property="article:tag" content="标准规范">
 <meta property="article:tag" content="Mysql">
 <meta property="article:tag" content="数据库">
+<meta property="article:tag" content="标准规范">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
@@ -200,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-21 18:26:14" itemprop="dateModified" datetime="2021-01-21T18:26:14+08:00">2021-01-21</time>
+                <time title="修改时间：2021-01-22 15:42:28" itemprop="dateModified" datetime="2021-01-22T15:42:28+08:00">2021-01-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,10 +244,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
-<a id="more"></a>
-<p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
-<h1 id="建表规约"><a href="#建表规约" class="headerlink" title="建表规约"></a>建表规约</h1><ol>
+        <h1 id="Mysql数据库设计规范指南"><a href="#Mysql数据库设计规范指南" class="headerlink" title="Mysql数据库设计规范指南"></a>Mysql数据库设计规范指南</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#preface">前言</a></li>
+<li><a href="#buildtable">建表规约</a></li>
+<li><a href="#index">索引规约</a></li>
+<li><a href="#sql">SQL语句</a><a id="more"></a></li>
+<li><a href="#orm">ORM映射</a></li>
+<li><a href="#version">附1:版本历史</a></li>
+<li><a href="#explanation">附2:名词解释</a></li>
+</ol>
+<p><a name="preface"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。<br>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
+<p><a name="buildtable"></a></p>
+<h2 id="建表规约"><a href="#建表规约" class="headerlink" title="建表规约"></a>建表规约</h2><ol>
 <li><p><font color=bc0008>【强制】</font>表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint(1 表示是，0 表示否)。</p>
 <p> <font color=977919>说明:</font>任何字段如果为非负数，必须是 unsigned。</p>
 <p> <font color=29965b>正例:</font>表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。</p>
@@ -332,7 +341,8 @@
 <td align="left">无符号值:0 到约 10 的 19 次方</td>
 </tr>
 </tbody></table>
-<h1 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h1><ol>
+<p><a name="index"></a></p>
+<h2 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h2><ol>
 <li><p><font color=bc0008>【强制】</font>业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。 </p>
 <p> <font color=977919>说明:</font>不要以为唯一索引影响了 insert 速度，这个速度损耗可以忽略，但提高查找速度是明显的;另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，根据墨菲定律，必然有脏数据产生。</p>
 </li>
@@ -374,6 +384,7 @@
  3) 抵制惟一索引。认为业务的惟一性一律需要在应用层通过“先查后插”方式解决。</code></pre>
 </li>
 </ol>
+<p><a name="sql"></a></p>
 <h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><ol>
 <li><p><font color=bc0008>【强制】</font>不要使用count(列名)或count(常量)来替代count(<em>)，count(</em>)是SQL92定义的 标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。</p>
 <p> <font color=977919>说明:</font>count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行。</p>
@@ -409,7 +420,8 @@
 <p> <font color=977919>说明:</font>TRUNCATE TABLE 在功能上与不带 WHERE 子句的 DELETE 语句相同。</p>
 </li>
 </ol>
-<h1 id="ORM映射"><a href="#ORM映射" class="headerlink" title="ORM映射"></a>ORM映射</h1><ol>
+<p><a name="orm"></a></p>
+<h2 id="ORM映射"><a href="#ORM映射" class="headerlink" title="ORM映射"></a>ORM映射</h2><ol>
 <li><p><font color=bc0008>【强制】</font>在表查询中，一律不要使用 * 作为查询的字段列表，需要哪些字段必须明确写明。 </p>
 <p> <font color=977919>说明:</font></p>
 <pre><code> 1)增加查询分析器解析成本。
@@ -425,7 +437,8 @@
 <li><p><font color=799042>【参考】</font><isEqual>中的 compareValue 是与属性值对比的常量，一般是数字，表示相等时 带上此条件;<isNotEmpty>表示不为空且不为 null 时执行;<isNotNull>表示不为 null 值 时执行。</p>
 </li>
 </ol>
-<h1 id="附1-版本历史"><a href="#附1-版本历史" class="headerlink" title="附1:版本历史"></a>附1:版本历史</h1><table>
+<p><a name="version"></a></p>
+<h2 id="附1-版本历史"><a href="#附1-版本历史" class="headerlink" title="附1:版本历史"></a>附1:版本历史</h2><table>
 <thead>
 <tr>
 <th align="center">版本号</th>
@@ -441,7 +454,8 @@
 <td align="left">试读版本首次发布</td>
 </tr>
 </tbody></table>
-<h1 id="附2-名词解释"><a href="#附2-名词解释" class="headerlink" title="附2:名词解释"></a>附2:名词解释</h1><ol>
+<p><a name="explanation"></a></p>
+<h2 id="附2-名词解释"><a href="#附2-名词解释" class="headerlink" title="附2:名词解释"></a>附2:名词解释</h2><ol>
 <li>ORM(Object Relation Mapping): 对象关系映射，对象领域模型与底层数据之间的转换， 本文泛指 Laravel,Hyperf 等框架。</li>
 <li>NPE(java.lang.NullPointerException): 空指针异常。</li>
 </ol>
@@ -455,9 +469,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/PHP/" rel="tag"># PHP</a>
-              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
               <a href="/tags/Mysql/" rel="tag"># Mysql</a>
               <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" rel="tag"># 标准规范</a>
           </div>
 
         
@@ -532,7 +546,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">建表规约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">索引规约</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">SQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORM%E6%98%A0%E5%B0%84"><span class="nav-number">4.</span> <span class="nav-text">ORM映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%841-%E7%89%88%E6%9C%AC%E5%8E%86%E5%8F%B2"><span class="nav-number">5.</span> <span class="nav-text">附1:版本历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%842-%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">6.</span> <span class="nav-text">附2:名词解释</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">Mysql数据库设计规范指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6"><span class="nav-number">2.1.</span> <span class="nav-text">建表规约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6"><span class="nav-number">2.2.</span> <span class="nav-text">索引规约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.3.</span> <span class="nav-text">SQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM%E6%98%A0%E5%B0%84"><span class="nav-number">2.4.</span> <span class="nav-text">ORM映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%841-%E7%89%88%E6%9C%AC%E5%8E%86%E5%8F%B2"><span class="nav-number">2.5.</span> <span class="nav-text">附1:版本历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%842-%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">2.6.</span> <span class="nav-text">附2:名词解释</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

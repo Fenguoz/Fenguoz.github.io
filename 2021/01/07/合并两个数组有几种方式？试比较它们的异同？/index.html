@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="方式：  array_merge() ‘+’  array_merge_recursive()  补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 array_combine() ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="合并两个数组有几种方式？试比较它们的异同？">
+<meta property="og:url" content="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Fenguoz的个人网站">
+<meta property="og:description" content="方式：  array_merge() ‘+’  array_merge_recursive()  补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 array_combine() ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-07T13:53:48.000Z">
+<meta property="article:modified_time" content="2023-02-10T02:11:46.127Z">
+<meta property="article:author" content="Fenguoz">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="腾讯">
+<meta property="article:tag" content="笔试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>合并两个数组有几种方式？试比较它们的异同？ | Fenguoz的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          合并两个数组有几种方式？试比较它们的异同？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-07 21:53:48" itemprop="dateCreated datePublished" datetime="2021-01-07T21:53:48+08:00">2021-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">每天一道面试题</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="合并两个数组有几种方式？试比较它们的异同？" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>方式：</p>
+<ol>
+<li><strong>array_merge()</strong></li>
+<li><strong>‘+’</strong> </li>
+<li><strong>array_merge_recursive()</strong></li>
+</ol>
+<p>补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 <strong>array_combine()</strong> ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值</p>
+<span id="more"></span>
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>接下来我们分析下其每个的具体作用。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例1</span></span><br><span class="line"><span class="variable">$a1</span> = [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$a2</span> = [<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$a1</span> + <span class="variable">$a2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_combine</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:&quot;b&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例2</span></span><br><span class="line"><span class="variable">$b1</span> = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$b2</span> = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$b1</span>+<span class="variable">$b2</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_combine</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">// result Warning: array_combine(): Both parameters should have an equal number of elements</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例3</span></span><br><span class="line"><span class="variable">$c1</span> = [<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>];</span><br><span class="line"><span class="variable">$c2</span> = [<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span> =&gt; <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$c1</span> + <span class="variable">$c2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:3,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:[2,3],&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>示例1中不难看出array_merge和array_merge_recursive是能正常合并的，不过’+’不行。array_combine前者的元素变成了对应后者元素的键值。</p>
+<p>接着示例2，可以看出array_merge和array_merge_recursive依然是能正常合并的。’+’则是合并了后者的第三个元素。array_combine在示例2中则运行报错了。</p>
+<p>示例3，array_merge是合并了。array_merge_recursive也合并，若果有相同的键值时，则会递归合并。’+’依然是只合并了后者的第三个元素。</p>
+<p>分析得出：</p>
+<p><strong>array_merge()</strong> ，正常合并两个数组。</p>
+<p><strong>array_merge_recursive()</strong> ，正常合并两个数组。若果<u>有相同的键值时则递归合并</u>。</p>
+<p><strong>‘+’</strong> ,根据示例1和示例2对比，我们可以得出<u>键值相同的元素不会附加在前面的数组中</u>，不同则附加，作为结果返回。</p>
+<p><strong>array_combine()</strong>[<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-combine.php">进入手册</a>]，根据php手册中我们可以找到解释。array_combine()，“创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值.如果作为keys的数组和作为values的数组的元素个数不一样，将会抛出一个警告错误”。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><strong>array_merge()</strong> 简单的合并数组</p>
+<p><strong>array_merge_recursive()</strong> 合并两个数组，有相同的键值时则递归合并</p>
+<p><strong>‘+’</strong> 合并两个数组，键值相同的元素不会附加在前面的数组中</p>
+<p><strong>array_combine()</strong> 合并两个数组，前者元素值成了对应后者元素值的键值</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>细心的小伙伴应该能发现示例2和示例3中array_merge返回值有点不对劲🤔️。</p>
+<p>示例2中返回了bb，而示例3只返回了b&#x3D;&gt;3。</p>
+<p>细想了下，若果是键值唯一，那么示例3成立，示例2应是bcd，取后者覆盖后的值。</p>
+<p>若果键值不唯一，示例2成立，则示例3应是b&#x3D;&gt;2,b&#x3D;&gt;3。</p>
+<p>最终查看php手册发现原因，<strong>array_merge()</strong>[<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-merge.php">进入手册</a>],“如果输入的数组中有<u>相同的字符串键名</u>，则该键名后面的值<u>将覆盖前一个值</u>。然而，如果数组包含<u>数字键名</u>，后面的值<u>将 <font color=red>不会</font> 覆盖原来的值</u>，而是附加到后面。”</p>
+<p>补充</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例4</span></span><br><span class="line"><span class="variable">$d1</span> = [ <span class="number">1</span> =&gt; <span class="string">&#x27;a&#x27;</span>, <span class="number">2</span> =&gt; <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$d2</span> = [ <span class="number">3</span> =&gt; <span class="string">&#x27;b&#x27;</span>, <span class="number">4</span> =&gt; <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$d1</span>, <span class="variable">$d2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$d1</span>, <span class="variable">$d2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$d1</span> + <span class="variable">$d2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;1&quot;:&quot;a&quot;,&quot;2&quot;:&quot;b&quot;,&quot;3&quot;:&quot;b&quot;,&quot;4&quot;:&quot;c&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是数字键值的数组合并时，array_merge和array_merge_recursive结果都是对数组重新排序，而’+’则是保留了原本键值。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 面试题</a>
+              <a href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag"># 腾讯</a>
+              <a href="/tags/%E7%AC%94%E8%AF%95/" rel="tag"># 笔试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" rel="prev" title="程序员练级攻略-技术资源集散地">
+      <i class="fa fa-chevron-left"></i> 程序员练级攻略-技术资源集散地
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="next" title="项目开发规范">
+      项目开发规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.</span> <span class="nav-text">实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

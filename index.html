@@ -161,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
@@ -175,7 +175,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:数值类型</a>
+            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:3.函数类型</a>
         </h2>
 
         <div class="post-meta">
@@ -186,7 +186,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-02-13 18:39:57 / 修改时间：19:48:06" itemprop="dateCreated datePublished" datetime="2023-02-13T18:39:57+08:00">2023-02-13</time>
+              <time title="创建时间：2023-02-13 20:03:30 / 修改时间：20:12:05" itemprop="dateCreated datePublished" datetime="2023-02-13T20:03:30+08:00">2023-02-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,7 +199,7 @@
             </span>
 
           
-            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:数值类型" title="阅读次数">
+            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:3.函数类型" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -214,8 +214,103 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-下面哪一项不是-Solidity-中的函数可见性说明符？"><a href="#1-下面哪一项不是-Solidity-中的函数可见性说明符？" class="headerlink" title="1.下面哪一项不是 Solidity 中的函数可见性说明符？"></a>1.下面哪一项不是 Solidity 中的函数可见性说明符？</h4><p>答：protected(external,private,public)</p>
+<h4 id="2-下面关于-view-关键字的描述，哪一项是准确的"><a href="#2-下面关于-view-关键字的描述，哪一项是准确的" class="headerlink" title="2.下面关于 view 关键字的描述，哪一项是准确的?"></a>2.下面关于 view 关键字的描述，哪一项是准确的?</h4><p>答：包含 view 关键字的函数，可以读取但不能写入存储在链上的状态变量</p>
+<h4 id="3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？"><a href="#3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？" class="headerlink" title="3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？"></a>3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？</h4><p>答：每个函数在声明时必须包含这两个关键字中的一个</p>
+<h4 id="4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："><a href="#4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：" class="headerlink" title="4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："></a>4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">add</span><span class="params">(uint256 a, uint256 b)</span> internal _____ <span class="title function_">returns</span> <span class="params">(uint256)</span> &#123;</span><br><span class="line">    uint256 c = a + b;</span><br><span class="line">    assert(c &gt;= a);  <span class="comment">// 本行代码意为：若c不大于等于a，则说明加法运算溢出，抛出异常</span></span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="那么，下划线处最适合填写的关键字是："><a href="#那么，下划线处最适合填写的关键字是：" class="headerlink" title="那么，下划线处最适合填写的关键字是："></a>那么，下划线处最适合填写的关键字是：</h4><p>答：pure</p>
+<h4 id="5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额："><a href="#5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额：" class="headerlink" title="5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额："></a>5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">balanceOf</span><span class="params">(address who)</span> _____ <span class="title function_">returns</span> <span class="params">(uint)</span></span><br></pre></td></tr></table></figure>
+<h4 id="那么，下划线处最适合填写的关键字是"><a href="#那么，下划线处最适合填写的关键字是" class="headerlink" title="那么，下划线处最适合填写的关键字是"></a>那么，下划线处最适合填写的关键字是</h4><p>答：public</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:2.数值类型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-13 18:39:57 / 修改时间：20:08:29" itemprop="dateCreated datePublished" datetime="2023-02-13T18:39:57+08:00">2023-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:2.数值类型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -254,7 +349,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/11/WTF%E6%97%A5%E8%AE%B0-HelloWeb3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
@@ -268,7 +363,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-HelloWeb3/" class="post-title-link" itemprop="url">WTF日记:HelloWeb3</a>
+            <a href="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/" class="post-title-link" itemprop="url">WTF日记:1.HelloWeb3</a>
         </h2>
 
         <div class="post-meta">
@@ -277,10 +372,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-02-11 17:56:45 / 修改时间：18:21:28" itemprop="dateCreated datePublished" datetime="2023-02-11T17:56:45+08:00">2023-02-11</time>
+              <time title="创建时间：2023-02-11 17:56:45" itemprop="dateCreated datePublished" datetime="2023-02-11T17:56:45+08:00">2023-02-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-13 20:09:00" itemprop="dateModified" datetime="2023-02-13T20:09:00+08:00">2023-02-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -292,7 +393,7 @@
             </span>
 
           
-            <span id="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-HelloWeb3/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:HelloWeb3" title="阅读次数">
+            <span id="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:1.HelloWeb3" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -307,8 +408,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-HelloWeb3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-HelloWeb3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1072,114 +1173,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-title-link" itemprop="url">合并两个数组有几种方式？试比较它们的异同？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-07 21:53:48" itemprop="dateCreated datePublished" datetime="2021-01-07T21:53:48+08:00">2021-01-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">每天一道面试题</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="合并两个数组有几种方式？试比较它们的异同？" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>方式：</p>
-<ol>
-<li><strong>array_merge()</strong></li>
-<li><strong>‘+’</strong> </li>
-<li><strong>array_merge_recursive()</strong></li>
-</ol>
-<p>补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 <strong>array_combine()</strong> ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1251,7 +1244,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

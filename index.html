@@ -161,6 +161,140 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/17/WTF%E6%97%A5%E8%AE%B0-5-%E5%8F%98%E9%87%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/17/WTF%E6%97%A5%E8%AE%B0-5-%E5%8F%98%E9%87%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="post-title-link" itemprop="url">WTF日记:5.变量数据存储和作用域</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-17 19:12:23 / 修改时间：19:15:59" itemprop="dateCreated datePublished" datetime="2023-02-17T19:12:23+08:00">2023-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/17/WTF%E6%97%A5%E8%AE%B0-5-%E5%8F%98%E9%87%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:5.变量数据存储和作用域" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/17/WTF%E6%97%A5%E8%AE%B0-5-%E5%8F%98%E9%87%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/17/WTF%E6%97%A5%E8%AE%B0-5-%E5%8F%98%E9%87%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-引用类型-Reference-Type-包含以下："><a href="#1-引用类型-Reference-Type-包含以下：" class="headerlink" title="1.引用类型(Reference Type)包含以下："></a>1.引用类型(Reference Type)包含以下：</h4><ul>
+<li>数组（array）</li>
+<li>结构体（struct）</li>
+<li>映射（mapping）</li>
+<li>✅以上全部</li>
+</ul>
+<h4 id="2-solidity数据存储位置的类型不包含以下："><a href="#2-solidity数据存储位置的类型不包含以下：" class="headerlink" title="2.solidity数据存储位置的类型不包含以下："></a>2.solidity数据存储位置的类型不包含以下：</h4><ul>
+<li>storage</li>
+<li>✅stack</li>
+<li>calldata</li>
+<li>memory</li>
+</ul>
+<h4 id="3-合约中状态变量默认的存储位置类型为以下的："><a href="#3-合约中状态变量默认的存储位置类型为以下的：" class="headerlink" title="3.合约中状态变量默认的存储位置类型为以下的："></a>3.合约中状态变量默认的存储位置类型为以下的：</h4><ul>
+<li>✅storage</li>
+<li>calldata</li>
+<li>memory</li>
+</ul>
+<h4 id="4-不同类型的引用变量相互赋值时，修改其中一个的值，不会导致另一个的值随之改变的是以下哪种情况："><a href="#4-不同类型的引用变量相互赋值时，修改其中一个的值，不会导致另一个的值随之改变的是以下哪种情况：" class="headerlink" title="4.不同类型的引用变量相互赋值时，修改其中一个的值，不会导致另一个的值随之改变的是以下哪种情况："></a>4.不同类型的引用变量相互赋值时，修改其中一个的值，不会导致另一个的值随之改变的是以下哪种情况：</h4><ul>
+<li>合约中的storage赋值给本地的storage</li>
+<li>合约中的memory赋值给本地的memory</li>
+<li>✅合约中的storage赋值给本地的memory</li>
+<li>以上全部</li>
+</ul>
+<h4 id="5-Solidity中变量按作用域划分，可分为："><a href="#5-Solidity中变量按作用域划分，可分为：" class="headerlink" title="5.Solidity中变量按作用域划分，可分为："></a>5.Solidity中变量按作用域划分，可分为：</h4><ul>
+<li>状态变量（state variable）</li>
+<li>局部变量（local variable）</li>
+<li>全局变量（global variable)</li>
+<li>✅以上全部</li>
+</ul>
+<h4 id="6-消耗gas最多的变量类型为："><a href="#6-消耗gas最多的变量类型为：" class="headerlink" title="6.消耗gas最多的变量类型为："></a>6.消耗gas最多的变量类型为：</h4><ul>
+<li>✅状态变量</li>
+<li>局部变量</li>
+<li>全局变量</li>
+</ul>
+<h4 id="7-下列表示“请求发起地址”的为："><a href="#7-下列表示“请求发起地址”的为：" class="headerlink" title="7.下列表示“请求发起地址”的为："></a>7.下列表示“请求发起地址”的为：</h4><ul>
+<li>msg.sig</li>
+<li>✅msg.sender</li>
+<li>msg.data</li>
+<li>msg.value</li>
+</ul>
+<h4 id="8-下列表示“当前区块的矿工地址”的为："><a href="#8-下列表示“当前区块的矿工地址”的为：" class="headerlink" title="8.下列表示“当前区块的矿工地址”的为："></a>8.下列表示“当前区块的矿工地址”的为：</h4><ul>
+<li>✅block.coinbase</li>
+<li>block.gaslimit</li>
+<li>block.number</li>
+<li>block.timestamp</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1088,112 +1222,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">Mysql数据库设计规范</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-20 10:31:25" itemprop="dateCreated datePublished" datetime="2021-01-20T10:31:25+08:00">2021-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql数据库设计规范" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mysql数据库设计规范指南"><a href="#Mysql数据库设计规范指南" class="headerlink" title="Mysql数据库设计规范指南"></a>Mysql数据库设计规范指南</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
-<li><a href="#preface">前言</a></li>
-<li><a href="#buildtable">建表规约</a></li>
-<li><a href="#index">索引规约</a></li>
-<li><a href="#sql">SQL语句</a>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1265,7 +1293,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

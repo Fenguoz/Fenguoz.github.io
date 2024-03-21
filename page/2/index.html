@@ -161,6 +161,421 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:6.引用类型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-16 20:08:21 / 修改时间：20:25:34" itemprop="dateCreated datePublished" datetime="2023-02-16T20:08:21+08:00">2023-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:6.引用类型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-以下选项中不属于固定长度数组的是"><a href="#1-以下选项中不属于固定长度数组的是" class="headerlink" title="1.以下选项中不属于固定长度数组的是"></a>1.以下选项中不属于固定长度数组的是</h4><ul>
+<li>uint[100] array0;</li>
+<li>✅address[] array1;</li>
+<li>byte[3] array2;</li>
+<li>bool[100] array3;</li>
+</ul>
+<h4 id="2-以下选项中不属于可变长度数组的是"><a href="#2-以下选项中不属于可变长度数组的是" class="headerlink" title="2.以下选项中不属于可变长度数组的是"></a>2.以下选项中不属于可变长度数组的是</h4><ul>
+<li>uint[] array0;</li>
+<li>bytes array1;</li>
+<li>✅address[6] array2;</li>
+<li>byte[] array3;</li>
+</ul>
+<h4 id="3-以下关于数组的说法中，正确的是"><a href="#3-以下关于数组的说法中，正确的是" class="headerlink" title="3.以下关于数组的说法中，正确的是"></a>3.以下关于数组的说法中，正确的是</h4><ul>
+<li>固定长度数组 和 bytes拥有 push() 成员，可以在数组最后添加一个0元素。</li>
+<li>数组字面常数，例如 [uint(1),2,3]，需要声明第一个元素的类型，不然默认用存储空间最大的类型。</li>
+<li>✅内存数组的长度在创建后是固定的。</li>
+<li>对于memory可变长度数组，可以用new操作符来创建，并且不用声明长度，例如uint[] memory array &#x3D; new uint[];。</li>
+</ul>
+<h4 id="4-数组和结构体分别属于什么类型"><a href="#4-数组和结构体分别属于什么类型" class="headerlink" title="4.数组和结构体分别属于什么类型"></a>4.数组和结构体分别属于什么类型</h4><ul>
+<li>数值类型和引用类型</li>
+<li>✅引用类型和引用类型</li>
+<li>数值类型和数值类型</li>
+<li>引用类型和数值类型</li>
+</ul>
+<h4 id="5-以下关于结构体的说法中，错误的是"><a href="#5-以下关于结构体的说法中，错误的是" class="headerlink" title="5.以下关于结构体的说法中，错误的是"></a>5.以下关于结构体的说法中，错误的是</h4><ul>
+<li>通过结构体的形式可以定义新的类型。</li>
+<li>结构体内可以包含字符串，整型等基本数据类型，也可以包含数组，映射，结构体等复杂类型。</li>
+<li>✅结构体内可以包含其本身。</li>
+</ul>
+<h4 id="6-有如下一段合约代码，执行-initStudent-方法后，student-id-和-student-score-的值分别为"><a href="#6-有如下一段合约代码，执行-initStudent-方法后，student-id-和-student-score-的值分别为" class="headerlink" title="6.有如下一段合约代码，执行 initStudent 方法后，student.id 和 student.score 的值分别为"></a>6.有如下一段合约代码，执行 initStudent 方法后，student.id 和 student.score 的值分别为</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">contract StructTypes &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span>&#123;</span></span><br><span class="line">        uint256 id;</span><br><span class="line">        uint256 score; </span><br><span class="line">    &#125;</span><br><span class="line">   Student student;</span><br><span class="line">   function <span class="title function_">initStudent</span><span class="params">()</span> external&#123;</span><br><span class="line">        student.id = <span class="number">100</span>;</span><br><span class="line">        student.score = <span class="number">200</span>;</span><br><span class="line">        Student storage _student = student;</span><br><span class="line">        _student.id = <span class="number">300</span>;</span><br><span class="line">        _student.score = <span class="number">400</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>✅300 400</li>
+<li>100 200</li>
+<li>300 200</li>
+<li>100 400</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" class="post-title-link" itemprop="url">WTF日记:4. 函数输出</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-16 09:56:53 / 修改时间：10:05:12" itemprop="dateCreated datePublished" datetime="2023-02-16T09:56:53+08:00">2023-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:4. 函数输出" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-returns关键字的作用"><a href="#1-returns关键字的作用" class="headerlink" title="1.returns关键字的作用?"></a>1.returns关键字的作用?</h4><p>答：加在函数名后面，用于声明返回的变量类型及变量名</p>
+<h4 id="2-return关键字的作用"><a href="#2-return关键字的作用" class="headerlink" title="2.return关键字的作用?"></a>2.return关键字的作用?</h4><p>答：用于函数主体中，返回指定的变量</p>
+<h4 id="3-采用命名式返回的函数主体中能否使用return"><a href="#3-采用命名式返回的函数主体中能否使用return" class="headerlink" title="3.采用命名式返回的函数主体中能否使用return?"></a>3.采用命名式返回的函数主体中能否使用return?</h4><p>答：能</p>
+<h4 id="4-解构式赋值能否只读取函数部分返回值"><a href="#4-解构式赋值能否只读取函数部分返回值" class="headerlink" title="4.解构式赋值能否只读取函数部分返回值?"></a>4.解构式赋值能否只读取函数部分返回值?</h4><p>答：能</p>
+<h4 id="5-假设存在如下函数："><a href="#5-假设存在如下函数：" class="headerlink" title="5.假设存在如下函数："></a>5.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 , <span class="type">bool</span> , <span class="built_in">string</span>, uint256[<span class="number">3</span>] memory)</span>，</span><br></pre></td></tr></table></figure>
+<h4 id="那么它可能的返回结果是？"><a href="#那么它可能的返回结果是？" class="headerlink" title="那么它可能的返回结果是？"></a>那么它可能的返回结果是？</h4><p>答：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (<span class="number">64</span>, <span class="literal">true</span>, <span class="string">&quot;abcd&quot;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-下列属于命名式返回的是"><a href="#6-下列属于命名式返回的是" class="headerlink" title="6.下列属于命名式返回的是?"></a>6.下列属于命名式返回的是?</h4><p>答：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 _number, <span class="type">bool</span> _bool, uint256[<span class="number">3</span>] memory _array)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-假设存在如下函数："><a href="#7-假设存在如下函数：" class="headerlink" title="7.假设存在如下函数："></a>7.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 _number)</span>&#123;</span><br><span class="line">    <span class="type">bool</span> _bool = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">string</span> memory _str = <span class="string">&#x27;0xAA&#x27;</span>;       </span><br><span class="line">    _number = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="那么调用该函数返回的结果是？"><a href="#那么调用该函数返回的结果是？" class="headerlink" title="那么调用该函数返回的结果是？"></a>那么调用该函数返回的结果是？</h4><p>答：0:uint236 number 2</p>
+<h4 id="8-假设存在如下函数："><a href="#8-假设存在如下函数：" class="headerlink" title="8.假设存在如下函数："></a>8.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnMultiple</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256, <span class="type">bool</span>, uint256[<span class="number">3</span>] memory)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="number">1</span>, <span class="literal">true</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="那么下面哪个选项正确使用了该函数？"><a href="#那么下面哪个选项正确使用了该函数？" class="headerlink" title="那么下面哪个选项正确使用了该函数？"></a>那么下面哪个选项正确使用了该函数？</h4><p>答：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> _bool ; (, _bool, ) = returnMultiple();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:3.函数类型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-13 20:03:30 / 修改时间：20:12:05" itemprop="dateCreated datePublished" datetime="2023-02-13T20:03:30+08:00">2023-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:3.函数类型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-下面哪一项不是-Solidity-中的函数可见性说明符？"><a href="#1-下面哪一项不是-Solidity-中的函数可见性说明符？" class="headerlink" title="1.下面哪一项不是 Solidity 中的函数可见性说明符？"></a>1.下面哪一项不是 Solidity 中的函数可见性说明符？</h4><p>答：protected(external,private,public)</p>
+<h4 id="2-下面关于-view-关键字的描述，哪一项是准确的"><a href="#2-下面关于-view-关键字的描述，哪一项是准确的" class="headerlink" title="2.下面关于 view 关键字的描述，哪一项是准确的?"></a>2.下面关于 view 关键字的描述，哪一项是准确的?</h4><p>答：包含 view 关键字的函数，可以读取但不能写入存储在链上的状态变量</p>
+<h4 id="3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？"><a href="#3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？" class="headerlink" title="3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？"></a>3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？</h4><p>答：每个函数在声明时必须包含这两个关键字中的一个</p>
+<h4 id="4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："><a href="#4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：" class="headerlink" title="4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："></a>4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">add</span><span class="params">(uint256 a, uint256 b)</span> internal _____ <span class="title function_">returns</span> <span class="params">(uint256)</span> &#123;</span><br><span class="line">    uint256 c = a + b;</span><br><span class="line">    assert(c &gt;= a);  <span class="comment">// 本行代码意为：若c不大于等于a，则说明加法运算溢出，抛出异常</span></span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="那么，下划线处最适合填写的关键字是："><a href="#那么，下划线处最适合填写的关键字是：" class="headerlink" title="那么，下划线处最适合填写的关键字是："></a>那么，下划线处最适合填写的关键字是：</h4><p>答：pure</p>
+<h4 id="5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额："><a href="#5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额：" class="headerlink" title="5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额："></a>5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">balanceOf</span><span class="params">(address who)</span> _____ <span class="title function_">returns</span> <span class="params">(uint)</span></span><br></pre></td></tr></table></figure>
+<h4 id="那么，下划线处最适合填写的关键字是"><a href="#那么，下划线处最适合填写的关键字是" class="headerlink" title="那么，下划线处最适合填写的关键字是"></a>那么，下划线处最适合填写的关键字是</h4><p>答：public</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:2.数值类型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-13 18:39:57 / 修改时间：20:08:29" itemprop="dateCreated datePublished" datetime="2023-02-13T18:39:57+08:00">2023-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:2.数值类型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-以下属于solidity变量类型的是？"><a href="#1-以下属于solidity变量类型的是？" class="headerlink" title="1.以下属于solidity变量类型的是？"></a>1.以下属于solidity变量类型的是？</h4><p>答：数值类型(Value Type)，引用类型(Reference Type)，映射类型(Mapping Type)，函数类型(Function Type)</p>
+<h4 id="2-solidity中数值类型-Value-Type-不包括："><a href="#2-solidity中数值类型-Value-Type-不包括：" class="headerlink" title="2.solidity中数值类型(Value Type)不包括："></a>2.solidity中数值类型(Value Type)不包括：</h4><p>答：float(数值类型包含uint8,address,bool)</p>
+<h4 id="3-address-payable-addr-addr-transfer-1-意为："><a href="#3-address-payable-addr-addr-transfer-1-意为：" class="headerlink" title="3.address payable addr;addr.transfer(1);意为："></a>3.address payable addr;addr.transfer(1);意为：</h4><p>答：合约向addr转账1wei</p>
+<h4 id="4-bytes4类型具有几个16进制位？"><a href="#4-bytes4类型具有几个16进制位？" class="headerlink" title="4.bytes4类型具有几个16进制位？"></a>4.bytes4类型具有几个16进制位？</h4><p>答：8(2个16进制数 &#x3D; 8个二进制数位 &#x3D; 1字节)</p>
+<h4 id="5-以下运算能使a返回true的是？"><a href="#5-以下运算能使a返回true的是？" class="headerlink" title="5.以下运算能使a返回true的是？"></a>5.以下运算能使a返回true的是？</h4><p>答：bool a &#x3D; 1-1&#x3D;&#x3D;0&amp;&amp;1%2&#x3D;&#x3D;1;</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/11/WTF%E6%97%A5%E8%AE%B0-1.HelloWeb3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -779,427 +1194,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">PHP基础数据类型总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-18 21:40:09" itemprop="dateCreated datePublished" datetime="2021-01-18T21:40:09+08:00">2021-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="PHP基础数据类型总结" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在PHP中，数据类型分为字符串、整数、浮点、布尔值、数组、对象和资源7大类。在这篇文章中，举例了各数据类型的重点或者易错点。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/18/PHP%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">项目开发规范</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-18 15:54:53" itemprop="dateCreated datePublished" datetime="2021-01-18T15:54:53+08:00">2021-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准规范</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="post-meta-item leancloud_visitors" data-flag-title="项目开发规范" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="项目开发规范指南"><a href="#项目开发规范指南" class="headerlink" title="项目开发规范指南"></a>项目开发规范指南</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
-<li><a href="#preface">前言</a></li>
-<li><a href="#project">项目规范</a>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/18/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-title-link" itemprop="url">合并两个数组有几种方式？试比较它们的异同？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-07 21:53:48" itemprop="dateCreated datePublished" datetime="2021-01-07T21:53:48+08:00">2021-01-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%8F%E5%A4%A9%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">每天一道面试题</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="合并两个数组有几种方式？试比较它们的异同？" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>方式：</p>
-<ol>
-<li><strong>array_merge()</strong></li>
-<li><strong>‘+’</strong> </li>
-<li><strong>array_merge_recursive()</strong></li>
-</ol>
-<p>补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 <strong>array_combine()</strong> ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" class="post-title-link" itemprop="url">程序员练级攻略-技术资源集散地</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-05 16:32:25" itemprop="dateCreated datePublished" datetime="2021-01-05T16:32:25+08:00">2021-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-10 10:11:46" itemprop="dateModified" datetime="2023-02-10T10:11:46+08:00">2023-02-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98/" itemprop="url" rel="index"><span itemprop="name">程序员</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" class="post-meta-item leancloud_visitors" data-flag-title="程序员练级攻略-技术资源集散地" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>极客时间陈皓老师的专栏《左耳听风》,为了自己方便学习，同时也分享一起学习，当然如果有兴趣，可以去订阅。</p>
-<h2 id="个人技术博客"><a href="#个人技术博客" class="headerlink" title="个人技术博客"></a>个人技术博客</h2><p>首先，我先推荐一些不错的个人技术博客。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5-%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90%E9%9B%86%E6%95%A3%E5%9C%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1267,7 +1265,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

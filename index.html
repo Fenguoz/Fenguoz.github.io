@@ -161,6 +161,719 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">闪电网络：技术与用户体验（三）：路由</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-21 11:09:00 / 修改时间：11:11:41" itemprop="dateCreated datePublished" datetime="2024-03-21T11:09:00+08:00">2024-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">闪电网络</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" class="post-meta-item leancloud_visitors" data-flag-title="闪电网络：技术与用户体验（三）：路由" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E9%81%93%E4%B8%8E%E6%94%AF%E4%BB%98/" title="闪电网络：技术与用户体验（二）：通道与支付">闪电网络：技术与用户体验（二）：通道与支付</a>
+<p>在上一篇文章中，我们了解了如何借助比特币的脚本和交易特性，实现双方可以无限次更新状态的共有资金（“通道”）；并在此基础上实现可以获得收据的 “支付”。与链上支付相比，这种基于通道的支付具有低手续费、确认速度快的特点，因此扩大了比特币的吞吐量（“可扩展性”）。</p>
+</blockquote>
+<p>但是，这只表明，通道是可以实现的，跨通道的多跳支付也是可以实现的。具体来说，在一个网络中，到底如何运用这些技术，向另一个节点支付呢？本篇将解决这个问题。</p>
+<p>本篇所述的内容，将使读者对闪电网络的 “网络” 特性有更直观的理解，也将意识到，这里有多么大的改进空间。本文也将解释一些已经发生和正在发生的改进。同时，其中的关键事实，也解释了闪电网络当前的一些用户体验。</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>“路由（routing）” 的字面意思是 “寻找路径”。</p>
+<p>假设你要去一个从没去过的地方，你需要哪些信息？首先，你需要一张地图；其次，你需要在地图上找出你身处的位置以及目的地的位置；最后，在两个点之间找出一条可以走得通的线路。互联网导航软件在做的也是同样的事情。</p>
+<p>在闪电网络中找出由通道前后连接而成的、给特定对象支付的路径，也是一样的道理。为此我们要借助两部分信息。</p>
+<h2 id="公开信息"><a href="#公开信息" class="headerlink" title="公开信息"></a>公开信息</h2><p>整个闪电网络的公开通道的连接情形，也即网络的拓扑图，在闪电网络中属于公开的信息。任何一个节点都可以从其它节点处获得该节点所掌握的拓扑信息。每一个节点在新建一条公开通道时，也都会向自己所知的其它对等节点播报（<code>channel_announment</code>）1，从而更新这些公开的信息。</p>
+<blockquote>
+<p>闪电网络中有两种通道，一种是公开的通道，另一种则是不公开的（unannounced channel）。如此处所述，前者的许多信息属于全网可得的公开信息。后者的这些信息并不向整个网络公开，但有可能被第三方知晓，比如，节点出于收款的需要而主动暴露给支付方。</p>
+</blockquote>
+<p>另一种公开的信息，是这些公开通道的容量（双方共有的资金总额）。新的公开通道在播报出来的时候，也会公开该通道所使用的 UTXO（被称为 “channel point”），该 UTXO 的面额自然也就是这条通道的容量。通道容量的信息在规划支付路径时显然是有用的，它使我们可以不必尝试那些容量显然不够的通道，或者说，可以不在一条通道上尝试超过该通道容量的支付。</p>
+<blockquote>
+<p>但是，这一信息也常常被诟病为对隐私性的侵害：能够同时观察链上数据和闪电网络拓扑信息的人，将知道哪一个节点在使用哪一条通道（哪一个 UTXO），并猜测汇入这个 UTXO 的哪一部分资金属于这个节点，甚至能从该 UTXO 的后续变化中了解该节点的情况，例如，该节点广播一笔非合作式结算该通道的交易之后，使用自己的另一个 UTXO 来为这笔交易追加手续费。</p>
+</blockquote>
+<p>如果有一种技术，可以在不曝光通道 UTXO 的前提下可信地证明其容量，将是对闪电网络隐私性的重大改进。<br>还有一种公开的信息，是通道在转发特定方向的支付时的收费条件，以及允许 HTLC 留存的时间。由于一条通道有两个端点，所以它可以媒介两种方向的支付。每一种方向的支付的收费条件，都是由负责的节点自己定义的（通过 <code>channel_update</code> 消息来更新）2。显然，这也是对寻路有用的信息，支付方可以优先选择收费更便宜的路线。</p>
+<p>值得一提的是，有一种信息并不是全网公开的信息：每一条通道的双方实时余额。显然，如果有这种信息，寻路问题将变得非常容易解决：一条路径到底能不能支付成功，只需观察路径上的通道的实时余额就可以知道了。但是，每个人都知道，这对隐私性来说是多么大的灾难：第三方观察者将能轻松地从通道余额的变动中找出哪个节点在给哪个节点支付、支付额是多少。这是闪电网络作出的取舍，牺牲支付的效率来提高隐私性。我认为这种取舍是值得的。</p>
+<p>除了这些公开信息，我们还需借助一些私人信息。</p>
+<h2 id="私人信息与发票"><a href="#私人信息与发票" class="headerlink" title="私人信息与发票"></a>私人信息与发票</h2><p>为了发起支付，我们需要知道自己在给哪一个节点支付 —— 这就是我们需要接收者提供的信息：接收方节点在网络中的位置。</p>
+<p>在最常规的情形中， 这就是收款方要向支付方出示 “闪电发票（invoice）”3 的原因。发票中包含了接收方节点的签名，可用于复原出接收方节点的公钥，也即其 <code>node_id</code>，从而允许我们定位到闪电网络中的具体一个节点。发票中也包含了支付额以及支付哈希值，允许支付方使用这个哈希值来建立 HTLC。发票还可以包含要求支付方写明的备注、支付过期时间等信息。</p>
+<p>依据公开信息（地图）和接收方提供的私人信息，我们就可以尝试在网络中找出一条路径，给接收方支付一定的数额。</p>
+<h2 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h2><p>在网络中找出一条令人满意的路径始终是一个有挑战性的事情，因为网络的情形是不断变化的。具备足够容量的通道可能恰好有节点下线了，或者在支付者希望传递支付的方向上没有足够多的余额。或者，虽然能找出路径，但所需的转发费用超出了支付者愿意负担的程度。</p>
+<p>当前闪电网络的两个主要客户端实现 LND 和 Core Lightning 都使用 Dijkstra 算法4 的某个变种5 6。该算法常常用于在固定一个起点时寻找触达其它点的最短路径。</p>
+<p>不过，闪电网络规范（BOLT）并不规定寻路算法，也就是说人们可以按自己的想法尝试各种不同的算法，这不会导致你的节点无法参与闪电网络。</p>
+<p>当前，改进路由算法最新的一些尝试包括：假设通道总是不平衡的（大部分余额会位于一端），以此来猜测并获得已尝试过的通道的一些信息；在支付之前用失败支付来 “打探” 一条路径是否能成功；等等。</p>
+<h2 id="支付转发指令"><a href="#支付转发指令" class="headerlink" title="支付转发指令"></a>支付转发指令</h2><p>最后一个问题是，假定一个节点掌握了网络的拓扑图，并从接收者传来的发票中得知了接收者节点的 id，以及本次支付的支付额以及支付哈希值；然后，它使用路由算法，在网络中找出了很有可能支付成功的一条路径；那么，它该怎么告诉路径上的节点、请求他们使用 HTLC 来转发支付呢？</p>
+<p>就像接力传递 HTLC 一样，这样的指令也是接力传递的。假设现在 Alice 在收到 Diana 的发票之后，找出了一条给 Diana 支付的路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Alice --&gt; Bob --&gt; Carol --&gt; Diana</span><br></pre></td></tr></table></figure>
+<p>那么：</p>
+<ul>
+<li>Alice 向 Bob 表示自己可以提供一个 HTLC，同时发送一个加密的数据包，以及一些元数据 7；（双方会更新承诺交易以增设这个 HTLC 输出）</li>
+<li>Bob 依靠元数据解密数据包后，得到一段可读的消息以及一个新的加密数据包；该消息指示他向 Carol 提供一个 HTLC，并将这个新的加密数据包转发给 Carol；</li>
+<li>Bob 向 Carol 提供 HTLC 并发送上一步中得到的加密数据包，以及一些元数据；（双方更新承诺交易）</li>
+<li>Carol 依靠所得的元数据解密所得的加密数据包，得到一段可读的消息以及新的一个加密数据包；该消息指示她向 Diana 提供一个 HTLC，并将新的加密数据包转发给 Diana。</li>
+<li>Carol 向 Diana 提供 HTLC 并发送上一步中得到的加密数据包，以及一些元数据；（双方更新承诺交易）</li>
+<li>Diana 依靠所得的元数据解密加密数据包，并从中知晓自己是最终的接收者。</li>
+<li>Diana 向 Carol 释放原像，双方更新承诺交易。原像一路回传，导致支付路径上的 HTLC 都得到结算。最终，Alice 获得原像，即支付证据。<br>可见，一个节点在转发支付时要做什么，完全是由发送者在加密消息中指定的。（转发节点为什么愿意遵从这些指令呢？因为他们期待从中收到转发费用。）</li>
+</ul>
+<p>发送者在一开始计算好路径之后，就构造出给每一个转发节点的指令，然后以加密的方式，确保相应的指令只能被相应的节点知晓。因此，每一个节点都不知道后续的节点收到的是什么样的指令。</p>
+<p>其次，因为每个节点收到的加密数据包中，都没有此前节点的信息遗存，所以每个节点也都不知道自己之前的节点收到的指令。</p>
+<p>最后，因为每个节点在解密、删去自己可读的消息之后，往下一个节点传递加密数据包时，会用垃圾数据将它填充到自己所获得的加密数据包的长度，所以，每一个节点收到的加密数据包的长度都是相同的。所以，没有任何一个节点能从这些数据中知道自己前面有几个节点、后面有几个节点 —— 它只知道自己的上一个节点和下一个节点，而无法知晓整条支付路径。这就实现了相当好的隐私性。</p>
+<blockquote>
+<p>这是使用一种叫做 “Sphinx” 的消息构造技术实现的。其关键是按支付路径的倒序构造支付指令和加密包，并且层层加密：Alice 先构造给 Diana 的指令，填充垃圾数据成特定的长度（1300 字节），执行加密；然后在结果的前面加入给 Carol 的指令、删去后面多余的字节使数据成特定的长度（1300 字节），再次加密；再加入给 Bob 的指令、删去多余的字节，再次加密。<br>如果我们用括号表示加密的话，最终 Alice 发给 Bob 的加密数据包相当于是这样的：(给 Bob 的指令 + (给 Carol 的指令 + (给 Diana 的指令)))。每个人都只能解开一层加密，了解一些信息，然后将剩余的加密数据包（在填充垃圾数据成 1300 字节后）转发给下一个节点。<br>与加密包伴随的是一段元数据，可被对应的节点用来解密（但对其他人是无用的）。给下一个节点的元数据总能依据本节点得到的元数据构造出来，所以 Alice 只需构造给 Bob 的元数据就可以了。<br>最终，每个转发节点收到的消息都是 1366 字节，其中 1300 字节是加密数据包；而剩余的 66 字节则是元数据。</p>
+</blockquote>
+<p>这种在构造时层层加密、读取时层层解密的消息，非常类似于洋葱（onion），这就是为什么整套协议被命名为 “洋葱路由”。但它与 “洋葱消息” 是两种独立的特性。</p>
+<blockquote>
+<p>“洋葱消息” 在闪电网络的语境下有特殊的含义，指的是一种 “闪电网络节点间直接通信” 的协议，我们会在下一篇文章中介绍。</p>
+</blockquote>
+<p>此处所说的加密消息包的构造过程图示，可见这篇文章 8。</p>
+<blockquote>
+<p>除此之外，由于给每一个中间节点的指令中都包含了其应在通道中保留 HTLC 的时间以及相应的面额，而这两个数值是逐跳递减的（以保证资金安全性并支付转发费用），为了避免中间节点从中猜出接收者节点与自身的距离，还应该在这两个数额中加入一些冗余，或使用多余的跳，以优化接收者节点的隐私性。</p>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>虽然发送者节点需要在拓扑图上运行路由算法、构造给路径上每一个节点的指令、每一个节点都要解密消息并给自己的通道对手更新状态，但是，整个过程的带宽和计算负担都很小。每两个节点之间只需传递两次消息，只需更新两次通道状态（一次是增加 HTLC 输出，一次是结算或表示失败），更新通道状态只需要生成一些签名并发送给对方（而无需实际上发送承诺交易，因为承诺交易的构造是确定性的）。所以，闪电网络的用户会发现，在成功的支付中，它的速度总是相当快，一般几秒之内就能确认支付成功。</p>
+<p>接下来，我们探讨一些优化措施。这些优化措施分别优化了支付的成功率、发送者的负担和接收者的隐私性。</p>
+<h2 id="多路径支付"><a href="#多路径支付" class="headerlink" title="多路径支付"></a>多路径支付</h2><p>在上面的例子中，Alice 找出了一条路径给 Diana 支付。但仔细想想，如果支付只能走一条路径，显然是不够理想的。因为闪电网络是一个网络 —— 这意味着 Alice 有多条路径可以触达 Diana，每一条都在所需要的方向上都有一定的支付能力。如果只能走一条路径，就没有用尽闪电网络的潜能，可允许的支付额度会更小，或只能采用更远的路径而使费用变高。</p>
+<p>我们仍以第一篇中的例子举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">甲  &lt;--------&gt;  乙  &lt;--------&gt;  丙  &lt;--------&gt;  丁</span><br><span class="line">500          300  200        300  500        500</span><br><span class="line"></span><br><span class="line">甲  &lt;----------------&gt;  戊  &lt;----------------&gt;  丁</span><br><span class="line">500                 200   300                500</span><br></pre></td></tr></table></figure>
+<p>如果只能采用一条路径，甲最多只能给丁支付 300 聪；如果能同时运用两条路径，就能支付 500 聪。</p>
+<p>幸运的是，闪电网络的支付形式 HTLC 并不妨碍我们通过多条路径送达支付，反正，每一条路径上的每一个节点，要采取什么样的行动，都是发送者节点可以指定的！发送者可以将一笔支付额拆成多笔更小额的支付，每一笔都使用相同的哈希值建构 HTLC，然后使用不同的支付路径送达。这就是所谓的 “多路径支付（MPP）”。</p>
+<p>事实上，在发送者给接收者构造的消息中，有两个字段，分别指明当前这条消息将送达的支付数额，以及发送者意图支付的总数额，这就可以告知接收者，发送者是否在使用多路径支付。</p>
+<p>敏锐的读者会立即意识到一个问题：拆开的多笔支付不一定能同时送达，甚至可能只有一些会送达，而另一些会失败。这该怎么办呢？如果接收者在只收到一部分支付碎片时就回传原像，岂不就遭遇了损失？答案是，不怎么办 —— 只要接收者节点不在所有支付碎片都到达之前回传原像，就不会遭遇经济损失，而这是接收者节点出于自己的利益，会自然而然采取的行为。当然，在这个过程中，由于成功的路径不能获得回传的原像，各个通道中都会有一些资金被锁定一段时间，但这是可以优化的，发送者可以及时回传支付失败的信息，从而解除资金占用。</p>
+<blockquote>
+<p>LND 客户端实现了一种叫做 “原子化多路径支付” 的技术。顾名思义，就是可以保证所有支付碎片要么一起成功，要么一起失败 —— 尽管仍可能遭遇一些支付碎片无法送达的情形，但接收者却一定不会遭遇损失，不会在只收到部分碎片的时候就返回原像。这是因为，用来构建 HTLC 的哈希值并不是由接收者给出的，而是由发送者指定的，并且发送者将原像的信息分散在不同路径的支付转发消息中。只有所有消息都到达，发送者才能抽取完整的原像信息，并让所有支付路径都回传原像。<br>这种技术听起来很美妙，但实际上，它却缺乏一个关键的元素：发送者无法收到支付证据。跟这些支付相关的原像信息，是发送者早就已经知道的。这使它更像一种高级的 “Keysend” 功能 —— 我们会在下一篇文章中介绍。</p>
+</blockquote>
+<p>当前，所有主要的闪电网络客户端（Core Lightning、Eclair、LND）都已经实现了多路径支付。</p>
+<h2 id="PTLC-与原子化的多路径支付"><a href="#PTLC-与原子化的多路径支付" class="headerlink" title="PTLC 与原子化的多路径支付"></a>PTLC 与原子化的多路径支付</h2><p>在上一篇文章中我们提到，PTLC 可以替代 HTLC 并获得更好的隐私性。但 PTLC 能做的还不止如此。</p>
+<p>PTLC 与 HTLC 的关键区别在于，它使用了另一种检查秘密值的方式：椭圆曲线点乘法（私钥与公钥的对应）。而它是 “可加的”。即：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.G + b.G = (a + b).G = A + B</span><br></pre></td></tr></table></figure>
+<p>这就意味着，当支付发送者要用 PTLC 交换秘密值（私钥）<code>a</code> 的时候，也完全可以使用公钥 <code>A + B</code> 来检查，只要发送者以某种方式，将 <code>b</code> 告诉支付接收者 —— 而这正是支付转发消息可以做到的事。</p>
+<p>因此，发送者可以创建一种基于 PTLC 的、可以收到支付证据的、原子化的多路径支付：生成 n 个秘密值 <code>s_i</code>，这些秘密值的和为 <code>s</code>；在不同支付碎片的支付转发消息中告诉接收者不同的 <code>s_i</code>，并在支付路径的最后一跳中要求检查 <code>S + A</code> 的秘密值，也即 <code>s + a</code>。 仅当所有的支付转发消息（支付碎片）都送达的时候，接收者才能知道 <code>s</code>，然后才能在所有支付路径中回传秘密值。而发送者也可以收到支付证据 <code>a</code>。</p>
+<h2 id="蹦床路由"><a href="#蹦床路由" class="headerlink" title="蹦床路由"></a>蹦床路由</h2><p>在上文的例子中，支付路径是由支付的发送者 Alice 根据自己所知的网络拓扑图构造的。这意味着，支付者要先有这个拓扑图。但是，拓扑图既需要存储空间，也会时时变化。到了闪电网络用户这里，就意味着，每次上线，都需要先拨出一个时间来获取拓扑图的更新并完成处理，然后才能支付。对于闪电网络的目标用户（使用移动设备的小额支付用户）来说，这种时延可能会构成很大的困扰。</p>
+<p>“蹦床路由（Trampoline payments）” 就是一种解决这个问题的技术，其思路是：假定 Franky 具有完整的拓扑图，而发送者 Alice 没有，但是知道 Franky 的闪电网络位置；那么，Alice 先找出触达蹦床节点 Franky 的路径，然后再由 Franky 找出触达接收者 Diana 的路径。这就把保存和更新拓扑图、规划路径的工作外包给了 Franky。</p>
+<p>因为 Franky 要寻找触达 Diana 的路径，Alice 当然要把 Diana 的闪电网络位置告诉他，这就影响了接收者的隐私性。对应的一种解决办法是，使用多个蹦床节点，也即，Alice 指示 Franky 寻找的，不是最终接收者 Diana，而是另一个蹦床节点 Gloria。当需要寻找的节点既可能是蹦床节点、也可能是最终接收者的时候，Franky 自然就不能肯定到底是哪一种情况。</p>
+<p>别忘了，在支付路径上，一个中间节点要做什么，能够了解什么信息，完全是由发送者决定的。这给了我们相当大的自由来实现蹦床路由这样的技术。</p>
+<p>蹦床路由的另一个缺点是，它可能会使用更长的路径，因此支付者需要付出更高的手续费，但这是可以接受的。</p>
+<p>迄今，所有主要的闪电网络客户端都已经实现了蹦床路由。值得一提的是，接收者节点并不需要支持蹦床路由，就能接收支付。</p>
+<p>蹦床路由的基本介绍可见这两篇文章 9 10。</p>
+<h2 id="路径盲化"><a href="#路径盲化" class="headerlink" title="路径盲化"></a>路径盲化</h2><p>最后一个我们要介绍的改进，与接收者的隐私性有关。</p>
+<p>如前所述，因为洋葱路由的采用，闪电支付的发送方享有非常好的隐私性：支付路径上的转发节点并不知道自己前面有多少跳，也就难以确定发送方的位置。但是，接收者的隐私性，相对来说就没有那么好。转发节点可以通过 HTLC 的持续时间和数额猜测自己跟最终接收者的距离；接收者的节点位置首先要暴露给发送者，还有可能被发送者暴露给第三方（蹦床节点）。这些都是接收者隐私性的瑕疵。</p>
+<p>那么，有没有一种办法可以不暴露接收者节点的位置，而依然能接收支付呢？</p>
+<p>“路径盲化（route blinding）” 就是旨在解决这个问题的尝试。其想法是，接收者向发送者暴露的不是自己的闪电网络位置（<code>node_id</code>），而是一条可以触达自身的路径；并且，这条路径所经过的节点和通道，是不向发送者暴露的（“盲化”）；发送者能知道的仅有这条路径的 “入口节点”，即第一个节点。</p>
+<p>实质上，这意味着，支付路径不再是全部由发送者决定的了；相反，接收者选择了一段路径，并将使用这条路径的必要信息（比如到达入口节点时应该为 HTLC 设置的存续时间和面额）告诉发送者。发送者只需用常规的支付转发消息触达入口节点，并递送接收者提前构造的加密消息，就能触达接收者；从入口节点开始，盲化路径上的节点会逐一解密安排给自己的消息，并依据其中的信息转发支付。</p>
+<p>这再一次体现了闪电网络的灵活性！</p>
+<p>关于 “路径盲化” 的详细描述，可见这份提议 11。</p>
+<p>当前，路径盲化的详述已经在 2023 年 4 月进入了闪电网络规范（BOLT）#4 12。主要的闪电网络客户端都在致力于实现路径盲化。</p>
+<p>值得一提的是，蹦床路由和路径盲化实际上可以相结合。Eclair 客户端就实现了将两者相结合的特性 13。</p>
+<h2 id="结语-1"><a href="#结语-1" class="headerlink" title="结语"></a>结语</h2><p>在本文中，我们介绍了一种标准的闪电支付流程所涉及的网络通信步骤：支付的发送者需要依据网络的拓扑图以及接收者所暴露的信息，创建支付路径，并借助节点之间的网络连接逐步转发消息并接力支付。这个过程具备相当好的隐私性，也尽可能降低了节点对稳定的互联网位置的依赖。</p>
+<p>然后，我们介绍了几种优化措施：多路径支付、蹦床路由以及路径盲化。它们分别优化了支付的成功率、发送者节点的启动负担以及接收者的隐私性。这些优化措施都围绕着闪电网络的 “网络” 特性而展开。</p>
+<p>在下一篇文章中，我们将回归用户体验问题，介绍一个普通用户感知很明显的事物：收款码。</p>
+<p>闪电网络的发票本身是一次性的，它包含了一次支付的哈希值及其面额，在支付成功或者超时之后就会作废。这意味着，如果仅有发票这个工具，接收者将无法提供一个可重复使用的收款码。那么，我们该怎么解决这个问题呢？</p>
+<blockquote>
+<p>下一篇： <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/" title="闪电网络：技术与用户体验（四）：收款码">闪电网络：技术与用户体验（四）：收款码</a></p>
+</blockquote>
+<p>脚注</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lightning/bolts/blob/master/07-routing-gossip.md#the-channel_announcement-message">https://github.com/lightning/bolts/blob/master/07-routing-gossip.md#the-channel_announcement-message</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lightning/bolts/blob/master/07-routing-gossip.md#the-channel_update-message">https://github.com/lightning/bolts/blob/master/07-routing-gossip.md#the-channel_update-message</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lightning/bolts/blob/master/11-payment-encoding.md">https://github.com/lightning/bolts/blob/master/11-payment-encoding.md</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95">https://zh.wikipedia.org/zh-hans/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.lightning.engineering/the-lightning-network/pathfinding/finding-routes-in-the-lightning-network">https://docs.lightning.engineering/the-lightning-network/pathfinding/finding-routes-in-the-lightning-network</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/@rusty_lightning/routing-dijkstra-bellman-ford-and-bfg-7715840f004">https://medium.com/@rusty_lightning/routing-dijkstra-bellman-ford-and-bfg-7715840f004</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoin.stackexchange.com/questions/89542/single-hop-payment-vs-multi-hop-payments">https://bitcoin.stackexchange.com/questions/89542/single-hop-payment-vs-multi-hop-payments</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/05/18/what-is-onion-routing-how-does-it-work/">https://www.btcstudy.org/2023/05/18/what-is-onion-routing-how-does-it-work/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/03/29/outsourcing-route-computation-with-trampoline-payments/">https://www.btcstudy.org/2022/03/29/outsourcing-route-computation-with-trampoline-payments/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/topics/trampoline-payments/">https://bitcoinops.org/en/topics/trampoline-payments/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/03/10/route-blinding-proposal-by-bastien-teinturier/">https://www.btcstudy.org/2023/03/10/route-blinding-proposal-by-bastien-teinturier/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/newsletters/2023/04/05/#bolts-765">https://bitcoinops.org/en/newsletters/2023/04/05/#bolts-765</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/zh/newsletters/2024/01/31/#eclair-2811">https://bitcoinops.org/zh/newsletters/2024/01/31/#eclair-2811</a> ↩</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/" class="post-title-link" itemprop="url">闪电网络：技术与用户体验（四）：收款码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-21 11:09:00 / 修改时间：11:21:07" itemprop="dateCreated datePublished" datetime="2024-03-21T11:09:00+08:00">2024-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">闪电网络</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="闪电网络：技术与用户体验（四）：收款码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" title="闪电网络：技术与用户体验（三）：路由">闪电网络：技术与用户体验（三）：路由</a>
+<p>在上一篇文章中，我们了解到，在最初设想的闪电网络支付中，收款方应该向付款方发送一个 “闪电网络发票（invoice）”，使后者能够在闪电网络中找出收款方的位置并通过 HTLC 和中间节点送达支付。作为一段数据，闪电网络可以有各种各样的形式，它可以是一串字符，也可以编码成一个 QR 码。</p>
+</blockquote>
+<p>在支付方和接收方能够面对面的情形中，将闪电发票编码成 QR 码会更加便利，而且跟当今用户习惯的互联网支付没有什么分别 —— 支付方拿出手机，打开闪电 App，然后扫描接收方的 QR 码，App 在后台处理之后，点击确认，完成支付。</p>
+<p>但是，这样的 “收款码” 却有一个奇怪的特点：它只能用一次。闪电发票本质上是一次性的，一旦支付成功，或者超时失败，就不能再次使用。</p>
+<p>对于做生意的商家来说，这有一点点麻烦，就是每次都必须为用户生成一个新的收款码，但还不算是不能接受。但是，对另一些场景来说，它就很不便利了。比如说：互联网打赏；熟人间的多次来回支付；捐赠。在这些场景中，让接收方手动一一为支付方生成并提供发票，要么在时机上不现实，要么在规模上不现实。</p>
+<p>为了实现 “静态的收款码”，人们提出了许多方案。我们先来看第一种。</p>
+<h2 id="Keysend"><a href="#Keysend" class="headerlink" title="Keysend"></a>Keysend</h2><p>“Keysend” 的想法是：因为节点的 <code>node_id</code> 是不会改变的，而且在给出发票之后就会向支付方暴露，所以，可以用它来作为一个静态的端点。</p>
+<p>具体来说，当一个支付方在知道接收方的 <code>node_id</code> 之后，想要再次给 TA 支付，又不便于获取发票时，就这样做：支付方自己生成一个秘密值，并计算出其哈希值；然后，将这个秘密值放在给接收方的支付转发消息中，同时，使用其哈希值来构造传递支付的 HTLC。当加密的消息被一跳一跳传递给接收者节点时，TA 会解密消息，然后知晓其中的秘密值，然后就可以像常规的闪电网络支付那样回传原像。（支付转发消息在闪电网络中传递的详情，请见上一篇文章。）这样一来，支付方无需接收方出示原像，就能在闪电网络中完成一次多跳支付。</p>
+<p>Keysend 有许多有趣的用法。比如，你可以用它来实现对一些通道的内部余额的打探（probing）：发送方向接收方发送一次 Keysend，并要求接收方不要接收支付，而回传错误；当这样的支付逐步加大额度，从而在某一跳断开时，发送方也就知道了该通道在该方向上的余额。打探可以变成对隐私性的攻击，但是，也可以用来提前打探路径，从而避免支付失败。还有人尝试用 Keysend 来发送消息，也即借助闪电网络实现加密的即时通讯 1。</p>
+<p>Keysend 还有一个优点：它完全不依赖其它协议，而只依赖闪电网络自身。</p>
+<p>不过，作为一种支付，它还是有一个令人难以接受的缺点：它不能得到收据。由于用来构造 HTLC 的哈希值是由支付方自己指定的（而发票中的哈希值是由接收方指定的，并具有接收方的签名），他从一开始就知道这个哈希值背后的原像，所以，即使全部 HTLC 顺利结算，也不能认为自己得到了收据。</p>
+<p>另一个同样不容小视的缺点是，如果以 <code>node_id</code> 来接收支付（比如在捐赠或打赏场景中），接收方的隐私会有非常大的缺陷。接收方的节点、通道、通道 UTXO，都会暴露。</p>
+<p>当前，大多数闪电网络客户端都已经实现了 Keysend 的功能，不过，在运行的时候可能需要用户手动打开这个功能。</p>
+<p>Keysend 的介绍还可见这篇文章 2。</p>
+<p>在上一篇文章中，我们介绍了一种叫做 “AMP（原子化多路径支付）” 的技术，并表示它其实更像一种 Keysend 方案。其中的缘由，在了解 Keysend 是什么之后，当不难理解。读者可以看看 Lighting Labs 为 AMP 编写的介绍 3，看看其特性与 Keysend 有多么相似。</p>
+<h2 id="LNURL-与-Lightning-Address"><a href="#LNURL-与-Lightning-Address" class="headerlink" title="LNURL 与 Lightning Address"></a>LNURL 与 Lightning Address</h2><p>从 Keysend 的案例中我们可以知道，尽管发票令人觉得麻烦，却是不可或缺的一种东西，因为它可以让支付方获得收据（支付证据）。换言之，合理的方案应该是能够自动化地请求发票，而不是完全绕过发票（像 Keysend 那样）。</p>
+<p>而这就需要一种方式，能够触达接收者节点、请求一个闪电发票，并且发票能恰当地回传到支付方处。</p>
+<p>那么，如果接收者节点有一个可被外部访问的网络端点（比如，一个可以访问的网络域名或者 IP 地址），那么支付方就可以先访问这个网络端点、请求接收者的发票；获得发票之后，再启动常规的支付流程。</p>
+<p>LNURL 就是在这个想法上产生的解决方案。接收者节点额外运行一个 LNURL 服务端，并将该服务端的网络端口（例如 <code>https://lnurliscool.com/receiver</code>）编码成一个 QR 码。然后，在支付中：</p>
+<ol>
+<li>接收者出示这个 QR 码；</li>
+<li>支付者使用支持 LNURL 协议的闪电 App 扫描这个 QR 码；</li>
+<li>支付者的闪电 App （LNURL 客户端）依据 QR 码中的访问 LNURL 服务端，请求一定数额的发票；</li>
+<li>接收者的 LNURL 服务端回复发票；</li>
+<li>支付者的闪电 App 根据发票，启动常规的闪电支付流程。</li>
+</ol>
+<p>由于 QR 码所编码的不是发票，而是一个网络端口，当然可以是稳定不变的：支付者可以向服务端多次请求发票并发起支付。这种收款码的一种有趣的形式是 <code>XXXX@YY.com</code> 这样看起来像电子邮件地址的 “Lightning Address（闪电地址）” 4，前缀是一个自定义的标识符，后缀则是 LNURL 服务端的域名。支付者的闪电 App 会根据 LNURL 规范 #16 5，组合出一个网络端口。</p>
+<p>LNURL 是一套多特性的协议，除了上述特性（称为 “LNURL-Pay”）之外，还有：</p>
+<ul>
+<li>Auth（身份验证）特性，为一个闪电网络用户生成不同的公钥，作为登录不同网站的身份 6；</li>
+<li>Withdrawal（取款），在扫码之后可以获得支付（取款），而不是发起支付 7；（这就实现了 “付款码” 的功能）</li>
+</ul>
+<p>到目前，规范基本上已经稳定下来了 8。你可以在他们的规范库中看到哪些钱包已经支持了 LNURL。</p>
+<p>值得一提的是，在当前，你会发现，实现 LNURL 的钱包大多是托管钱包，它们会给每一个用户分配一个 Lightning Address，以允许使用 Lighting Address 收取支付，使用 LNURL 的其它功能更不在话下。但自主保管钱包往往只允许用户向 Lightning Address 发送支付，而不会为用户提供 Lightning Address。</p>
+<p>其原因可能是，LNURL 自身其实并不解决用户的可访问性问题 —— 用户必须先有一个可访问的互联网端口，然后才能运行 LNURL 的服务端。为用户提供这样的互联网服务（“内网穿透”），超出了自主保管钱包的开发目标，也面临许多用户体验上的挑战 —— 最好的办法还是让有技能的用户在自己的设备上自主选择或搭建一些互联网服务。而托管钱包就不存在这些困扰，其用户并没有真实的闪电网络客户端，也没有复杂的网络问题要处理。</p>
+<blockquote>
+<p>托管钱包，顾名思义，资金被托管在服务商处，只是用户可以使用这些名义余额来发起闪电支付。它在各个方面都更接近于如今大多数人接触到的互联网支付产品（比如支付宝、微信支付乃至 PayPal），体验也相似。但是，因为用户和服务商之间并没有真实的通道，因此也无法得到密码学和比特币网络的保护 —— 用户需要信任服务商。在使用这样的服务商时，用户无需考虑在线要求，也无需担心收支额度的问题，一切皆由服务商在后台处理。<br>自主保管钱包则依据我们系列第二篇中所述的原理开发出来，因此用户无需信任对手方。</p>
+</blockquote>
+<p>不管怎么说，LNURL 代表了使用其它网络协议来改进闪电网络用户体验的尝试，这可以说是一种特性，也可以说是一种缺点，完全看你持有哪一种视角。因为使用的是额外的网络协议，它有巨大的开发空间。但因为利用了其它协议（而不是仅依赖于闪电网络本身），自主保管的闪电钱包无法直接运用其所有特性，尤其是移动端的用户，几乎只能在托管钱包上享受其所有特性。</p>
+<p>接下来，我们进入一种仅依赖于闪电网络，但所实现的最终功能与 LNURL 非常相似的协议。</p>
+<h2 id="BOLT12"><a href="#BOLT12" class="headerlink" title="BOLT12"></a>BOLT12</h2><p>如何能够仅依赖闪电网络，来提供网络触达、往返通信的功能呢？</p>
+<p>在前面关于 Keysend 的介绍中，我们已经提过，我们可以通过用来传递支付的 “洋葱路由” 协议，向一个节点递送消息；消息就藏在给该节点的加密数据包中。在常规的、成功的支付中，接收者节点会回传一个原像，这个原像是一个 32 字节的随机数，并通过支付路径上各通道的更新，一路回传到支付者节点。而在专门为了传递消息的 Keysend 中，支付者可以在加密数据包中放置消息，并要求接收者节点回传错误（表示支付失败），支付路径上的各通道也会更新，但不返回原像。</p>
+<p>如果，我是说如果 —— 如果 A 节点传给 B 节点的是一张发票呢？那么 B 节点就可以依据这个发票给 A 节点支付了！如果 A 节点传给 B 节点的是自身的位置信息呢？那么 B 节点就可以通过 Keysend 给 A 节点发送发票了！</p>
+<p>这就是 “BOLT12 Offer” 协议背后的洞见。给定我们可以用闪电网络触达一个节点，自然就能在此基础上实现通讯。BOLT12 增加了一种数据格式，称为 “Offer（要约）”，还有一种叫做 <code>invoice_request</code> 的消息类型。</p>
+<p>在支付场景中：</p>
+<ol>
+<li>接收方出示 Offer（作为收款码）；</li>
+<li>支付方根据 Offer 的信息向接收者节点发送 <code>invoice_request</code>，其中包含了愿意接受的支付条件以及 <code>reply_path（回复路径）</code>；</li>
+<li>接收方节点构造发票之后，通过 <code>reply_path</code> 发送给支付方节点；</li>
+<li>支付方节点根据发票，给接收方支付。</li>
+</ol>
+<p>同理，Offer 也可以用于退款：要求退款的一方根据退款方的 Offer 发送发票，退款方就根据发票发起支付。当交互流程反过来（支付者出示 Offer，接收者发送发票）时，它就变成了一种 “付款码”。</p>
+<p>由于 Offer 所提供的主要是自身位置的信息，以及其它一些跟支付条件有关的信息，但自身并不是发票，所以，它可以长期使用 —— 支付者可以多次向接收方请求发票。</p>
+<p>在 2019 年刚刚提出的时候，BOLT12 就使用上述类似于 Keysend 的做法来传递消息。但随后就有开发者提出 9，这种 “messages-over-payments（通过转发支付的协议来转发消息）” 的做法有很大的开销，沿途的节点必须更新通道状态，还必须保存关于这些承诺交易的信息，而且在回传失败消息时还必须加以处理 —— 与其如此，还不如设计一套新的协议，让支持这种协议的闪电节点能够直接通信，这就是 “洋葱消息” 在闪电网络语境下的含义 10。</p>
+<p>在使用洋葱消息之后，节点就可以直接转发消息，转发消息的节点也无需再记忆跟这些消息相关的信息。这也是上述 <code>reply_path</code> 的由来 —— 响应 Offer 的一方规划好从自身出发、触达 Offer 方然后再触达自身的环状路径，并将后半段路径放在 <code>reply_path</code> 中告诉 Offer 方。</p>
+<p>在 2023 年 8 月 11，“洋葱消息” 合并进入了 BOLT7，这意味着以后所有的闪电节点客户端都会实现这种特性。而洋葱消息也会使用我们在上一篇文章中介绍的 “盲化路径”。原本在原理上，BOLT12 是不依赖于盲化路径的，但如今在实现中，变成了需要盲化路径作为前置技术。不过，这也意味着，出示 Offer 的接收方将默认具有更好的隐私性。</p>
+<p>BOLT12 尚未合并到 BOLT 中，但这个想法得到了大多数开发者的支持。关于 BOLT12 的特性，这个页面提供了基本的介绍 12。至于其起源和变革，Optech 的主题界面提供非常详尽的参考 13。</p>
+<p>相比于 LNURL，BOLT12 最大的特点是，它可以在闪电网络协议内实现，而不需要依赖于其它网络协议和通讯方式。这有它的好处，但是，它也意味着要使用闪电网络中的资源。如今，因为洋葱消息的采用，其开销被进一步降低。我们有理由期望，BOLT12 会给我们带来用户体验的变革。届时，自主保管的钱包，也能提供收款码、付款码这样当前专属于（支持 LNURL 的）托管钱包的体验。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在这篇文章中，我们介绍了实现可复用的闪电网络收款信息的尝试。最初的 Keysend 虽然直接，却无法提供支付证据。LNURL 有很大的灵活性，在自主保管的闪电钱包中却难以做到 “开箱即用”。而 BOLT12，通过利用闪电网络自身的特性，最有可能革新自主保管的闪电网络用户的体验。</p>
+<p>在下一篇文章中，我们将介绍帮助用户应对通道用户体验最难解问题 —— 收款额度 —— 的解决方案。</p>
+<blockquote>
+<p>下一篇： <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/" title="闪电网络：技术与用户体验（五）：流动性获取">闪电网络：技术与用户体验（五）：流动性获取</a></p>
+</blockquote>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/03/09/on-lightning-messaging-apps-emerge-as-growing-use-case/">https://www.btcstudy.org/2022/03/09/on-lightning-messaging-apps-emerge-as-growing-use-case/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/01/14/technical-series-what-is-keysend/">https://www.btcstudy.org/2022/01/14/technical-series-what-is-keysend/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.lightning.engineering/lightning-network-tools/lnd/amp">https://docs.lightning.engineering/lightning-network-tools/lnd/amp</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/12/22/how-lightning-address-works/">https://www.btcstudy.org/2022/12/22/how-lightning-address-works/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lnurl/luds/blob/luds/16.md">https://github.com/lnurl/luds/blob/luds/16.md</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/11/30/lightning-authentication-lnurl-auth/">https://www.btcstudy.org/2022/11/30/lightning-authentication-lnurl-auth/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2024/02/02/the-past-present-and-future-of-offline-payments/#LNURL-Withdraw">https://www.btcstudy.org/2024/02/02/the-past-present-and-future-of-offline-payments/#LNURL-Withdraw</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lnurl/luds">https://github.com/lnurl/luds</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/newsletters/2020/02/26/#ln-direct-messages">https://bitcoinops.org/en/newsletters/2020/02/26/#ln-direct-messages</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/newsletters/2020/04/08/#onion-messages">https://bitcoinops.org/en/newsletters/2020/04/08/#onion-messages</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/newsletters/2023/08/09/#bolts-759">https://bitcoinops.org/en/newsletters/2023/08/09/#bolts-759</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bolt12.org/">https://bolt12.org/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/topics/offers/">https://bitcoinops.org/en/topics/offers/</a> ↩</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/" class="post-title-link" itemprop="url">闪电网络：技术与用户体验（五）：流动性获取</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-21 11:09:00 / 修改时间：11:25:20" itemprop="dateCreated datePublished" datetime="2024-03-21T11:09:00+08:00">2024-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">闪电网络</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/" class="post-meta-item leancloud_visitors" data-flag-title="闪电网络：技术与用户体验（五）：流动性获取" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%94%B6%E6%AC%BE%E7%A0%81/" title="闪电网络：技术与用户体验（四）：收款码">闪电网络：技术与用户体验（四）：收款码</a>
+</blockquote>
+<p>在本篇中，我们将介绍让节点获得入账流动性（收款额度）的方案，并介绍这些方案在闪电网络终端用户所用的实现上的演化。</p>
+<p>早在本系列第一篇中，我们就提到，出于 “通道（共有资金）” 的特性，“收款额度” 的概念是无法逃避的。而每个用户都有可能遇上想要收款却没有额度的情形。</p>
+<p>这个问题因为闪电网络早期实现的一个设计而变得更加严峻 —— 单向注资。</p>
+<h2 id="单向注资"><a href="#单向注资" class="headerlink" title="单向注资"></a>单向注资</h2><p>虽然在我们之前使用的例子中，都把通道双方都有余额作为通道的初始状态，但实际上，最早实现的通道注资方法是 “单向注资” —— 在参与通道的双方中，仅有一方为通道提供资金。如此一来，在一开始，双方得到的都是不平衡的通道：一方仅有支付能力（而无收款能力），而另一方又仅有收款能力（没有支付能力）。</p>
+<p>这种设计有一些优点：易于实现、安全性检查更加简单（双向注资所需的额外安全性检查可见 1）；尤为重要的是，它更适合网络的启动。在一个新节点要加入网络时，它可能会选择跟一个已知的老节点开设通道，然而，对后者来说，却难以决定要不要在其中锁入流动性：如果这个新节点只是尝试一下，很少在线，那么，锁入其中的资金就无法获得收益。而单向注资使得该节点根本不必有此担忧：新节点会自己锁入资金，而不要求老节点提供任何初始资金。</p>
+<p>但是，这也意味着，收款额度的获取成了所有新节点的难题 —— 不论你想做一个转发节点，还是将闪电网络用于日常使用。</p>
+<p>截至本文撰写之时（2024 年 2 月），已经有两个闪电网络客户端（Core Lightning 和 Eclair）实现了 “双向注资（dual funding）”，也即在创建通道时，双方都可以为通道提供资金。在一些条件下，这可以节约一个节点要创建平衡的通道的步骤。</p>
+<p>“双向注资” 的详细介绍可见这个页面 2。</p>
+<p>接下来我们要介绍的是获得入账流动性的方案。概要来说，这样的方案可以分成两大类：一类的原理是向外支付；另一类的原理是请求他人向自己开设不平衡的通道。</p>
+<h2 id="潜水艇互换"><a href="#潜水艇互换" class="headerlink" title="潜水艇互换"></a>潜水艇互换</h2><p>“潜水艇互换（submarine swap）” 是第一类方案的代表。其想法是，需要入账流动性的节点将自己在闪电通道中的资金通过 HTLC 置换成链上资金；在向外支付的同时，该节点也就获得了入账流动性。</p>
+<p>用户在闪电网络中给互换服务商支付，互换服务商在链上给用户支付，这就是潜水艇互换；而 HTLC 可以保证互换的免信任性。不过，由于这个过程涉及链上支付，它在实现中会遇到一些难题，从而一定程度上需要一些信任。我们用详细的互换流程来分析：</p>
+<ol>
+<li>用户向服务商请求互换；服务商提供自身的闪电网络位置；</li>
+<li>用户生成一个原像及其哈希值，使用该哈希值构造用于闪电支付的 HTLC；当支付转发消息到达服务商时，服务商使用相同的哈希值，在链上创建一个 HTLC 输出；</li>
+<li>用户发现该链上 HTLC 输出得到确认之后，就使用哈希原像申领其中的资金；该原像也就暴露给了服务商；</li>
+<li>服务商使用原像领取闪电网络中的 HTLC。</li>
+</ol>
+<p>从第二步开始，服务商需要信任用户，因为 TA 需要创建一个链上输出。如果这时候用户突然反悔，或本来就有意作恶，不在链上释放原像，那么服务商就亏掉了为创建这个链上输出而需支付的手续费。也正因此，在一些服务中，服务商会要求用户预付一定的费用，在完成互换之后退款，但从原理上说，这又变成了用户需要信任服务商。</p>
+<p>潜水艇互换在实践中的另一个困难是，它需要用户的钱包也有相应的支持。用于给用户支付的 HTLC 并不是常见的单签名输出，用户的钱包必须能够理解 HTLC 的脚本、懂得为其构造见证数据（witness），才能花费其中的资金。当前，将自身定位为 “比特币钱包” 的钱包软件几乎都无法提供这种支持，但一些 “闪电钱包” 则可以做到。未来，这需要依靠 Miniscript 这样的技术来提供更好的互通性 3。</p>
+<p>潜水艇互换可能是最早出现的入账流动性获取方案，也启发了许多后来者。其中一种是 “PeerSwap”，直接跟你的通道对手实施潜水艇互换 4。还有一种叫 “环路支付（circular payment）”，就是规划出一条环状的路径，将自己在 A 通道中的余额转移到 B 通道 5。</p>
+<p>潜水艇互换还有一种有趣的用法：你可以用闪电网络中的资金给他人支付链上比特币。此外，它也可以反向运行：将链上的比特币 “充值” 到自己的闪电通道中，以增加支付能力，无需 关闭通道-重新打开通道。</p>
+<p>当前，如果你使用 LND 客户端来运行闪电节点，你可以使用搭配的 <code>Loop</code> 客户端来使用潜水艇互换功能。</p>
+<h2 id="通道租赁"><a href="#通道租赁" class="headerlink" title="通道租赁"></a>通道租赁</h2><p>获得入账流动性的另一种办法是租赁通道：请求他人用自己的资金与你开设一条通道（当然，你需要支付一些费用）。对方投入的资金即是你立即获得的收款额度。</p>
+<p>请注意 —— 你并没有借他的钱，钱依然在他手上，只不过形式从链上资金变成了链下（某一条通道中的）资金；当你在这条通道中收到支付时，他必定在另一条通道中得到了 相同数额+转发费用 的支付。</p>
+<p>显然，这种通道租赁需要让通道保持一段时间，否则出租方就可以收钱不办事 —— 在收到租金之后立即关闭通道。但是前面介绍的闪电通道构造似乎并没有对通道存续时间的保证。难道又只能引入信任了？</p>
+<p>事实上，如果你了解比特币的脚本，你会发现，有一种很简单的办法可以保证出租方会让通道持续一段时间。假设租赁方 Alice 要求出租方 Bob 与自己开设一条通道，那么，Alice 可以在自己签名的承诺交易中，为所有给 Bob 支付的输出（包括普通的输出和 HTLC 输出的相应花费分支）都加入绝对时间锁，时间锁的过期时间是双方约定的合约结束时间。也即，即使 Bob 拿着最新的承诺交易退出通道，如果未过合约期限，这些资金也会一直锁定、无法动用。这就完全打消了 Bob 提前关闭通道的激励 —— 资金放在通道中还有可能产生收益，但关闭通道会导致字面意义上的 “冷藏”。早在 2018 年，就有开发者提出了这样的想法 6。</p>
+<p>通道租赁的想法简单又直接。甚至移动端的自主保管钱包 Breez 也在 App 中提供了向著名的服务商租赁通道的入口。</p>
+<p>最初，提供此类服务的都是著名的公司，而且流程中很可能需要信任。于是，人们想出了更多方法来降低参与的门槛、增加市场的竞争。</p>
+<h2 id="Lightning-Pool"><a href="#Lightning-Pool" class="headerlink" title="Lightning Pool"></a>Lightning Pool</h2><p>Lightning Pool 是 Lightning Labs 推出的一种通道租赁拍卖市场。用户可以使用 LND 客户端和搭配的 Pool 客户端来参与。其基本特性是：</p>
+<ul>
+<li>市场需要一个中介（或者说拍卖行），来保证各方诚信行事。</li>
+<li>流动性的需方和供方，都要各自与拍卖行创建一个 “账户”，并把钱存进去。这样的账户在比特币链上是一个输出，它有两个花费分支：一是户主与拍卖行的 2-of-2 多签名；二是户主单签名 + 绝对时间锁。<ul>
+<li>这样的输出保证了：拍卖行无法独自转移户主的资金，而且资金的所有行动都要经过户主的同意，并且，在一段时间之后，户主总能单方面转移其中的资金。所以，这样的账户是免信任的。并且，当户主提出自己的订单要求时，拍卖行可通过要求户主的签名，来保证这样的 出价&#x2F;要价 是诚实的。</li>
+</ul>
+</li>
+<li>拍卖是供方和需方各自叫价、但叫价仅向拍卖行公开的盲拍。拍卖行会在确保供需匹配之后，以区块为时间间隔清算市场；并且，在同一区块中成交的所有订单，每一单位的资金将收到相同的租赁价格。</li>
+<li>拍卖行在链上会用一笔交易，批量处理该区块内所有成交的订单。</li>
+<li>订单成交之后，供需双方创建闪电通道，并且，将使用上文所述的技巧来保证通道会在合约期内持续存在。</li>
+</ul>
+<p>Lightning Pool 是一种有趣的尝试。它用一个半公开的市场解决了流动性供需匹配的问题，还为比特币资金提供了一种按区块计量的利息率（当然，所有的通道租赁解决方案都有这个效果）。</p>
+<p>Lightning Pool 的技术详述可见他们的论文 7。</p>
+<h2 id="Liquidity-Advertisement"><a href="#Liquidity-Advertisement" class="headerlink" title="Liquidity Advertisement"></a>Liquidity Advertisement</h2><p>“流动性广告（Liquidity Advertisement）” 是 Blockstream 提出的一种技术，其核心是让流动性的供方可以用闪电节点的 gossip 消息（本来用于宣布新通道、新节点的消息，相当于整个闪电网络的公开频道）来播报自己的要价以及通道的持续时间。接受这个价格的闪电节点可以与之用双向注资方法开启通道、获得入账流动性。租赁方为通道提供的输入会立即用来支付租赁费。</p>
+<p>当前，仅有 Core Lightning 客户端为 Liquidity Advertisement 提供了实验性支持。</p>
+<h2 id="零确认通道"><a href="#零确认通道" class="headerlink" title="零确认通道"></a>零确认通道</h2><p>上述两种方案，显然更适合于网络中的转发节点，以及有经验有技能的用户，却不适合于移动设备的用户（可以操作的界面更为有限），更不适合刚解除闪电网络、对技术了解不多的用户。因此，我们要专门一些适合刚入门用户的方案（并且假设他们会使用移动端 App，而不是电脑软件）。</p>
+<p>“零确认通道（Zero-conf channel）”（也称 “零配置通道”、“涡轮通道”）的想法是，通过引入有限的信任，一举解决入门用户的两大问题：（1）创建通道需要等待；（2）新建通道没有入账额度。</p>
+<p>办法如下：用户将比特币资金发送给服务商，服务商负责对用户开启通道（单向注资），并在通道内将扣除服务费之后的剩余资金转移给用户；并且，双方都视这条通道为立即可用，而无需等待通道注资交易得到区块确认。</p>
+<p>显然，这个过程需要用户信任服务商：假定用户将资金转移给服务商之后，服务商拒绝执行后续步骤，那么用户并没有什么办法（只能到社交媒体上哭诉）；其次，在通道注资交易获得区块确认之前，用户在通道内获得的支付都是不可靠的，因为服务商可以重复花费注资交易的输入。</p>
+<p>但是，它解决了刚进入闪电通道的用户的一些痛点：首先，常规的闪电通道，在创建时需要让注资交易获得 3 次区块确认，用户才能开始支付，而零确认通道可以让用户立即开始闪电支付（用户的闪电支付，只要能获得收据，是可靠的）；其次，这种通道由服务商创建（可能还加入了服务商自己的资金），所以用户从一开始就可以获得收款额度。因此，还是可以给用户带来显著的便利的。</p>
+<p>而且，一旦零确认通道的注资交易获得区块确认，它就会逐渐转变成常规的闪电通道：用户拥有承诺交易所提供的保护，不再需要信任服务商。</p>
+<p>显然，要求用户先将资金交给服务商，是双向注资技术缺位之时的无奈之举。有了双向注资之后，我们就可以优化它，让服务商和用户直接执行双向注资程序。这并不能缩减用户创建闪电钱包的时延，只是降低了所需的信任。至于 “零确认” 这段时间所要求的信任，则是无法消除的 —— 但我们都知道，这个环节所要求的信任，是有限的。</p>
+<p>更富细节的描述可见此篇 8。</p>
+<p>许多移动端的闪电钱包都实现过零确认通道。不过现在，它已逐渐让位于一种更精致的零确认通道 —— JIT 通道。</p>
+<h2 id="JIT-通道与闪电网络服务商（LSP）"><a href="#JIT-通道与闪电网络服务商（LSP）" class="headerlink" title="JIT 通道与闪电网络服务商（LSP）"></a>JIT 通道与闪电网络服务商（LSP）</h2><p>“JIT 通道”，顾名思义，是一种 “按需开设的通道”，它在零确认通道的基础上更进一步，但又可以说更加简单。</p>
+<p>其思想是：仅当用户要接收支付、现有的收款额度又不够时，由服务商向用户开设新的通道，用户在新的通道里领取支付；并且，这条新通道也是 “零确认通道”，可以立即使用。</p>
+<p>其技术实现也非常直接：当一个 HTLC 即将经由服务商到达用户，而用户的收款额度不够时；服务商就跟用户创建一个新通道，并用这个新通道内的资金来创建所需的 HTLC；此外，服务商还可以要求用户在某一条通道中创建一个使用相同哈希值的 HTLC，以支付服务费。一旦用户在新通道中用原像领取支付，服务商就不仅能获得该笔支付的转发费（像常规的闪电通道一样），还能获得用户支付的服务费。</p>
+<p>相比于原本的零确认通道，JIT 通道的流程大大减少，但又保留了零确认通道对服务商的好处：甄别用户。因为需要在通道中锁定资金、为用户提供收款额度，服务商最担心的就是遇上试水的、不真实的用户。或者说，服务商需要甄别用户，以决定自己锁定的流动性的数量。而用户预先付出的资金数量、即将收取的资金数量，都为服务商提供了重要的参考。</p>
+<p>除去 “零确认” 过程中的信任，JIT 通道也未完全消除信任需要，但它跟潜水艇互换一样，更偏向要求服务商信任用户：服务商必须垫付创建通道的区块确认费，但如果这笔支付是虚假的、用户不会放出原像，服务商就面临亏损。</p>
+<p>在业内，有一个 “闪电网络服务商（LSP）” 的概念。其意思是，当用户与这样的服务商建立通道时，服务商可以自动地帮助用户管理通道（包括备份）和流动性，无需用户为之烦恼；此外，由于 LSP 时刻在线，也能为用户异步接收支付提供帮助 9 。即使这个概念不是由 JIT 通道激发的，JIT 通道也必定极大地完善了这个概念。</p>
+<p>当前，许多自主保管钱包都提供了 LSP，包括 Phoenix 钱包和 Breez 钱包。其中，Phoenix 钱包还有专门的一个页面，让用户自己配置为接收一笔支付而愿意支付的服务费上限。当开设通道所需的实际费用超过这个限度时，LSP 将不会行动。</p>
+<p>现如今，人们已经在讨论为 LSP 制定一套技术规范 10，从而允许人们使用相同的软件来获取不同 LSP 的服务，以强化 LSP 的市场竞争、保证用户的体验。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>目前，大部分移动端闪电网络用户的选择依然是托管钱包 —— 用户不掌握私钥，资金也得不到真实通道的保护，但无需关心收款额度、定期在线要求以及通道资料备份等所有事情的，闪电支付服务。显然，自主保管钱包的体验还没有说服足够多的人。但是，我们有理由相信它会继续进步。上一篇文章所述的收款码的进化是一个例子。本篇所述的零确认通道的进化也是一个例子。</p>
+<p>在下一篇文章，我们将介绍让用户能够更自由地应对支付和收款需要，不必关心资金形式的技术。它们改善了用户的支付能力，并且直观地展现了形式不同、本质相同的资金的深层一致性 —— 只有一种比特币。</p>
+<blockquote>
+<p>下一篇： <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/" title="闪电网络：技术与用户体验（六）：只有一种比特币">闪电网络：技术与用户体验（六）：只有一种比特币</a></p>
+</blockquote>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/zh/newsletters/2024/02/07/#txid-segwit">https://bitcoinops.org/zh/newsletters/2024/02/07/#txid-segwit</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/topics/dual-funding/">https://bitcoinops.org/en/topics/dual-funding/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/06/26/hidden-power-of-bitcoin/">https://www.btcstudy.org/2022/06/26/hidden-power-of-bitcoin/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/04/27/peerswap-a-p2p-btc-ln-balancing-protocol/">https://www.btcstudy.org/2022/04/27/peerswap-a-p2p-btc-ln-balancing-protocol/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/06/14/rebalancing-in-the-lightning-network-circular-payments-fee-management-and-splices/">https://www.btcstudy.org/2022/06/14/rebalancing-in-the-lightning-network-circular-payments-fee-management-and-splices/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001555.html">https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-November/001555.html</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/lightninglabs/pool-paper/blob/main/liquidity.pdf">https://github.com/lightninglabs/pool-paper/blob/main/liquidity.pdf</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2022/08/25/what-are-turbo-channels/">https://www.btcstudy.org/2022/08/25/what-are-turbo-channels/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2024/02/02/the-past-present-and-future-of-offline-payments/">https://www.btcstudy.org/2024/02/02/the-past-present-and-future-of-offline-payments/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/12/01/lightnings-future-a-new-era-of-interoperability-with-lsp-specs/">https://www.btcstudy.org/2023/12/01/lightnings-future-a-new-era-of-interoperability-with-lsp-specs/</a> ↩</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/" class="post-title-link" itemprop="url">闪电网络：技术与用户体验（六）：只有一种比特币</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-21 11:09:00 / 修改时间：11:27:56" itemprop="dateCreated datePublished" datetime="2024-03-21T11:09:00+08:00">2024-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">闪电网络</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/" class="post-meta-item leancloud_visitors" data-flag-title="闪电网络：技术与用户体验（六）：只有一种比特币" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8F%AA%E6%9C%89%E4%B8%80%E7%A7%8D%E6%AF%94%E7%89%B9%E5%B8%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%B5%81%E5%8A%A8%E6%80%A7%E8%8E%B7%E5%8F%96/" title="闪电网络：技术与用户体验（五）：流动性获取">闪电网络：技术与用户体验（五）：流动性获取</a>
+</blockquote>
+<p>在前面的文章中，我们一直在讨论，如何优化闪电网络，并通过技术的进步来为用户提供更好的体验。但有一个 “简单的” 问题我们一直没有触及：在闪电钱包用户的日常生活中，可能既需要发起闪电支付，也需要发起 “链上支付” —— 具体来说，就是让一笔交易获得区块确认，或者说，在比特币网络中创建一个新的 UTXO；既需要利用闪电网络来收款，也需要接收链上支付。</p>
+<p>最初的闪电网络客户端实现（包括：Eclair、Core Lightning 和 LND）都同时管理链上资金和闪电通道资金。而且那时候，“链上资金” 与 “闪电通道资金” 是泾渭分明的，互相不能直接用于对方的支付：如果你要发起一笔链上支付，你无法直接动用闪电通道内的资金，你必须先退出通道，然后再发起链上支付（这其中的时延高得令人发指）。链上资金自然更无法直接用于闪电支付。也正因此，当时的用户界面（第三方的钱包软件以及操作工具）也往往将链上余额与通道内余额分开展示。</p>
+<p>显然，这很不便利，是不理想的。它会在用户的同一个钱包（使用同一批私钥可控制的资金）内部形成流动性的分割、影响用户的支付能力，并且制造很大的困惑 —— 这世界上难道存在两种比特币吗？为什么它们都在我的钱包里，我却不能用它们来支付？</p>
+<p>但是，如何打破这种区隔呢？如何让闪电通道内的资金也能发起链上支付？如何用链上资金触发闪电网络内的支付？</p>
+<p>在本文中，我们会介绍一系列的技术和解决方案，它们改变了 “两种资金有区隔” 的不完善状态，有力地证明了闪电钱包不必因为这种认识上的人为区别而裹足不前。最终，它们允许闪电钱包只保留一种形式的资金、只展示一种余额，同时保留跟一切钱包交互的能力。</p>
+<h2 id="潜水艇互换"><a href="#潜水艇互换" class="headerlink" title="潜水艇互换"></a>潜水艇互换</h2><p>第一种使我们可以不必顾虑资金的形式、径直发起支付的技术就是上一篇文章里我们介绍过的 “潜水艇互换”。正向的潜水艇互换使我们可以用通道内的资金创建链上输出（也即发起链上支付），而反向的潜水艇互换使我们可以用链上输出换取闪电支付的能力。</p>
+<p>不过它也有些不便利之处。在潜水艇互换中，接收者的钱包软件必须支持这种脚本，而且必须在一段时间内领取支付。这都会对接收方提出一些要求。</p>
+<h2 id="Splicing（通道拼接）"><a href="#Splicing（通道拼接）" class="headerlink" title="Splicing（通道拼接）"></a>Splicing（通道拼接）</h2><p>“通道拼接” 则比潜水艇互换更进一步。它利用了一种根本上的洞见：所谓的 “链上资金”，不过是 “放在只有自己能控制的 UTXO 中的资金”；而 “通道资金”，不过是 “放在与其他人共同分享的 UTXO 中的资金” —— 它们只是操作方法不同，本质并没有什么分别。只要通道双方达成一致意见，他们就能以通道 UTXO 作为输入，发起链上交易（“拼出”），并在同一笔交易中创建一条新的通道，不必先关闭通道、完成支付之后又开启；同样地，只要双方遵循一定的程序，同样能将当前的 UTXO 以及其它资金作为输入，形成新的通道（“拼入”），而不必先关闭通道然后再开启。</p>
+<p>并且，通道拼接还能保证，在等待拼出或拼入交易获得区块确认的过程中，通道的功能可以不受影响，依然能即使确认支付。这是怎么做到的呢？</p>
+<p>以通道拼出为例，我们假设双方要用通道资金发起一笔链上支付，其输入和输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当前通道 UTXO（前身 UTXO） --------- 新通道 UTXO</span><br><span class="line">                              |</span><br><span class="line">                               —--- 接收者 UTXO</span><br></pre></td></tr></table></figure>
+<p>在这笔交易等待区块确认期间，双方可以对 “前身 UTXO” 和 “新通道 UTXO” 同步签名意义相同的承诺交易，区别只在于对 “前身 UTXO” 签名的交易将始终有一个交给接收者的输出。也即，如果拼出交易得到了确认，这些对前身 UTXO 签名的承诺交易就自动作废，而基于新通道 UTXO 的承诺交易如实地反映了双方的交互；如果拼出交易得不到确认，基于前身 UTXO 的承诺交易也如实地反映了双方的余额变化，将最新的承诺交易广播到比特币网络中依然会触发对接收者的链上支付，而不会允许通道任何一方占便宜。拼入交易也是同样的道理。</p>
+<p>通道拼接大大改变了闪电通道发起链上支付的能力和体验。并且，它使我们可以在维持闪电支付能力的同时调整通道的大小，而不必经历关闭又开启的繁琐操作。甚至有人提出可以让通道也参与 coinjoin（一种混淆支付真正收发者的交易） 1。可想而知它有多么强大。</p>
+<p>相比于潜水艇互换，通道拼出不会对接受者的钱包提出任何要求，最普通、最常见的钱包软件就可以用来收款。不过，通道拼出无法用来获得入账流动性。</p>
+<p>截至本文撰写之时，Eclair 客户端已经支持通道拼接，Core Lightning 客户端也提供了实验性的支持。详细解释和支持进度可见这个页面 2。</p>
+<h2 id="Swap-in-Potentiam"><a href="#Swap-in-Potentiam" class="headerlink" title="Swap-in Potentiam"></a>Swap-in Potentiam</h2><p>除了优化通道资金发起链上支付的能力，人们也在思考如何加快链上资金进入闪电网络的速度。上一篇文章介绍的 “零确认通道”，也是这方面的努力。“Swap-in Potentiam” 则提议闪电网络的用户应该用这样一种脚本来接收链上支付：该脚本有两种花费分支，一是用户与某个闪电网络服务商（LSP）的 2-of-2 多签名；二是用户单签名 + 一个相对时间锁。</p>
+<p>这种脚本有非常有趣的特性：（1）时间锁分支决定了其中的资金的最终归属；假设其双签名分支不被动用，在相对时间锁过期后，用户就可以单凭自己的公钥和签名来花费它；（2）在时间锁还未解锁的时候，不论 LSP 还是用户都无法单方面使用其中的资金；当用户使用其中的资金给 LSP 支付（以承诺交易的形式），LSP 是可以立即就确认的。—— 没错，在时间锁解锁之前，可以把它当成是用户对 LSP 的单向支付通道。在这样的单向通道内，用户给 LSP 的支付，与闪电通道内的支付没有什么区别 —— 所以它可以立即用来闪电支付。</p>
+<p>对用户来说，这是一种免信任，但又可以获得 LSP 服务的资金形式。在收到链上支付之后，只需资金得到区块确认，立即就可以进入闪电网络，而无需再经历开启通道的流程。</p>
+<p>“Swap-in Potentiam” 提议的原始文本可见这里 3。</p>
+<p>截至本文撰写之时，移动端钱包 Phoenix 已经实现了 Swap-in Potentiam。</p>
+<blockquote>
+<p>Swap-in Potentiam 已经走到这条路的终点了吗？不。从通道拼接的角度看，最佳效率的做法是支付者、闪电钱包用户、LSP 三方一起构造、签名交易，使得支付者的链上支付在单笔交易中直接拼入通道，而不是进入 Swap-in Potentiam 脚本之后再拼入。<br>显然，这需要支付者的钱包采用一种更为抽象的支付的概念 —— 为一笔交易贡献一定数量的输入，然后确保该交易有一个归属于自己的找零输出，并且输入和输出的差额恰为（支付额 - 应负担的手续费额） —— 而不再要求交易完全由自身来构造、不再要求交易的输入仅有自身可控制的资金。在这种情况下，接收者仅提供自己的收款脚本是不足够的，两方可能要经过多次通信往返，才能安全地构造出最终的交易并广播出去。<br>当前，以 payjoin 为名的技术，最契合我们这里谈到的概念 4。</p>
+</blockquote>
+<p>接下来，我们要分析两种钱包的用户体验。它们各自使用上述的技术，达成了 “向用户展示一个余额” 的目标。</p>
+<h2 id="Muun-vs-Phoenix"><a href="#Muun-vs-Phoenix" class="headerlink" title="Muun vs. Phoenix"></a>Muun vs. Phoenix</h2><p>Muun 钱包可能是最早尝试克服 “两套余额” 问题的钱包。它的做法是只维护链上资金，然后以潜水艇互换来获得 闪电支付&#x2F;闪电收款 的能力。</p>
+<p>这样做的结果是简洁得惊人的架构和用户体验 —— 它将 闪电通道&#x2F;闪电网络 完全抽象掉了。软件无需实现完整的闪电网络协议、钱包里没有通道、没有流动性问题，也没有在线要求。用户也完全不必了解闪电通道。无论是常规的链上支付还是闪电支付，体验都相当一致。而且，其安全保管操作与常规的 “比特币钱包” 没有什么区别。</p>
+<p>但这样做也有一个明显的缺点：它并不能享受到闪电网络的所有好处，主要体现在手续费上。即使在支付闪电发票，实际上其操作也是在链上发起交易，也要支付链上确认的手续费；反之，接收闪电支付的时候也是如此，同样涉及链上交易。一旦比特币网络的交易确认需求高涨、手续费率提高，用户就会发现自己要支付的手续费高得可怕，一点也不像在使用闪电钱包。</p>
+<p>Phoenix 则跟 Muun 钱包朝着完全相反的方向走 —— 它激进地要让用户的钱包里只有通道资金，并且只有一笔。它是这样做的：</p>
+<ul>
+<li>JIT 通道。当用户要接收闪电支付而无足够的收款额度时，就由 LSP 向用户开启通道，让用户获得收款额度；</li>
+<li>通道拼接。当用户要发起链上支付时，就发起通道拼出交易。结合 JIT 通道，意味着在 LSP 提供收款额度时，也会采用通道拼入的形式，以维持仅有一条通道的状态；<ul>
+<li>此外，用户也可以提前请求收款额度，LSP 会在后台完成操作；</li>
+</ul>
+</li>
+<li>Swap-in Potentiam。当用户要接收链上支付时，就使用 Swap-in Potentiam 这样的脚本；一旦资金得到 3 次确认，此时的区块确认手续费又低于用户设定的限值，钱包会自动与 LSP 合作，将资金拼入通道；并且，它是 “零确认的拼入”，也即，即使拼入交易尚未获得网络确认，双方也将新通道中的资金视为立即可用。</li>
+</ul>
+<p>Phoenix 综合了我们在这两篇里提到的许多技术，持之以恒地打造了最友好的移动端自主保管钱包体验。</p>
+<p>不论是 Muun 钱包，还是 Phoenix 钱包，它们所应用的技术并没有抹去 “区块确认” 和 “通道确认” 在速度（和经济开销）上的区别，也不可能抹除，但它们已经是两个容易解释得多的概念 5，而且只要保证了支付能力，这些细节就不会太让用户困扰。它们都为钱包软件的设计提供了许多启发和应该思考的问题。Muun 基于跟常规的 “比特币钱包” 完全相同的架构，提供了支付闪电发票的能力；Phoenix 则激进到让用户所有的资金都进入通道，但完全不影响用户的链上支付能力与体验。它们都在抹除 “比特币钱包” 和 “闪电钱包” 的界限，逼迫所有人正视技术和基础设施的进步所带来的潜能，并要求钱包的开发者们为用户释放这种潜能。</p>
+<p>最终，用户也会知道，世界上有且只有一种比特币，它每一天都会比昨天更容易在网络中穿梭。</p>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/03/01/lightning-privacy-research-channel-coinjoins/">https://www.btcstudy.org/2023/03/01/lightning-privacy-research-channel-coinjoins/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bitcoinops.org/en/topics/splicing/">https://bitcoinops.org/en/topics/splicing/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/03/06/swap-in-potentiam-moving-onchain-funds-instantly-to-lightning/">https://www.btcstudy.org/2023/03/06/swap-in-potentiam-moving-onchain-funds-instantly-to-lightning/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2023/11/10/payjoin-for-a-better-bitcoin-future/">https://www.btcstudy.org/2023/11/10/payjoin-for-a-better-bitcoin-future/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://phoenix.acinq.co/faq#what-is-inbound-liquidity">https://phoenix.acinq.co/faq#what-is-inbound-liquidity</a> ↩</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E9%81%93%E4%B8%8E%E6%94%AF%E4%BB%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -186,7 +899,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-03-21 10:50:00 / 修改时间：10:54:30" itemprop="dateCreated datePublished" datetime="2024-03-21T10:50:00+08:00">2024-03-21</time>
+              <time title="创建时间：2024-03-21 10:50:00 / 修改时间：11:00:45" itemprop="dateCreated datePublished" datetime="2024-03-21T10:50:00+08:00">2024-03-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,8 +1050,9 @@
 <p>截至目前为止，“聚合 HTLC 输出” 同样仍处于方法的讨论阶段。详细介绍可见这篇文章 15。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文至此就要告一段落了。我们从基础的概念出发，解释了闪电通道的构造，闪电支付的概念，以及，其构造方法如何可以随着比特币协议的升级而升级。我们还介绍了尚在讨论阶段，无法当下就实现的可能性。</p>
 <p>本文覆盖了一般的闪电网络概述的内容，但是，它依然未全面展现闪电网络的 “网络” 特性 —— 没错，HTLC 可以将多条通道内的支付 “粘合” 在一起，但问题是，发送者根据什么信息，找出这样的路径？这些节点，依据什么指令，开始向通道对手提供 HTLC？这些问题，我们将在下一篇解答。它们的答案，也将真正体现 “网络” 的特性，并越过一般的闪电网络概述止步之处。</p>
-<p>（未完）</p>
-<p>续篇见此处</p>
+<blockquote>
+<p>下一篇： <a href="/2024/03/21/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" title="闪电网络：技术与用户体验（三）：路由">闪电网络：技术与用户体验（三）：路由</a></p>
+</blockquote>
 <h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><ol>
 <li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2020/08/25/bitcoins-utxo-model-by-river-finance/">https://www.btcstudy.org/2020/08/25/bitcoins-utxo-model-by-river-finance/</a> ↩</p>
 </li>
@@ -1054,425 +1768,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:6.引用类型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-16 20:08:21 / 修改时间：20:25:34" itemprop="dateCreated datePublished" datetime="2023-02-16T20:08:21+08:00">2023-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:6.引用类型" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-6-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-以下选项中不属于固定长度数组的是"><a href="#1-以下选项中不属于固定长度数组的是" class="headerlink" title="1.以下选项中不属于固定长度数组的是"></a>1.以下选项中不属于固定长度数组的是</h4><ul>
-<li>uint[100] array0;</li>
-<li>✅address[] array1;</li>
-<li>byte[3] array2;</li>
-<li>bool[100] array3;</li>
-</ul>
-<h4 id="2-以下选项中不属于可变长度数组的是"><a href="#2-以下选项中不属于可变长度数组的是" class="headerlink" title="2.以下选项中不属于可变长度数组的是"></a>2.以下选项中不属于可变长度数组的是</h4><ul>
-<li>uint[] array0;</li>
-<li>bytes array1;</li>
-<li>✅address[6] array2;</li>
-<li>byte[] array3;</li>
-</ul>
-<h4 id="3-以下关于数组的说法中，正确的是"><a href="#3-以下关于数组的说法中，正确的是" class="headerlink" title="3.以下关于数组的说法中，正确的是"></a>3.以下关于数组的说法中，正确的是</h4><ul>
-<li>固定长度数组 和 bytes拥有 push() 成员，可以在数组最后添加一个0元素。</li>
-<li>数组字面常数，例如 [uint(1),2,3]，需要声明第一个元素的类型，不然默认用存储空间最大的类型。</li>
-<li>✅内存数组的长度在创建后是固定的。</li>
-<li>对于memory可变长度数组，可以用new操作符来创建，并且不用声明长度，例如uint[] memory array &#x3D; new uint[];。</li>
-</ul>
-<h4 id="4-数组和结构体分别属于什么类型"><a href="#4-数组和结构体分别属于什么类型" class="headerlink" title="4.数组和结构体分别属于什么类型"></a>4.数组和结构体分别属于什么类型</h4><ul>
-<li>数值类型和引用类型</li>
-<li>✅引用类型和引用类型</li>
-<li>数值类型和数值类型</li>
-<li>引用类型和数值类型</li>
-</ul>
-<h4 id="5-以下关于结构体的说法中，错误的是"><a href="#5-以下关于结构体的说法中，错误的是" class="headerlink" title="5.以下关于结构体的说法中，错误的是"></a>5.以下关于结构体的说法中，错误的是</h4><ul>
-<li>通过结构体的形式可以定义新的类型。</li>
-<li>结构体内可以包含字符串，整型等基本数据类型，也可以包含数组，映射，结构体等复杂类型。</li>
-<li>✅结构体内可以包含其本身。</li>
-</ul>
-<h4 id="6-有如下一段合约代码，执行-initStudent-方法后，student-id-和-student-score-的值分别为"><a href="#6-有如下一段合约代码，执行-initStudent-方法后，student-id-和-student-score-的值分别为" class="headerlink" title="6.有如下一段合约代码，执行 initStudent 方法后，student.id 和 student.score 的值分别为"></a>6.有如下一段合约代码，执行 initStudent 方法后，student.id 和 student.score 的值分别为</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">contract StructTypes &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span>&#123;</span></span><br><span class="line">        uint256 id;</span><br><span class="line">        uint256 score; </span><br><span class="line">    &#125;</span><br><span class="line">   Student student;</span><br><span class="line">   function <span class="title function_">initStudent</span><span class="params">()</span> external&#123;</span><br><span class="line">        student.id = <span class="number">100</span>;</span><br><span class="line">        student.score = <span class="number">200</span>;</span><br><span class="line">        Student storage _student = student;</span><br><span class="line">        _student.id = <span class="number">300</span>;</span><br><span class="line">        _student.score = <span class="number">400</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>✅300 400</li>
-<li>100 200</li>
-<li>300 200</li>
-<li>100 400</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" class="post-title-link" itemprop="url">WTF日记:4. 函数输出</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-16 09:56:53 / 修改时间：10:05:12" itemprop="dateCreated datePublished" datetime="2023-02-16T09:56:53+08:00">2023-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:4. 函数输出" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/16/WTF%E6%97%A5%E8%AE%B0-4.%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-returns关键字的作用"><a href="#1-returns关键字的作用" class="headerlink" title="1.returns关键字的作用?"></a>1.returns关键字的作用?</h4><p>答：加在函数名后面，用于声明返回的变量类型及变量名</p>
-<h4 id="2-return关键字的作用"><a href="#2-return关键字的作用" class="headerlink" title="2.return关键字的作用?"></a>2.return关键字的作用?</h4><p>答：用于函数主体中，返回指定的变量</p>
-<h4 id="3-采用命名式返回的函数主体中能否使用return"><a href="#3-采用命名式返回的函数主体中能否使用return" class="headerlink" title="3.采用命名式返回的函数主体中能否使用return?"></a>3.采用命名式返回的函数主体中能否使用return?</h4><p>答：能</p>
-<h4 id="4-解构式赋值能否只读取函数部分返回值"><a href="#4-解构式赋值能否只读取函数部分返回值" class="headerlink" title="4.解构式赋值能否只读取函数部分返回值?"></a>4.解构式赋值能否只读取函数部分返回值?</h4><p>答：能</p>
-<h4 id="5-假设存在如下函数："><a href="#5-假设存在如下函数：" class="headerlink" title="5.假设存在如下函数："></a>5.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 , <span class="type">bool</span> , <span class="built_in">string</span>, uint256[<span class="number">3</span>] memory)</span>，</span><br></pre></td></tr></table></figure>
-<h4 id="那么它可能的返回结果是？"><a href="#那么它可能的返回结果是？" class="headerlink" title="那么它可能的返回结果是？"></a>那么它可能的返回结果是？</h4><p>答：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (<span class="number">64</span>, <span class="literal">true</span>, <span class="string">&quot;abcd&quot;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-下列属于命名式返回的是"><a href="#6-下列属于命名式返回的是" class="headerlink" title="6.下列属于命名式返回的是?"></a>6.下列属于命名式返回的是?</h4><p>答：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 _number, <span class="type">bool</span> _bool, uint256[<span class="number">3</span>] memory _array)</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="7-假设存在如下函数："><a href="#7-假设存在如下函数：" class="headerlink" title="7.假设存在如下函数："></a>7.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnNamed</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256 _number)</span>&#123;</span><br><span class="line">    <span class="type">bool</span> _bool = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">string</span> memory _str = <span class="string">&#x27;0xAA&#x27;</span>;       </span><br><span class="line">    _number = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="那么调用该函数返回的结果是？"><a href="#那么调用该函数返回的结果是？" class="headerlink" title="那么调用该函数返回的结果是？"></a>那么调用该函数返回的结果是？</h4><p>答：0:uint236 number 2</p>
-<h4 id="8-假设存在如下函数："><a href="#8-假设存在如下函数：" class="headerlink" title="8.假设存在如下函数："></a>8.假设存在如下函数：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">returnMultiple</span><span class="params">()</span> public pure <span class="title function_">returns</span><span class="params">(uint256, <span class="type">bool</span>, uint256[<span class="number">3</span>] memory)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="number">1</span>, <span class="literal">true</span>, [<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="那么下面哪个选项正确使用了该函数？"><a href="#那么下面哪个选项正确使用了该函数？" class="headerlink" title="那么下面哪个选项正确使用了该函数？"></a>那么下面哪个选项正确使用了该函数？</h4><p>答：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> _bool ; (, _bool, ) = returnMultiple();</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:3.函数类型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-13 20:03:30 / 修改时间：20:12:05" itemprop="dateCreated datePublished" datetime="2023-02-13T20:03:30+08:00">2023-02-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:3.函数类型" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-3.%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-下面哪一项不是-Solidity-中的函数可见性说明符？"><a href="#1-下面哪一项不是-Solidity-中的函数可见性说明符？" class="headerlink" title="1.下面哪一项不是 Solidity 中的函数可见性说明符？"></a>1.下面哪一项不是 Solidity 中的函数可见性说明符？</h4><p>答：protected(external,private,public)</p>
-<h4 id="2-下面关于-view-关键字的描述，哪一项是准确的"><a href="#2-下面关于-view-关键字的描述，哪一项是准确的" class="headerlink" title="2.下面关于 view 关键字的描述，哪一项是准确的?"></a>2.下面关于 view 关键字的描述，哪一项是准确的?</h4><p>答：包含 view 关键字的函数，可以读取但不能写入存储在链上的状态变量</p>
-<h4 id="3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？"><a href="#3-下面关于-pure-和-view-两个关键字的描述，哪一项是错误的？" class="headerlink" title="3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？"></a>3.下面关于 pure 和 view 两个关键字的描述，哪一项是错误的？</h4><p>答：每个函数在声明时必须包含这两个关键字中的一个</p>
-<h4 id="4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："><a href="#4-以下代码截取自-SafeMath-Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：" class="headerlink" title="4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常："></a>4.以下代码截取自 SafeMath Library，其定义了一个函数以替代“加法”，如果加法的结果溢出则会返回异常：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">add</span><span class="params">(uint256 a, uint256 b)</span> internal _____ <span class="title function_">returns</span> <span class="params">(uint256)</span> &#123;</span><br><span class="line">    uint256 c = a + b;</span><br><span class="line">    assert(c &gt;= a);  <span class="comment">// 本行代码意为：若c不大于等于a，则说明加法运算溢出，抛出异常</span></span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="那么，下划线处最适合填写的关键字是："><a href="#那么，下划线处最适合填写的关键字是：" class="headerlink" title="那么，下划线处最适合填写的关键字是："></a>那么，下划线处最适合填写的关键字是：</h4><p>答：pure</p>
-<h4 id="5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额："><a href="#5-以下代码截取自-USDT-的-Token-合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的-USDT-余额：" class="headerlink" title="5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额："></a>5.以下代码截取自 USDT 的 Token 合约，其声明了一个函数，任何用户都可以调用这个函数以查询某个地址的 USDT 余额：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function <span class="title function_">balanceOf</span><span class="params">(address who)</span> _____ <span class="title function_">returns</span> <span class="params">(uint)</span></span><br></pre></td></tr></table></figure>
-<h4 id="那么，下划线处最适合填写的关键字是"><a href="#那么，下划线处最适合填写的关键字是" class="headerlink" title="那么，下划线处最适合填写的关键字是"></a>那么，下划线处最适合填写的关键字是</h4><p>答：public</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="Fenguoz">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fenguoz的个人网站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">WTF日记:2.数值类型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-02-13 18:39:57 / 修改时间：20:08:29" itemprop="dateCreated datePublished" datetime="2023-02-13T18:39:57+08:00">2023-02-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="WTF日记:2.数值类型" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/13/WTF%E6%97%A5%E8%AE%B0-2.%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-以下属于solidity变量类型的是？"><a href="#1-以下属于solidity变量类型的是？" class="headerlink" title="1.以下属于solidity变量类型的是？"></a>1.以下属于solidity变量类型的是？</h4><p>答：数值类型(Value Type)，引用类型(Reference Type)，映射类型(Mapping Type)，函数类型(Function Type)</p>
-<h4 id="2-solidity中数值类型-Value-Type-不包括："><a href="#2-solidity中数值类型-Value-Type-不包括：" class="headerlink" title="2.solidity中数值类型(Value Type)不包括："></a>2.solidity中数值类型(Value Type)不包括：</h4><p>答：float(数值类型包含uint8,address,bool)</p>
-<h4 id="3-address-payable-addr-addr-transfer-1-意为："><a href="#3-address-payable-addr-addr-transfer-1-意为：" class="headerlink" title="3.address payable addr;addr.transfer(1);意为："></a>3.address payable addr;addr.transfer(1);意为：</h4><p>答：合约向addr转账1wei</p>
-<h4 id="4-bytes4类型具有几个16进制位？"><a href="#4-bytes4类型具有几个16进制位？" class="headerlink" title="4.bytes4类型具有几个16进制位？"></a>4.bytes4类型具有几个16进制位？</h4><p>答：8(2个16进制数 &#x3D; 8个二进制数位 &#x3D; 1字节)</p>
-<h4 id="5-以下运算能使a返回true的是？"><a href="#5-以下运算能使a返回true的是？" class="headerlink" title="5.以下运算能使a返回true的是？"></a>5.以下运算能使a返回true的是？</h4><p>答：bool a &#x3D; 1-1&#x3D;&#x3D;0&amp;&amp;1%2&#x3D;&#x3D;1;</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1540,7 +1839,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

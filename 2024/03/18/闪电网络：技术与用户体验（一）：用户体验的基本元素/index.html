@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本系列文章旨在填补关于闪电网络的文献资料的一些空白。对闪电网络和闪电通道的整体性介绍一般都撰写于几年前 1，因此，它们往往只及于闪电通道和闪电网络的基本技术概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闪电网络：技术与用户体验（一）：用户体验的基本元素">
+<meta property="og:url" content="http://example.com/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/index.html">
+<meta property="og:site_name" content="Fenguoz的个人网站">
+<meta property="og:description" content="本系列文章旨在填补关于闪电网络的文献资料的一些空白。对闪电网络和闪电通道的整体性介绍一般都撰写于几年前 1，因此，它们往往只及于闪电通道和闪电网络的基本技术概念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/abacus.png">
+<meta property="article:published_time" content="2024-03-18T13:40:09.000Z">
+<meta property="article:modified_time" content="2024-08-20T08:08:11.632Z">
+<meta property="article:author" content="Fenguoz">
+<meta property="article:tag" content="闪电网络">
+<meta property="article:tag" content="BTC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/abacus.png">
+
+<link rel="canonical" href="http://example.com/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>闪电网络：技术与用户体验（一）：用户体验的基本元素 | Fenguoz的个人网站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home  //首页 fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user  //关于 fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags  //标签 fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th   //分类 fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive //归档 fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="Fenguoz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fenguoz的个人网站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          闪电网络：技术与用户体验（一）：用户体验的基本元素
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-18 21:40:09" itemprop="dateCreated datePublished" datetime="2024-03-18T21:40:09+08:00">2024-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-20 16:08:11" itemprop="dateModified" datetime="2024-08-20T16:08:11+08:00">2024-08-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">闪电网络</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/" class="post-meta-item leancloud_visitors" data-flag-title="闪电网络：技术与用户体验（一）：用户体验的基本元素" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">本系列文章旨在填补关于闪电网络的文献资料的一些空白。对闪电网络和闪电通道的整体性介绍一般都撰写于几年前 1，因此，它们往往只及于闪电通道和闪电网络的基本技术概念</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本系列文章旨在填补关于闪电网络的文献资料的一些空白。对闪电网络和闪电通道的整体性介绍一般都撰写于几年前 1，因此，它们往往只及于闪电通道和闪电网络的基本技术概念，而：</p>
+<ul>
+<li>没有将技术原理与用户体验 —— 尤其是用户体验中的挑战 —— 关联起来，因此无法为读者上手使用闪电网络提供心智基础；</li>
+<li>没有体现闪电网络上已经出现的技术改进和解决方案，以及还可以探索的优化空间。一些解决方案是专为优化终端用户的体验而提出的，并且也成功地改善了用户体验；还有一些方案，虽然难以为终端用户所知，但也大大提高了闪电网络的支付效率。<ul>
+<li>难以理解和思考闪电网络的优化空间的部分原因在于对其 “网络” 特性的认识不足。<br>有鉴于此，本系列文章希望给出一份新的介绍，将闪电网络（钱包）的使用体验（尤其是其挑战）与技术概念关联起来，并基于这些概念以及闪电网络的 “网络” 特性，介绍闪电网络上已经发生的技术改进，以及还可以采用的改进。</li>
+</ul>
+</li>
+</ul>
+<p>本文是这个系列的第一篇文章。与一般的介绍不同，本文不会涉及构造闪电通道的技术以及形成闪电网络的元素（这是后续篇章的内容），相反，我们将先了解闪电网络的使用体验（准确来说，是自主保管的移动端闪电钱包的体验）。我们将从闪电网络的基本想法出发，推理出它的使用体验中的关键部分。往后，我们将通过 “体验-技术” 的视角不断解释形成这些体验的技术原因，并相应呈现改进的空间。</p>
+<p>本文不要求读者对比特币的可编程性有任何理解，但要求读者至少了解并能够辨识出比特币的使用体验 —— 在比特币网络上发送交易并使之得到区块链确认 —— 中的关键元素：地址、手续费、确认时间。</p>
+<h2 id="闪电网络的想法"><a href="#闪电网络的想法" class="headerlink" title="闪电网络的想法"></a>闪电网络的想法</h2><p>闪电网络的想法非常简单：</p>
+<ul>
+<li>假设有一笔资金，是由甲乙双方共同支配的，也即只有双方一致同意，才能花费它；那么，当其中的甲方希望用这笔资金中属于自己的部分来给乙方支付时，这就不需要获得其他任何人的见证 —— 只需要乙方确认即可。甲乙双方可以在很长一段时间之后结算双方的余额，完成资金分割。<ul>
+<li>这就像商业往来很密切的两个商店互相写欠条，仅在双方要对账结算的时候（比如月底或年底）才需要转移现金。</li>
+<li>这样的共同资金，称为 “通道”。</li>
+<li>一种直观的理解通道的方式是把一条通道想象成算盘 2 上的一根轴，轴有两端，轴上有一些算珠。当一方要给另一方支付时，就把自己这一端的一些算珠拨到对面去。abacus<br><img src="/images/abacus.png"></li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://medium.com/breez-technology/understanding-lightning-network-using-an-abacus-daad8dc4cf4b">(图片来源)</a></p>
+<ul>
+<li>假设一些人不止有一条通道，那么，他们就可以为其他人 “转发支付”。比如，甲与丙没有通道，但是甲跟乙有通道、乙跟丙也有通道，那么，甲就可以借助乙，给丙支付。例如，甲把钱交给乙，乙再把钱交给丙，就像接力跑一样。只需要每一条通道的双方彼此确认，就可以完成支付，也不需要其他任何人的见证。<ul>
+<li>当许许多多的 “通道” 将许多的节点（用户）连接在一起，这些节点就形成了一个 “网络”，使得参与其中的一个节点无需跟其他每一个节点相连接，也（大概率）可以给这些节点支付。<br>这就是闪电网络的想法：用一对一的通道来实现即时的支付确认；用通道组成的网络来最大化单个节点的支付能力。</li>
+</ul>
+</li>
+</ul>
+<p>这里，我们暂不讨论如何安全地实现 “通道” 和 “转发支付”，这会是后续章节的内容。我们需要知道的仅仅是，用户最常接触的比特币的保管形式是 “单签名钱包”，也即只需一把私钥就能花费的资金，显然是不能用来充当通道的，因为其控制是排他的。</p>
+<p>重点是，光凭这段概述，我们就可以发现闪电网络使用体验中的几个关键元素。在使用闪电钱包之前，必须先理解这几个元素，才能顺利使用。</p>
+<h2 id="闪电网络的使用体验"><a href="#闪电网络的使用体验" class="headerlink" title="闪电网络的使用体验"></a>闪电网络的使用体验</h2><h4 id="在线收款"><a href="#在线收款" class="headerlink" title="在线收款"></a>在线收款</h4><p>在闪电网络中，当你要收款的时候，你必须在线。从上面的推理来看，这是很容易理解的：收款涉及更改通道中的资金的状态，而通道是你与他人共享的，所以你必须在线，与对方一同更改资金的状态。</p>
+<p>这既不同于比特币的使用体验（只要他人知道你的一个比特币地址，就随时可以给你支付，不需要你在线），也不同于绝大部分支付系统（比如银行、互联网电子支付系统）的使用体验。</p>
+<p>不过，在当前的移动端闪电钱包中，这一点已经不会让用户产生太多感知：联网的手机都有通知系统，钱包的服务端可以向你发送通知，要求你打开 App，也即上线，以接收付款。但是，如果太长时间不处理这样的通知，可能会导致支付退回。</p>
+<blockquote>
+<p>对这种特性的一种误解是，认为闪电网络钱包的用户必须全天候在线。这是不对的，因为不在线仅仅意味着你无法收款，并不代表你在通道中的资金立即变得不安全。但另一种正确的理解是，闪电网络钱包的用户不能无限期离线，你必须隔三岔五上线检查自己的资金状况。具体可容许的离线时间视用户所用的软件实现而定，一般来说，离线三天五天是没有问题的。其中的缘由我们会在后续章节中解释。</p>
+</blockquote>
+<blockquote>
+<p>一定程度上，在线收款的特性也意味着，发送支付和收取支付的双方必须同时在线。但如上所述，这不难解决，关键是让接收支付的一方即时上线。在未来，这可以通过增加 “异步支付” 技术来解决这种同时性问题。</p>
+</blockquote>
+<h4 id="收款额度"><a href="#收款额度" class="headerlink" title="收款额度"></a>收款额度</h4><p>类似地，因为收款涉及通道，所以，它的收款能力是有上限的。</p>
+<p>我们以上面的那张图来举例。现在，算珠都位于 Alice 这边，因此，Alice 无法再用这条通道来接收支付了 —— 因为 Bob 在这条通道中已经没有余额了！但与此同时，Bob 使用这条通道来接收支付的能力，则是 Alice 在这条通道中的所有算珠。</p>
+<p>这就是 “收款额度（inbound liquidity，入账流动性）” 的概念。这也是一个迥异于比特币和其它支付系统的概念。在其它支付系统中，接收支付的能力在大多数时候是没有限制的。</p>
+<p>这种特性给闪电网络的用户带来了大量的不解和困扰。当你没有足够多的收款额度时，要么你的收款会失败（他人无法给你支付），要么，会导致新通道的创建（因此你需要支付在比特币链上确认一笔交易的手续费，这时候的手续费会远远高于你平时发起闪电支付的手续费）。</p>
+<p>这些问题在刚入门的用户这里往往会更加严重，这跟闪电网络当前的实现方式有关：在当前的闪电网络中，往往仅由发起通道开设请求的一方向通道注入资金（这被称为 “单向注资”），但这就导致了，在刚刚创建好的通道中，一方（比如用户）将没有任何收款额度 —— 在你要接收支付之前，你必须先花掉一些钱。</p>
+<p>现在，关于终端用户的收款额度问题，一种解决方式已经逐渐获得采用：安排一种服务商（称为 “LSP”），每当用户要收取支付、收款额度又不足时，就主动与用户开设新的通道，为用户提供收款额度（当然，也要收取开启通道的手续费）。这种办法同样也可以解决上述新用户的收款额度问题：当一名新用户第一次接收闪电支付时，LSP 与该用户打开通道，让该用户能够收取支付。唯一的问题是，它将对用户的第一笔闪电收款的数额提出要求，但无疑已经方便很多。</p>
+<p>因此，本文推荐新用户在上手使用闪电网络钱包时，总是使用闪电钱包（而不是比特币地址）来接收第一笔支付。这样会更加便利。</p>
+<blockquote>
+<p>此外，“双向注资” 技术也已经在主要的闪电网络客户端软件中实现，有望为进一步解决新用户的收款额度问题提供帮助。</p>
+</blockquote>
+<blockquote>
+<p>对于非移动端用户，比如全时在线节点的运营者来说，有更多的方法可以获得收款额度，比如：“潜水艇互换”，我们将在后续篇章中介绍。这些方法在一定程度上也可以为移动端用户所用，但从便利性来说，都不及 LSP 的上述服务。<br>但总的来说，“收款额度” 会始终伴随你的闪电网络使用历程，并且也是闪电网络与其它支付系统最显著的区别。它造成了许多困惑，这也意味着，如果我们能理解它，就能少去很多困惑。</p>
+</blockquote>
+<h4 id="支付成功率"><a href="#支付成功率" class="headerlink" title="支付成功率"></a>支付成功率</h4><p>与 “收款额度” 相对的是 “支付额度（outbound liquidity）”。但是，这个词并不能体现闪电网络的特殊性，因为我们的每一种支付工具都有余额（支付能力的上限）。</p>
+<p>我们回到上面的转发支付的例子。我们扩展成四方，并假设他们在彼此的通道中的余额如下图所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">甲  &lt;--------&gt;  乙  &lt;--------&gt;  丙  &lt;--------&gt;  丁</span><br><span class="line">500          300  200        300  500        500</span><br></pre></td></tr></table></figure>
+
+<p>甲在 “甲-乙” 通道中有余额 500 聪，乙则有 300 聪。其余通道以此类推。在这里，虽然甲拥有 500 聪，但如果他要给丙或者丁支付，则支付额无法超过 200 聪。</p>
+<p>无法给丁支付超过 200 聪的数额，显然不能归因于丁的收款额度不够 —— 在 “丙-丁” 通道中，丙还有 500 聪。问题在哪儿呢？在于 “乙-丙” 通道中，乙只有 200 聪。</p>
+<p>也就是说，成功的支付，要求在支付所途径的每一条通道中，转发支付的一方都有足够多的余额（支付额度）。在甲给丁支付的过程中，如果支付数额超过 200 聪，这笔支付将无法通过 “乙-丙” 通道。</p>
+<p>这就是为什么本文要使用 “支付成功率” 的概念。这也是为什么人们常常说闪电网络比较适合小额支付而不适合大额支付 —— 成功的支付不仅要找出一条由通道连成的路径，将支付者与接收者连起来，还要求组成通道的每一条通道，在传递支付的方向上都有足够多的余额。</p>
+<blockquote>
+<p>“聪（satoshi）”是比特币的最小单位。</p>
+</blockquote>
+<blockquote>
+<p>在后面的章节中，我们会了解如何可以优化支付的成功率。简单来说，我们需要做的是将一笔支付打散成多个碎片，让每一部分途径不同的路径，从而最大限度利用不同路径的支付额度。</p>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在本文中，我们了解了闪电网络的基本思想，并从这些基本思想出发，解释了闪电网络用户体验中的一些关键元素。这些描述无法涵盖今时今日移动端自主保管闪电钱包的全部体验，但勾勒出了其中的一部分。在往后的章节中，我们将越来越多地了解这些体验，也越来越多地解释其背后的技术或设计成因，并指出哪些技术进步已经改变了或有望改变这些体验。</p>
+<p>闪电网络是一个网络 —— 对这个事实，再怎么强调都不过分。这种 “网络” 特性，既形成了其使用体验中的一些明显的特点（也许有人将它们视为一些缺点），也指明了这些体验的优化空间。</p>
+<p>在下一章，我们将介绍闪电通道在比特币上的构造方法。</p>
+<blockquote>
+<p>下一篇： <a href="/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E9%81%93%E4%B8%8E%E6%94%AF%E4%BB%98/" title="闪电网络：技术与用户体验（二）：通道与支付">闪电网络：技术与用户体验（二）：通道与支付</a></p>
+</blockquote>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://www.btcstudy.org/2020/08/23/understanding-the-lightning-network-part-building-a-bidirectional-payment-channel/">https://www.btcstudy.org/2020/08/23/understanding-the-lightning-network-part-building-a-bidirectional-payment-channel/</a> ↩</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/breez-technology/understanding-lightning-network-using-an-abacus-daad8dc4cf4b">https://medium.com/breez-technology/understanding-lightning-network-using-an-abacus-daad8dc4cf4b</a> ↩</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C/" rel="tag"># 闪电网络</a>
+              <a href="/tags/BTC/" rel="tag"># BTC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/18/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%AF%E7%94%B1/" rel="prev" title="闪电网络：技术与用户体验（三）：路由">
+      <i class="fa fa-chevron-left"></i> 闪电网络：技术与用户体验（三）：路由
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E7%9A%84%E6%83%B3%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">闪电网络的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">闪电网络的使用体验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E6%94%B6%E6%AC%BE"><span class="nav-number">2.0.1.</span> <span class="nav-text">在线收款</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B6%E6%AC%BE%E9%A2%9D%E5%BA%A6"><span class="nav-number">2.0.2.</span> <span class="nav-text">收款额度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E4%BB%98%E6%88%90%E5%8A%9F%E7%8E%87"><span class="nav-number">2.0.3.</span> <span class="nav-text">支付成功率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%B3%A8"><span class="nav-number">4.</span> <span class="nav-text">脚注</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
+      src="/uploads/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Fenguoz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Fenguoz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/243944672@qq.com" title="E-Mail → 243944672@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
+  
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'rSw9CqQa7KcXnROnkDnMUmw6-gzGzoHsz',
+      appKey     : '0Ue8wjyaGJdi0IySu8xIE9Gu',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

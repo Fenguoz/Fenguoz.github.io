@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -24,12 +24,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="异常日志规范">
 <meta property="og:url" content="http://example.com/2021/01/21/%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/index.html">
-<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:site_name" content="Fenguoz的个人网站">
 <meta property="og:description" content="前言愿景是码出高效，码出质量。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-21T08:05:05.000Z">
-<meta property="article:modified_time" content="2021-01-21T10:10:03.590Z">
-<meta property="article:author" content="邹国锋">
+<meta property="article:modified_time" content="2021-01-21T10:10:03.000Z">
+<meta property="article:author" content="Fenguoz">
 <meta property="article:tag" content="标准规范">
 <meta property="article:tag" content="异常日志">
 <meta name="twitter:card" content="summary">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>异常日志规范 | 邹国锋的个人网站</title>
+  <title>异常日志规范 | Fenguoz的个人网站</title>
   
 
 
@@ -98,7 +98,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">邹国锋的个人网站</h1>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
@@ -172,12 +172,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="name" content="Fenguoz">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="邹国锋的个人网站">
+      <meta itemprop="name" content="Fenguoz的个人网站">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -237,7 +237,7 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>愿景是<strong>码出高效，码出质量</strong>。对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的统一方式一起做事，提升写作效率，降低沟通成本。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>依据约束力强弱及故障敏感性，规约依次分为<font color=bc0008>【强制】</font>、<font color=febd2c>【推荐】</font>、<font color=799042>【参考】</font>三大类。<br>在延伸信息中， “<font color=977919>说明</font>”对规约做了适当扩展和解释;“<font color=29965b>正例</font>”提倡什么样的编码和实现方式;“<font color=fa4113>反例</font>”说明需要提防的雷区，以及真实的错误案例。</p>
 <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><ol>
 <li><p><font color=bc0008>【强制】</font>异常不要用来做流程控制，条件控制。</p>
@@ -265,7 +265,8 @@
              // 返回的结果是 2
              return ++$x; 
          &#125;
-     &#125;</code></pre>
+     &#125;
+</code></pre>
 </li>
 <li><p><font color=bc0008>【强制】</font>捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。</p>
 <p> <font color=977919>说明:</font>如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。 </p>
@@ -278,7 +279,8 @@
  2) 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null。
  3) 远程调用返回对象时，一律要求进行空指针判断，防止 NPE。
  4) 对于 Session 中获取的数据，建议进行 NPE 检查，避免空指针。 
- 5) 级联调用 obj-&gt;getA()-&gt;getB()-&gt;getC();一连串调用，易产生 NPE。</code></pre>
+ 5) 级联调用 obj-&gt;getA()-&gt;getB()-&gt;getC();一连串调用，易产生 NPE。
+</code></pre>
 </li>
 <li><p><font color=febd2c>【推荐】</font>定义时区分 unchecked / checked 异常，避免直接抛出 new RuntimeException()， 更不允许抛出 Exception 或者 Throwable，应使用有业务含义的自定义异常。推荐业界已定 义过的自定义异常，如:DAOException / ServiceException 等。</p>
 </li>
@@ -288,7 +290,8 @@
 <li><p><font color=799042>【参考】</font>避免出现重复的代码(Don’t Repeat Yourself)，即 DRY 原则。 </p>
 <p> <font color=977919>说明:</font>随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。</p>
 <p> <font color=29965b>正例:</font>一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取:</p>
-<pre><code>     private boolean checkParam($param) &#123;...&#125;</code></pre>
+<pre><code>     private boolean checkParam($param) &#123;...&#125;
+</code></pre>
 </li>
 </ol>
 <h1 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h1><ol>
@@ -400,9 +403,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="邹国锋"
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
       src="/uploads/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -410,20 +413,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -458,11 +461,11 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
   
 </div>
         

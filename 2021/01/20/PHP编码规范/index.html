@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -24,12 +24,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP编码规范">
 <meta property="og:url" content="http://example.com/2021/01/20/PHP%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/index.html">
-<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:site_name" content="Fenguoz的个人网站">
 <meta property="og:description" content="PHP编码规范目录 前言 命名风格 常量定义 代码格式">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-20T02:31:33.000Z">
-<meta property="article:modified_time" content="2021-01-28T05:20:34.592Z">
-<meta property="article:author" content="邹国锋">
+<meta property="article:modified_time" content="2021-01-28T05:20:34.000Z">
+<meta property="article:author" content="Fenguoz">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="标准规范">
 <meta property="article:tag" content="编码">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>PHP编码规范 | 邹国锋的个人网站</title>
+  <title>PHP编码规范 | Fenguoz的个人网站</title>
   
 
 
@@ -99,7 +99,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">邹国锋的个人网站</h1>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
@@ -173,12 +173,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="name" content="Fenguoz">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="邹国锋的个人网站">
+      <meta itemprop="name" content="Fenguoz的个人网站">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -247,7 +247,7 @@
 <li><a href="#preface">前言</a></li>
 <li><a href="#name">命名风格</a></li>
 <li><a href="#constant">常量定义</a></li>
-<li><a href="#format">代码格式</a><a id="more"></a></li>
+<li><a href="#format">代码格式</a><span id="more"></span></li>
 <li><a href="#oop">OOP规约</a></li>
 <li><a href="#concurrent">并发处理</a></li>
 <li><a href="#control">控制语句</a></li>
@@ -281,7 +281,7 @@
 <li><p><font color=bc0008>【强制】</font>避免在子父类的成员变量之间、或者不同代码块的局部变量之间采用完全相同的命名，使可读性降低。</p>
 <p> <font color=977919>说明:</font>子类、父类成员变量名相同，即使是 public 类型的变量也是能够通过编译，而局部变量在同一方法内的不同代码块中同名也是合法的，但是要避免使用。对于非 setter/getter 的参数名称也要避免与成员变量名称相同。</p>
 <p> <font color=fa4113>反例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">    <span class="comment">// 非 setter/getter 的参数名称，不允许与本类成员变量同名</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"><span class="keyword">String</span> <span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$arg</span>) &#123;</span><br><span class="line">            <span class="variable">$money</span> = <span class="number">531</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 在同一方法体中，不允许与其它代码块中的 money 命名相同 </span></span><br><span class="line">            <span class="variable">$money</span> = <span class="number">615</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 不允许与父类的成员变量名称相同 </span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">    <span class="comment">// 非 setter/getter 的参数名称，不允许与本类成员变量同名</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">String <span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$arg</span>) &#123;</span><br><span class="line">            <span class="variable">$money</span> = <span class="number">531</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 在同一方法体中，不允许与其它代码块中的 money 命名相同 </span></span><br><span class="line">            <span class="variable">$money</span> = <span class="number">615</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">ConfusingName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 不允许与父类的成员变量名称相同 </span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><font color=bc0008>【强制】</font>杜绝完全不规范的缩写，避免望文不知义。</p>
 <p> <font color=fa4113>反例:</font>AbstractClass“缩写”命名成 AbsClass;condition“缩写”命名成 condi，此类随意缩写严重降低了代码的可阅读性。</p>
@@ -297,7 +297,8 @@
 <li><p><font color=febd2c>【推荐】</font>如果模块、接口、类、方法使用了设计模式，在命名时需体现出具体模式。 </p>
 <p> <font color=977919>说明:</font>将设计模式体现在名字中，有利于阅读者快速理解架构设计理念。     </p>
 <p> <font color=29965b>正例:</font> </p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderFactory</span></span>&#123;&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginProxy</span></span>&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResourceObserver</span></span>&#123;&#125;;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderFactory</span></span>&#123;&#125;; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginProxy</span></span>&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResourceObserver</span></span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=799042>【参考】</font>枚举类名带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。 </p>
 <p> <font color=977919>说明:</font>枚举其实就是特殊的类，域成员均为常量，且构造方法被默认强制是私有。 </p>
 <p> <font color=29965b>正例:</font>枚举名字为 ProcessStatusEnum 的成员名称:SUCCESS / UNKNOWN_REASON。</p>
@@ -308,7 +309,8 @@
  3) 获取统计值的方法用 count 做前缀。
  4) 插入的方法用 save/insert 做前缀。
  5) 删除的方法用 delete 做前缀。
- 6) 修改的方法用 update 做前缀。</code></pre>
+ 6) 修改的方法用 update 做前缀。
+</code></pre>
 </li>
 </ol>
 <p><a name="constant"></a></p>
@@ -319,14 +321,18 @@
 </li>
 <li><p><font color=febd2c>【推荐】</font>如果变量值仅在一个固定范围内变化用enum类型来定义。</p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountEnum</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> PHONE_NUMBER = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> EMAIL = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">const</span> USERNAME = <span class="number">3</span>;</span><br><span class="line">	<span class="built_in">static</span> <span class="keyword">public</span> <span class="variable">$__names</span> = <span class="keyword">array</span>(</span><br><span class="line">		<span class="number">1</span> =&gt; <span class="string">&#x27;phone_number&#x27;</span>,</span><br><span class="line">		<span class="number">2</span> =&gt; <span class="string">&#x27;email&#x27;</span>,</span><br><span class="line">		<span class="number">3</span> =&gt; <span class="string">&#x27;username&#x27;</span>,</span><br><span class="line">	);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountEnum</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="variable constant_">PHONE_NUMBER</span> = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="variable constant_">EMAIL</span> = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="variable constant_">USERNAME</span> = <span class="number">3</span>;</span><br><span class="line">	<span class="built_in">static</span> <span class="keyword">public</span> <span class="variable">$__names</span> = <span class="keyword">array</span>(</span><br><span class="line">		<span class="number">1</span> =&gt; <span class="string">&#x27;phone_number&#x27;</span>,</span><br><span class="line">		<span class="number">2</span> =&gt; <span class="string">&#x27;email&#x27;</span>,</span><br><span class="line">		<span class="number">3</span> =&gt; <span class="string">&#x27;username&#x27;</span>,</span><br><span class="line">	);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 <p><a name="format"></a></p>
-<h2 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h2></li>
+<h2 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h2><ol>
 <li><p><font color=bc0008>【强制】</font>如果是大括号内为空，则简洁地写成{}即可，大括号中间无需换行和空格;如果是非空代码块则:</p>
 <pre><code> 1) 左大括号前不换行。
  2) 左大括号后换行。
  3) 右大括号前换行。
- 4) 右大括号后还有 else 等代码则不换行;表示终止的右大括号后必须换行。</code></pre>
+ 4) 右大括号后还有 else 等代码则不换行;表示终止的右大括号后必须换行。
+</code></pre>
 </li>
 <li><p><font color=bc0008>【强制】</font>左小括号和字符之间不出现空格;同样，右小括号和字符之间也不出现空格;而左 大括号前需要空格。详见第 5 条下方正例提示。</p>
 <p> <font color=fa4113>反例:</font>if (空格 a == b 空格)</p>
@@ -339,35 +345,40 @@
 <li><p><font color=bc0008>【强制】</font>采用4个空格缩进，禁止使用tab字符。</p>
 <p> <font color=977919>说明:</font>如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。</p>
 <p> <font color=29965b>正例:</font> (涉及 1-5 点)</p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"><span class="keyword">String</span> <span class="variable">$args</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 缩进 4 个空格</span></span><br><span class="line">	<span class="variable">$say</span> = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="comment">// 运算符的左右必须有一个空格</span></span><br><span class="line">	<span class="variable">$flag</span> = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">0</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="variable">$say</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 左大括号前加空格且不换行;左大括号后换行</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">1</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 右大括号前换行，右大括号后有 else，不用换行</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 在右大括号后直接结束，则必须换行</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params">String <span class="variable">$args</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 缩进 4 个空格</span></span><br><span class="line">	<span class="variable">$say</span> = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="comment">// 运算符的左右必须有一个空格</span></span><br><span class="line">	<span class="variable">$flag</span> = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">0</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="variable">$say</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 左大括号前加空格且不换行;左大括号后换行</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$flag</span> == <span class="number">1</span>) &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 右大括号前换行，右大括号后有 else，不用换行</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">	    <span class="keyword">echo</span> <span class="string">&quot;world&quot;</span>;</span><br><span class="line">	<span class="comment">// 在右大括号后直接结束，则必须换行</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=bc0008>【强制】</font>注释的双斜线与注释内容之间有且仅有一个空格。 </p>
 <p> <font color=29965b>正例:</font>// 这是示例注释，请注意在双斜线之后有一个空格</p>
 </li>
 <li><p><font color=bc0008>【强制】</font>在进行类型强制转换时，右括号与强制转换值之间不需要任何空格隔开。</p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$second</span> = (<span class="keyword">int</span>)<span class="variable">$first</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$second</span> = (<span class="keyword">int</span>)<span class="variable">$first</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=bc0008>【强制】</font>单行字符数限制不超过120个，超出需要换行，换行时遵循如下原则:</p>
 <pre><code> 1)第二行相对第一行缩进 4 个空格，从第三行开始，不再继续缩进，参考示例。 
  2)运算符与下文一起换行。
  3)方法调用的点符号与下文一起换行。 
  4)方法调用中的多个参数需要换行时，在逗号后进行。
- 5)在括号前不要换行，见反例。 </code></pre>
+ 5)在括号前不要换行，见反例。 
+ 
+</code></pre>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行</span></span><br><span class="line"><span class="variable">$sb</span>-&gt;append(<span class="string">&quot;Jack&quot;</span>)-&gt;append(<span class="string">&quot;Ma&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;append(<span class="string">&quot;alibaba&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行</span></span><br><span class="line"><span class="variable">$sb</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;Jack&quot;</span>)-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;Ma&quot;</span>)... </span><br><span class="line">	-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;alibaba&quot;</span>)... </span><br><span class="line">	-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;alibaba&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p> <font color=fa4113>反例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，不要在括号前换行 </span></span><br><span class="line"><span class="variable">$sb</span>-&gt;append(<span class="string">&quot;Jack&quot;</span>)-&gt;append(<span class="string">&quot;Ma&quot;</span>)...append</span><br><span class="line">(<span class="string">&quot;alibaba&quot;</span>);</span><br><span class="line"><span class="comment">// 参数很多的方法调用可能超过 120 个字符，不要在逗号前换行 </span></span><br><span class="line">method(args1, args2, args3, ...</span><br><span class="line">, argsX);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"><span class="comment">// 超过 120 个字符的情况下，不要在括号前换行 </span></span><br><span class="line"><span class="variable">$sb</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;Jack&quot;</span>)-&gt;<span class="title function_ invoke__">append</span>(<span class="string">&quot;Ma&quot;</span>)...<span class="title function_ invoke__">append</span></span><br><span class="line">(<span class="string">&quot;alibaba&quot;</span>);</span><br><span class="line"><span class="comment">// 参数很多的方法调用可能超过 120 个字符，不要在逗号前换行 </span></span><br><span class="line"><span class="title function_ invoke__">method</span>(args1, args2, args3, ...</span><br><span class="line">, argsX);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><font color=bc0008>【强制】</font>方法参数在定义和传入时，多个参数逗号后边必须加空格。</p>
 <p> <font color=29965b>正例:</font>下例中实参的 args1，后边必须要有一个空格。 </p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">method(args1, args2, args3);</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">method</span>(args1, args2, args3);</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=febd2c>【推荐】</font>单个方法的总行数不超过 80 行。</p>
 <p> <font color=977919>说明:</font>除注释之外的方法签名、左右大括号、方法内代码、空行、回车及任何不可见字符的总行数不超过80 行。</p>
 <p> <font color=29965b>正例:</font>代码逻辑分清红花和绿叶，个性和共性，绿叶逻辑单独出来成为额外方法，使主干代码更加清晰;共性逻辑抽取成为共性方法，便于复用和维护。</p>
 </li>
 <li><p><font color=febd2c>【推荐】</font>没有必要增加若干空格来使变量的赋值等号与上一行对应位置的等号对齐。 </p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$first</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$one</span> = <span class="number">2</span>;</span><br><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> StringBuilder();</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$first</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$one</span> = <span class="number">2</span>;</span><br><span class="line"><span class="variable">$sb</span> = <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br></pre></td></tr></table></figure>
+
 <p> <font color=977919>说明:</font>增加 sb 这个变量，如果需要对齐，则给 one、first 都要增加几个空格，在变量比较多的情况下，是非常累赘的事情。</p>
 </li>
 <li><p><font color=febd2c>【推荐】</font>不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来以提升可读性。</p>
@@ -381,7 +392,8 @@
 <li><p><font color=bc0008>【强制】</font>相同参数类型，相同业务含义，才可以使用可变参数，避免使用Object。 </p>
 <p> <font color=977919>说明:</font>可变参数必须放置在参数列表的最后。(提倡尽量不用可变参数编程)</p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">listUsers</span>(<span class="params"><span class="keyword">String</span> type, <span class="keyword">int</span>... ids</span>) </span>&#123;...&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">listUsers</span>(<span class="params">String type, <span class="keyword">int</span>... ids</span>) </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=bc0008>【强制】</font>不能使用过时的类或方法。</p>
 <p> <font color=977919>说明:</font>PHP 7.4.x中在一个对象中使用 array_key_exists() 已被废弃。请使用 isset() 或 property_exists() 来替代。接口提供方既然明确是过时接口，那么有义务同时提供新的接口;作为调用方来说，有义务去考证过时方法的新实现是什么。</p>
 </li>
@@ -397,7 +409,8 @@
  2) 不允许修改引用的域对象。
  3) 不允许被覆写的方法。
  4) 不允许运行过程中重新赋值的局部变量。
- 5) 避免上下文重复使用一个变量，使用 final 可以强制重新定义一个变量，方便更好地进行重构。</code></pre>
+ 5) 避免上下文重复使用一个变量，使用 final 可以强制重新定义一个变量，方便更好地进行重构。
+</code></pre>
 </li>
 <li><p><font color=febd2c>【推荐】</font>类成员与方法访问控制从严:</p>
 <pre><code> 1) 如果不允许外部直接通过 new 来创建对象，那么构造方法必须是 private。 
@@ -407,7 +420,8 @@
  5) 类 static 成员变量如果仅在本类使用，必须是 private。
  6) 若是 static 成员变量，考虑是否为 final。
  7) 类成员方法只供类内部调用，必须是 private。
- 8) 类成员方法只对继承类公开，那么限制为 protected。</code></pre>
+ 8) 类成员方法只对继承类公开，那么限制为 protected。
+</code></pre>
 <p> <font color=977919>说明:</font>任何类、方法、参数、变量，严控访问范围。过于宽泛的访问范围，不利于模块解耦。</p>
 </li>
 </ol>
@@ -426,12 +440,14 @@
 <p> <font color=977919>说明二:</font>如果 lock 方法在 try 代码块之内，可能由于其它方法抛出异常，导致在 finally 代码块中，unlock 对未加锁的对象解锁，它会调用 AQS 的 tryRelease 方法(取决于具体实现类)，抛出 IllegalMonitorStateException 异常。</p>
 <p> <font color=977919>说明三:</font>在 Lock 对象的 lock 方法实现中可能抛出 unchecked 异常，产生的后果与说明二相同。 </p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$lock</span>-&gt;lock(); </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	doSomething();</span><br><span class="line">	doOthers(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> <span class="title class_">XxxLock</span>();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">lock</span>(); </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="title function_ invoke__">doSomething</span>();</span><br><span class="line">	<span class="title function_ invoke__">doOthers</span>(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">unlock</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> <font color=fa4113>反例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">// 如果此处抛出异常，则直接执行 finally 代码块</span></span><br><span class="line">	doSomething();</span><br><span class="line">	<span class="comment">// 无论加锁是否成功，finally 代码块都会执行</span></span><br><span class="line">	<span class="variable">$lock</span>-&gt;lock();</span><br><span class="line">	doOthers(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> <span class="title class_">XxxLock</span>();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">// 如果此处抛出异常，则直接执行 finally 代码块</span></span><br><span class="line">	<span class="title function_ invoke__">doSomething</span>();</span><br><span class="line">	<span class="comment">// 无论加锁是否成功，finally 代码块都会执行</span></span><br><span class="line">	<span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">lock</span>();</span><br><span class="line">	<span class="title function_ invoke__">doOthers</span>(); </span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	<span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">unlock</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=bc0008>【强制】</font>在使用尝试机制来获取锁的方式中，进入业务代码块之前，必须先判断当前线程是否持有锁。锁的释放规则与锁的阻塞等待方式相同。</p>
 <p> <font color=29965b>正例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> XxxLock();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$isLocked</span> = <span class="variable">$lock</span>-&gt;tryLock(); </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$isLocked</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123; </span><br><span class="line">		doSomething();</span><br><span class="line">		doOthers(); </span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="variable">$lock</span>-&gt;unlock(); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$lock</span> = <span class="keyword">new</span> <span class="title class_">XxxLock</span>();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="variable">$isLocked</span> = <span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">tryLock</span>(); </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$isLocked</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123; </span><br><span class="line">		<span class="title function_ invoke__">doSomething</span>();</span><br><span class="line">		<span class="title function_ invoke__">doOthers</span>(); </span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="variable">$lock</span>-&gt;<span class="title function_ invoke__">unlock</span>(); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=bc0008>【强制】</font>并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加锁，要么在数据库层使用乐观锁，使用 version 作为更新依据。 </p>
 <p> <font color=977919>说明:</font>如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。</p>
 </li>
@@ -457,17 +473,19 @@
  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$condition</span>) &#123; </span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$obj</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接着写 else 的业务逻辑代码;</span></span><br></pre></td></tr></table></figure>
 <p> <font color=977919>说明:</font>如果非使用 if()…else if()…else…方式表达逻辑，避免后续代码维护困难，<font color=bc0008>【强制】</font>请勿超过 3 层。 </p>
 <p> <font color=29965b>正例:</font>超过 3 层的 if-else 的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现，其中卫语句即代码逻辑先考虑失败、异常、中断、退出等直接返回的情况，以方法多个出口的方式，解决代码中判断分支嵌套的问题，这是逆向思维的体现。示例如下:</p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">findBoyfriend</span>(<span class="params"><span class="variable">$man</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isUgly()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;本姑娘是外貌协会的资深会员&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isPoor()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;贫贱夫妻百事哀&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;isBadTemper()) &#123; </span><br><span class="line">		var_dump(<span class="string">&quot;银河有多远，你就给我滚多远&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	var_dump(<span class="string">&quot;可以先交往一段时间看看&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">findBoyfriend</span>(<span class="params"><span class="variable">$man</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;<span class="title function_ invoke__">isUgly</span>()) &#123; </span><br><span class="line">		<span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;本姑娘是外貌协会的资深会员&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;<span class="title function_ invoke__">isPoor</span>()) &#123; </span><br><span class="line">		<span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;贫贱夫妻百事哀&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$man</span>-&gt;<span class="title function_ invoke__">isBadTemper</span>()) &#123; </span><br><span class="line">		<span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;银河有多远，你就给我滚多远&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;可以先交往一段时间看看&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p><font color=febd2c>【推荐】</font>除常用方法(如getXxx/isXxx)等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</p>
 <p> <font color=977919>说明:</font>很多 if 语句内的逻辑表达式相当复杂，与、或、取反混合运算，甚至各种方法纵深调用，理解成本非常高。如果赋值一个非常好理解的布尔变量名字，则是件令人爽心悦目的事情。</p>
 <p> <font color=29965b>正例:</font>// 伪代码如下</p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$existed</span> = (fopen(fileName, <span class="string">&quot;w&quot;</span>) != <span class="literal">null</span>) &amp;&amp; (...) || (...);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$existed</span>) &#123; </span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$existed</span> = (<span class="title function_ invoke__">fopen</span>(fileName, <span class="string">&quot;w&quot;</span>) != <span class="literal">null</span>) &amp;&amp; (...) || (...);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$existed</span>) &#123; </span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> <font color=fa4113>反例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">function</span> <span class="title">acquire</span>(<span class="params"><span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">if</span> (!tryAcquire(<span class="variable">$arg</span>) &amp;&amp;</span><br><span class="line">		acquireQueued(addWaiter(Node.EXCLUSIVE), <span class="variable">$arg</span>)) &#123; </span><br><span class="line">			selfInterrupt();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">function</span> <span class="title">acquire</span>(<span class="params"><span class="variable">$arg</span></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">if</span> (!<span class="title function_ invoke__">tryAcquire</span>(<span class="variable">$arg</span>) &amp;&amp;</span><br><span class="line">		<span class="title function_ invoke__">acquireQueued</span>(<span class="title function_ invoke__">addWaiter</span>(Node.EXCLUSIVE), <span class="variable">$arg</span>)) &#123; </span><br><span class="line">			<span class="title function_ invoke__">selfInterrupt</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=febd2c>【推荐】</font>不要在其它表达式(尤其是条件表达式)中，插入赋值语句。</p>
 <p> <font color=977919>说明:</font>赋值点类似于人体的穴位，对于代码的理解至关重要，所以赋值语句需要清晰地单独成为一行。</p>
 <p> <font color=fa4113>反例:</font></p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getLock</span>(<span class="params"><span class="keyword">boolean</span> <span class="variable">$fair</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 算术表达式中出现赋值操作，容易忽略 $count 值已经被改变</span></span><br><span class="line">	<span class="variable">$threshold</span> = (<span class="variable">$count</span> = MAX_VALUE) - <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 条件表达式中出现赋值操作，容易误认为是 $sync==$fair</span></span><br><span class="line">	<span class="keyword">return</span> (<span class="variable">$sync</span> = <span class="variable">$fair</span>) ? <span class="keyword">new</span> FairSync() : <span class="keyword">new</span> NonfairSync(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getLock</span>(<span class="params"><span class="keyword">boolean</span> <span class="variable">$fair</span></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 算术表达式中出现赋值操作，容易忽略 $count 值已经被改变</span></span><br><span class="line">	<span class="variable">$threshold</span> = (<span class="variable">$count</span> = MAX_VALUE) - <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 条件表达式中出现赋值操作，容易误认为是 $sync==$fair</span></span><br><span class="line">	<span class="keyword">return</span> (<span class="variable">$sync</span> = <span class="variable">$fair</span>) ? <span class="keyword">new</span> <span class="title class_">FairSync</span>() : <span class="keyword">new</span> <span class="title class_">NonfairSync</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=febd2c>【推荐】</font>循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变 量、获取数据库连接，进行不必要的 try-catch 操作(这个 try-catch 是否可以移至循环体外)。</p>
 </li>
 <li><p><font color=febd2c>【推荐】</font>避免采用取反逻辑运算符。</p>
@@ -480,12 +498,14 @@
  2) 执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失。
  3) 需要极高稳定性和可用性的方法。
  4) 对外提供的开放接口，不管是 RPC/API/HTTP 接口。 
- 5) 敏感权限入口。</code></pre>
+ 5) 敏感权限入口。
+</code></pre>
 </li>
 <li><p><font color=799042>【参考】</font>下列情形，不需要进行参数校验:</p>
 <pre><code> 1) 极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。
  2) 底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般 Model 层与 Service 层都在同一个应用中，部署在同一台服务器中，所以 Model 的参数校验，可以省略。
- 3) 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</code></pre>
+ 3) 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。
+</code></pre>
 </li>
 </ol>
 <p><a name="other"></a></p>
@@ -503,7 +523,8 @@
 </li>
 <li><p>12 小时制的则是小写的 h</p>
 <p><font color=29965b>正例:</font>表示日期和时间的格式如下所示:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 <li><p><font color=febd2c>【推荐】</font>不要在视图模板中加入任何复杂的逻辑。</p>
@@ -627,9 +648,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="邹国锋"
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
       src="/uploads/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -637,20 +658,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -685,11 +706,11 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
   
 </div>
         

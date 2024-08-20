@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -24,12 +24,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql数据库设计规范">
 <meta property="og:url" content="http://example.com/2021/01/20/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/index.html">
-<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:site_name" content="Fenguoz的个人网站">
 <meta property="og:description" content="Mysql数据库设计规范指南目录 前言 建表规约 索引规约 SQL语句">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-20T02:31:25.000Z">
-<meta property="article:modified_time" content="2021-01-22T07:42:28.305Z">
-<meta property="article:author" content="邹国锋">
+<meta property="article:modified_time" content="2021-01-22T07:42:28.000Z">
+<meta property="article:author" content="Fenguoz">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="Mysql">
 <meta property="article:tag" content="数据库">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Mysql数据库设计规范 | 邹国锋的个人网站</title>
+  <title>Mysql数据库设计规范 | Fenguoz的个人网站</title>
   
 
 
@@ -100,7 +100,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">邹国锋的个人网站</h1>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
@@ -174,12 +174,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="name" content="Fenguoz">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="邹国锋的个人网站">
+      <meta itemprop="name" content="Fenguoz的个人网站">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -248,7 +248,7 @@
 <li><a href="#preface">前言</a></li>
 <li><a href="#buildtable">建表规约</a></li>
 <li><a href="#index">索引规约</a></li>
-<li><a href="#sql">SQL语句</a><a id="more"></a></li>
+<li><a href="#sql">SQL语句</a><span id="more"></span></li>
 <li><a href="#orm">ORM映射</a></li>
 <li><a href="#version">附1:版本历史</a></li>
 <li><a href="#explanation">附2:名词解释</a></li>
@@ -294,14 +294,13 @@
 <li><p><font color=febd2c>【推荐】</font>字段允许适当冗余，以提高查询性能，但必须考虑数据一致。冗余字段应遵循: </p>
 <pre><code> 1) 不是频繁修改的字段。
  2) 不是 varchar 超长字段，更不能是 text 字段。
- 3) 不是唯一索引的字段。 正例:商品类目名称使用频率高，字段长度短，名称基本一不变，可在相关联的表中冗余存储类目名称，避免关联查询。</code></pre>
+ 3) 不是唯一索引的字段。 正例:商品类目名称使用频率高，字段长度短，名称基本一不变，可在相关联的表中冗余存储类目名称，避免关联查询。
+</code></pre>
 </li>
 <li><p><font color=febd2c>【推荐】</font>单表行数超过 500 万行或者单表容量超过 2GB，才推荐进行分库分表。 说明:如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表。</p>
 </li>
 <li><p><font color=799042>【参考】</font>合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。</p>
 <p> <font color=29965b>正例:</font>如下表，其中无符号值可以避免误存负数，且扩大了表示范围。</p>
-</li>
-</ol>
 <table>
 <thead>
 <tr>
@@ -341,6 +340,8 @@
 <td align="left">无符号值:0 到约 10 的 19 次方</td>
 </tr>
 </tbody></table>
+</li>
+</ol>
 <p><a name="index"></a></p>
 <h2 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h2><ol>
 <li><p><font color=bc0008>【强制】</font>业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。 </p>
@@ -365,12 +366,14 @@
 <li><p><font color=febd2c>【推荐】</font>利用延迟关联或者子查询优化超多分页场景。</p>
 <p> <font color=977919>说明:</font>MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回 N 行，那当 offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写。</p>
 <p> <font color=29965b>正例:</font>先快速定位需要获取的 id 段，然后再关联:</p>
- <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.* <span class="keyword">FROM</span> 表 <span class="number">1</span> a, (select id <span class="keyword">from</span> 表 <span class="number">1</span> where 条件 LIMIT <span class="number">100000</span>,<span class="number">20</span> ) b where a.id=b.id</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.* FROM 表 <span class="number">1</span> a, (select id <span class="keyword">from</span> 表 <span class="number">1</span> where 条件 LIMIT <span class="number">100000</span>,<span class="number">20</span> ) b where a.id=b.id</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><font color=febd2c>【推荐】</font>SQL 性能优化的目标:至少要达到 range 级别，要求是 ref 级别，如果可以是 consts 最好。</p>
 <p> <font color=977919>说明:</font></p>
 <pre><code> 1) consts 单表中最多只有一个匹配行(主键或者唯一索引)，在优化阶段即可读取到数据。 
  2) ref 指的是使用普通的索引(normal index)。
- 3) range 对索引进行范围检索。</code></pre>
+ 3) range 对索引进行范围检索。
+</code></pre>
 <p> <font color=fa4113>反例:</font>explain 表的结果，type=index，索引物理文件全扫描，速度非常慢，这个 index 级别比较 range 还低，与全表扫描是小巫见大巫。</p>
 </li>
 <li><p><font color=febd2c>【推荐】</font>建组合索引的时候，区分度最高的在最左边。</p>
@@ -381,7 +384,8 @@
 <li><p><font color=799042>【参考】</font>创建索引时避免有如下极端误解:</p>
 <pre><code> 1) 宁滥勿缺。认为一个查询就需要建一个索引。
  2) 宁缺勿滥。认为索引会消耗空间、严重拖慢记录的更新以及行的新增速度。
- 3) 抵制惟一索引。认为业务的惟一性一律需要在应用层通过“先查后插”方式解决。</code></pre>
+ 3) 抵制惟一索引。认为业务的惟一性一律需要在应用层通过“先查后插”方式解决。
+</code></pre>
 </li>
 </ol>
 <p><a name="sql"></a></p>
@@ -398,7 +402,8 @@
 <p> <font color=977919>说明:</font>NULL 与任何值的直接比较都为 NULL。</p>
 <pre><code> 1) NULL&lt;&gt;NULL 的返回结果是 NULL，而不是 false。 
  2) NULL=NULL 的返回结果是 NULL，而不是 true。 
- 3) NULL&lt;&gt;1 的返回结果是 NULL，而不是 true。</code></pre>
+ 3) NULL&lt;&gt;1 的返回结果是 NULL，而不是 true。
+</code></pre>
 </li>
 <li><p><font color=bc0008>【强制】</font>代码中写分页查询逻辑时，若count为0应直接返回，避免执行后面的分页语句。</p>
 </li>
@@ -414,7 +419,8 @@
 <li><p><font color=799042>【参考】</font>如果有国际化需要，所有的字符存储与表示，均以 utf-8 编码，注意字符统计函数的区别。</p>
 <p> <font color=977919>说明:</font></p>
 <pre><code> SELECT LENGTH(&quot;轻松工作&quot;); 返回为 12
- SELECT CHARACTER_LENGTH(&quot;轻松工作&quot;); 返回为 4 如果需要存储表情，那么选择 utf8mb4 来进行存储，注意它与 utf-8 编码的区别。</code></pre>
+ SELECT CHARACTER_LENGTH(&quot;轻松工作&quot;); 返回为 4 如果需要存储表情，那么选择 utf8mb4 来进行存储，注意它与 utf-8 编码的区别。
+</code></pre>
 </li>
 <li><p><font color=799042>【参考】</font>TRUNCATE TABLE 比 DELETE 速度快，且使用的系统和事务日志资源少，但 TRUNCATE 无事务且不触发 trigger，有可能造成事故，故不建议在开发代码中使用此语句。 </p>
 <p> <font color=977919>说明:</font>TRUNCATE TABLE 在功能上与不带 WHERE 子句的 DELETE 语句相同。</p>
@@ -426,7 +432,8 @@
 <p> <font color=977919>说明:</font></p>
 <pre><code> 1)增加查询分析器解析成本。
  2)增减字段容易与 resultMap 配置不一致。
- 3)无用字段增加网络消耗，尤其是 text 类型的字段。</code></pre>
+ 3)无用字段增加网络消耗，尤其是 text 类型的字段。
+</code></pre>
 </li>
 <li><p><font color=bc0008>【强制】</font>更新数据表记录时，必须同时更新记录对应的 updated_at 字段值为当前时间。</p>
 </li>
@@ -552,9 +559,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="邹国锋"
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
       src="/uploads/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -562,20 +569,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -610,11 +617,11 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
   
 </div>
         

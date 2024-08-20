@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -24,12 +24,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="合并两个数组有几种方式？试比较它们的异同？">
 <meta property="og:url" content="http://example.com/2021/01/07/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%AF%95%E6%AF%94%E8%BE%83%E5%AE%83%E4%BB%AC%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F/index.html">
-<meta property="og:site_name" content="邹国锋的个人网站">
+<meta property="og:site_name" content="Fenguoz的个人网站">
 <meta property="og:description" content="方式：  array_merge() ‘+’  array_merge_recursive()  补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 array_combine() ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-07T13:53:48.000Z">
-<meta property="article:modified_time" content="2021-01-08T01:42:47.813Z">
-<meta property="article:author" content="邹国锋">
+<meta property="article:modified_time" content="2021-01-08T01:42:47.000Z">
+<meta property="article:author" content="Fenguoz">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="腾讯">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>合并两个数组有几种方式？试比较它们的异同？ | 邹国锋的个人网站</title>
+  <title>合并两个数组有几种方式？试比较它们的异同？ | Fenguoz的个人网站</title>
   
 
 
@@ -100,7 +100,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">邹国锋的个人网站</h1>
+      <h1 class="site-title">Fenguoz的个人网站</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">在意生活那点小事~</p>
@@ -174,12 +174,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="邹国锋">
+      <meta itemprop="name" content="Fenguoz">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="邹国锋的个人网站">
+      <meta itemprop="name" content="Fenguoz的个人网站">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -251,10 +251,11 @@
 <li><strong>array_merge_recursive()</strong></li>
 </ol>
 <p>补充：以上都是把两个数组合并为一个数组，另外还有一个特殊的合并方式。 <strong>array_combine()</strong> ，通过合并两个数组来创建一个新数组，其中的一个数组元素为键名，另一个数组元素为键值</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>接下来我们分析下其每个的具体作用。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例1</span></span><br><span class="line"><span class="variable">$a1</span> = [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$a2</span> = [<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$a1</span> + <span class="variable">$a2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_combine(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:&quot;b&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例2</span></span><br><span class="line"><span class="variable">$b1</span> = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$b2</span> = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$b1</span>+<span class="variable">$b2</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_combine(<span class="variable">$b1</span>, <span class="variable">$b2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">// result Warning: array_combine(): Both parameters should have an equal number of elements</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例3</span></span><br><span class="line"><span class="variable">$c1</span> = [<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>];</span><br><span class="line"><span class="variable">$c2</span> = [<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span> =&gt; <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$c1</span> + <span class="variable">$c2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:3,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:[2,3],&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例1</span></span><br><span class="line"><span class="variable">$a1</span> = [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$a2</span> = [<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$a1</span> + <span class="variable">$a2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_combine</span>(<span class="variable">$a1</span>, <span class="variable">$a2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:&quot;b&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例2</span></span><br><span class="line"><span class="variable">$b1</span> = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$b2</span> = [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$b1</span>+<span class="variable">$b2</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_combine</span>(<span class="variable">$b1</span>, <span class="variable">$b2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">// result Warning: array_combine(): Both parameters should have an equal number of elements</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组示例3</span></span><br><span class="line"><span class="variable">$c1</span> = [<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>];</span><br><span class="line"><span class="variable">$c2</span> = [<span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">3</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">4</span>, <span class="string">&#x27;d&#x27;</span> =&gt; <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$c1</span>, <span class="variable">$c2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$c1</span> + <span class="variable">$c2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:3,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:[2,3],&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br><span class="line"><span class="comment">//result &#123;&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:4,&quot;d&quot;:5&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>示例1中不难看出array_merge和array_merge_recursive是能正常合并的，不过’+’不行。array_combine前者的元素变成了对应后者元素的键值。</p>
 <p>接着示例2，可以看出array_merge和array_merge_recursive依然是能正常合并的。’+’则是合并了后者的第三个元素。array_combine在示例2中则运行报错了。</p>
 <p>示例3，array_merge是合并了。array_merge_recursive也合并，若果有相同的键值时，则会递归合并。’+’依然是只合并了后者的第三个元素。</p>
@@ -273,7 +274,8 @@
 <p>若果键值不唯一，示例2成立，则示例3应是b=&gt;2,b=&gt;3。</p>
 <p>最终查看php手册发现原因，<strong>array_merge()</strong>[<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-merge.php">进入手册</a>],“如果输入的数组中有<u>相同的字符串键名</u>，则该键名后面的值<u>将覆盖前一个值</u>。然而，如果数组包含<u>数字键名</u>，后面的值<u>将 <font color=red>不会</font> 覆盖原来的值</u>，而是附加到后面。”</p>
 <p>补充</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例4</span></span><br><span class="line"><span class="variable">$d1</span> = [ <span class="number">1</span> =&gt; <span class="string">&#x27;a&#x27;</span>, <span class="number">2</span> =&gt; <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$d2</span> = [ <span class="number">3</span> =&gt; <span class="string">&#x27;b&#x27;</span>, <span class="number">4</span> =&gt; <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge(<span class="variable">$d1</span>, <span class="variable">$d2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(array_merge_recursive(<span class="variable">$d1</span>, <span class="variable">$d2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$d1</span> + <span class="variable">$d2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;1&quot;:&quot;a&quot;,&quot;2&quot;:&quot;b&quot;,&quot;3&quot;:&quot;b&quot;,&quot;4&quot;:&quot;c&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组示例4</span></span><br><span class="line"><span class="variable">$d1</span> = [ <span class="number">1</span> =&gt; <span class="string">&#x27;a&#x27;</span>, <span class="number">2</span> =&gt; <span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="variable">$d2</span> = [ <span class="number">3</span> =&gt; <span class="string">&#x27;b&#x27;</span>, <span class="number">4</span> =&gt; <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge</span>(<span class="variable">$d1</span>, <span class="variable">$d2</span>)).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="title function_ invoke__">array_merge_recursive</span>(<span class="variable">$d1</span>, <span class="variable">$d2</span>)) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$d1</span> + <span class="variable">$d2</span>) . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result [&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;]</span></span><br><span class="line"><span class="comment">//result &#123;&quot;1&quot;:&quot;a&quot;,&quot;2&quot;:&quot;b&quot;,&quot;3&quot;:&quot;b&quot;,&quot;4&quot;:&quot;c&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
 <p>如果是数字键值的数组合并时，array_merge和array_merge_recursive结果都是对数组重新排序，而’+’则是保留了原本键值。</p>
 
     </div>
@@ -368,9 +370,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="邹国锋"
+    <img class="site-author-image" itemprop="image" alt="Fenguoz"
       src="/uploads/avatar.jpeg">
-  <p class="site-author-name" itemprop="name">邹国锋</p>
+  <p class="site-author-name" itemprop="name">Fenguoz</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -378,20 +380,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -426,11 +428,11 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">邹国锋</span>
+  <span class="author" itemprop="copyrightHolder">Fenguoz</span>
   
 </div>
         
